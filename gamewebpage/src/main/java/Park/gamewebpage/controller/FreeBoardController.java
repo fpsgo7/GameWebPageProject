@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,6 +22,7 @@ public class FreeBoardController {
      * @return HTTP 상태 코드는 생성이며
      * HTTP body에는 FreeBoard 객체로 반환한다.
      */
+    @PostMapping("/freeBoard")
     public ResponseEntity<FreeBoard> createFreeBoard
             (@RequestBody CreateFreeBoardDTO createFreeBoardDTO){
         FreeBoard freeBoard
