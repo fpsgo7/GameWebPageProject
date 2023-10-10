@@ -12,13 +12,11 @@ import lombok.Setter;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
 public class CreateFreeBoardDTO {
 
     private String title;
     private String content;
-    private String writer;
+    private String writerId;
     private String writerName;
 
     /**
@@ -29,7 +27,7 @@ public class CreateFreeBoardDTO {
         return FreeBoard.builder()
                 .title(title)
                 .content(content)
-                .writer(writer)
+                .writerId(writerId)
                 .writerName(writerName)
                 .build();
     }

@@ -32,8 +32,8 @@ public class FreeBoard {
     @Column(name = "content",nullable = false)
     private String content;
 
-    @Column(name = "writer",nullable = false)
-    private String writer;
+    @Column(name = "writerId",nullable = false)
+    private String writerId;
 
     @Column(name = "writerName",nullable = false)
     private String writerName;
@@ -44,14 +44,14 @@ public class FreeBoard {
      * 생성하고자 싶은경우 사용한다.
      * @param title
      * @param content
-     * @param writer
+     * @param writerId
      * @param writerName
      */
     @Builder
-    public FreeBoard(String title, String content, String writer, String writerName){
+    public FreeBoard(String title, String content, String writerId, String writerName){
         this.title = title;
         this.content = content;
-        this.writer = writer;
+        this.writerId = writerId;
         this.writerName = writerName;
     }
 }

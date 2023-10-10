@@ -6,6 +6,8 @@ import Park.gamewebpage.repository.IFreeBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class FreeBoardService {
@@ -22,5 +24,14 @@ public class FreeBoardService {
     public FreeBoard createFreeBoard(CreateFreeBoardDTO createFreeBoardDTO){
         return iFreeBoardRepository
                 .save(createFreeBoardDTO.toEntity());
+    }
+
+    /**
+     * 자유 게시판 리스트를
+     * 가져온다.
+     * @return FreeBoard 전체 조회 결과
+     */
+    public List<FreeBoard> getListFreeBoard(){
+        return iFreeBoardRepository.findAll();
     }
 }

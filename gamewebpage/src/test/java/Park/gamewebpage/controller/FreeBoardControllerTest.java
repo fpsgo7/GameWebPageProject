@@ -21,6 +21,8 @@ import org.springframework.web.context.WebApplicationContext;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -64,12 +66,12 @@ class FreeBoardControllerTest {
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
         final String content = "콘텐츠1";
-        final String writer = "사용자아이디1";
+        final String writerId = "사용자아이디1";
         final String writerName = "사용자이름1";
 
         // 테스트에 사용할 CreateFreeBoardDTO 생성
         final CreateFreeBoardDTO createFreeBoardDTO
-                = new CreateFreeBoardDTO(title,content,writer,writerName);
+                = new CreateFreeBoardDTO(title,content,writerId,writerName);
 
         final String requestBody
                 = objectMapper.writeValueAsString(createFreeBoardDTO);
@@ -89,5 +91,43 @@ class FreeBoardControllerTest {
         Assertions.assertThat(freeBoardList.size()).isEqualTo(1); // 크기가 1인지 체크
         Assertions.assertThat(freeBoardList.get(0).getTitle()).isEqualTo(title);
         Assertions.assertThat(freeBoardList.get(0).getContent()).isEqualTo(content);
+    }
+
+
+    @DisplayName("getListFreeBoard: 자유게시판 리스트 조회 성공.")
+    @Test
+    public void  getListFreeBoard()throws Exception{
+        // given
+        final String url = "/freeBoard";
+        // CreateFreeBoardDTO 객체에 담을 변수
+        final String title = "타이틀1";
+        final String content = "콘텐츠1";
+        final String writerId = "사용자아이디1";
+        final String writerName = "사용자이름1";
+
+        iFreeBoardRepository.save(FreeBoard.builder()
+                .title(title)
+                .content(content)
+                .writerId(writerId)
+                .writerName(writerName)
+                .build());
+
+        // when
+        final  ResultActions resultActions
+                = mockMvc.perform(get(url)
+                .accept(MediaType.APPLICATION_JSON));
+
+        // then
+        resultActions
+                .andExpect(status().isOk())
+                // jsonPath 로 json으로 변환된 freeBoardDTOList
+                // 에서 가장 첫번쨰의 FreeBoard 객체의 값을
+                // 가져온다.
+                // andExpect는 결과를 기대하는 것으로
+                // 바로 밑 문장은 왼쪽과 오른쪽 같이 같은지 확인한다
+                .andExpect(jsonPath("$[0].content").value(content))
+                .andExpect(jsonPath("$[0].title").value(title))
+                .andExpect(jsonPath("$[0].writerId").value(writerId))
+                .andExpect(jsonPath("$[0].writerName").value(writerName));
     }
 }
