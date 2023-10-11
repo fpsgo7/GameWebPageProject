@@ -6,13 +6,13 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class GetListFreeBoardDTO {
+public class GetFreeBoardDTO {
     private final String title;
     private final String content;
     private final String writerId;
     private final String writerName;
 
-    public GetListFreeBoardDTO(FreeBoard freeBoard){
+    public GetFreeBoardDTO(FreeBoard freeBoard){
         this.title = freeBoard.getTitle();
         this.content = freeBoard.getContent();
         this.writerId = freeBoard.getWriterId();

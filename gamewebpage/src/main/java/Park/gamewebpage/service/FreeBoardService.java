@@ -34,4 +34,17 @@ public class FreeBoardService {
     public List<FreeBoard> getListFreeBoard(){
         return iFreeBoardRepository.findAll();
     }
+
+    /**
+     * 자유 게시판 글을
+     * 아이디로 찾아 반환한다.
+     * @param id
+     * @return 아이디가 있다면 해당 id를 가진 FreeBoard 반환
+     * 없다면 IllegalArgumentException 예외 반환
+     */
+    public FreeBoard getFreeBoard(Long id){
+        return iFreeBoardRepository.findById(id)
+                .orElseThrow(()
+                -> new IllegalArgumentException("not found: "+id));
+    }
 }

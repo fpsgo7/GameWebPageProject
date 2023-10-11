@@ -130,4 +130,38 @@ class FreeBoardControllerTest {
                 .andExpect(jsonPath("$[0].writerId").value(writerId))
                 .andExpect(jsonPath("$[0].writerName").value(writerName));
     }
+
+    @DisplayName("getFreeBoard: 자유게시판 글 조회 성공.")
+    @Test
+    public void  getFreeBoard()throws Exception{
+        // given
+        final String url = "/freeBoard/{id}";
+
+        final String title = "타이틀1";
+        final String content = "콘텐츠1";
+        final String writerId = "사용자아이디1";
+        final String writerName = "사용자이름1";
+
+        FreeBoard savedFreeBoard
+        = iFreeBoardRepository.save(FreeBoard.builder()
+                .title(title)
+                .content(content)
+                .writerId(writerId)
+                .writerName(writerName)
+                .build());
+
+        //when
+        final ResultActions resultActions
+                = mockMvc.perform(get(
+                        url,savedFreeBoard.getId()));
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.content").value(content))
+                .andExpect(jsonPath("$.title").value(title))
+                .andExpect(jsonPath("$.writerId").value(writerId))
+                .andExpect(jsonPath("$.writerName").value(writerName));
+
+    }
 }
