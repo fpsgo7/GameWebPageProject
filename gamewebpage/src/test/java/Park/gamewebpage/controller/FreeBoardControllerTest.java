@@ -2,6 +2,7 @@ package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.dto.CreateFreeBoardDTO;
+import Park.gamewebpage.dto.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
@@ -20,9 +21,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -196,5 +195,47 @@ class FreeBoardControllerTest {
         List<FreeBoard> freeBoardList = iFreeBoardRepository.findAll();
         // 삭제가 잘되었다면 저장소는 비어있어야한다.
         Assertions.assertThat(freeBoardList).isEmpty();
+    }
+
+    @DisplayName("updateFreeBoard: 자유 게시판 글 수정에 성공한다.")
+    @Test
+    public void updateFreeBoard() throws Exception{
+        //given
+        final String url = "/freeBoard/{id}";
+
+        final String title = "타이틀1";
+        final String content = "콘텐츠1";
+        final String writerId = "사용자아이디1";
+        final String writerName = "사용자이름1";
+
+        FreeBoard savedFreeBoard
+                = iFreeBoardRepository.save(
+                        FreeBoard.builder()
+                                .title(title)
+                                .content(content)
+                                .writerId(writerId)
+                                .writerName(writerName)
+                                .build());
+
+        final String newTitle = "new title";
+        final String newContent = "new content";
+
+        UpdateFreeBoardDTO updateFreeBoardDTO
+                = new UpdateFreeBoardDTO(newTitle,newContent);
+
+        // when
+        ResultActions resultActions
+                = mockMvc.perform(put(url,savedFreeBoard.getId())
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .content(objectMapper.writeValueAsString(updateFreeBoardDTO)));
+
+        // then
+        resultActions.andExpect(status().isOk());
+
+        FreeBoard freeBoard = iFreeBoardRepository.findById(savedFreeBoard.getId())
+                .get();
+
+        Assertions.assertThat(freeBoard.getTitle()).isEqualTo(newTitle);
+        Assertions.assertThat(freeBoard.getContent()).isEqualTo(newContent);
     }
 }

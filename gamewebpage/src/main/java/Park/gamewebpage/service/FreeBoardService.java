@@ -2,9 +2,11 @@ package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.dto.CreateFreeBoardDTO;
+import Park.gamewebpage.dto.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -55,5 +57,24 @@ public class FreeBoardService {
      */
     public void deleteFreeBoard(long id){
         iFreeBoardRepository.deleteById(id);
+    }
+
+    /**
+     * 업데이트를  위한 메서드
+     * Article 객체를 id로 찾아 얻어온후
+     * 값을 수정하여 반환한다.
+     * @param id
+     * @param updateFreeBoardDTO
+     * @return id 로 찾은 freeBoard
+     */
+    @Transactional
+    public FreeBoard updateFreeBoard(long id, UpdateFreeBoardDTO updateFreeBoardDTO){
+        FreeBoard freeBoard = iFreeBoardRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("not found:"+id));
+
+        freeBoard.setTitle(updateFreeBoardDTO.getTitle());
+        freeBoard.setContent(updateFreeBoardDTO.getContent());
+
+        return  freeBoard;
     }
 }

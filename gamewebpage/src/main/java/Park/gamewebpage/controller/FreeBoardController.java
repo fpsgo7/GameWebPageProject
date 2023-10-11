@@ -3,8 +3,10 @@ package Park.gamewebpage.controller;
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.dto.CreateFreeBoardDTO;
 import Park.gamewebpage.dto.GetFreeBoardDTO;
+import Park.gamewebpage.dto.UpdateFreeBoardDTO;
 import Park.gamewebpage.service.FreeBoardService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.sql.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -90,5 +92,20 @@ public class FreeBoardController {
         return ResponseEntity
                 .ok()
                 .build();
+    }
+
+    @PutMapping("/freeBoard/{id}")
+    public ResponseEntity<FreeBoard> updateFreeBoard(
+            @PathVariable long id,
+            @RequestBody UpdateFreeBoardDTO updateFreeBoardDTO
+            ){
+        FreeBoard updateFreeBoard
+                = freeBoardService.updateFreeBoard(
+                        id,updateFreeBoardDTO
+        );
+
+        return ResponseEntity
+                .ok()
+                .body(updateFreeBoard);
     }
 }
