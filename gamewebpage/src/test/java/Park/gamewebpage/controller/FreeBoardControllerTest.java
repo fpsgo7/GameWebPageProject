@@ -20,6 +20,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -163,5 +164,37 @@ class FreeBoardControllerTest {
                 .andExpect(jsonPath("$.writerId").value(writerId))
                 .andExpect(jsonPath("$.writerName").value(writerName));
 
+    }
+
+    @DisplayName("deleteFreeBoard: 자유 게시판 글 삭제에 성공한다.")
+    @Test
+    public void deleteFreeBoard() throws Exception{
+        // given
+        final String url = "/freeBoard/{id}";
+
+        final String title = "타이틀1";
+        final String content = "콘텐츠1";
+        final String writerId = "사용자아이디1";
+        final String writerName = "사용자이름1";
+
+        // 객체 생성 과 저장소 저장
+        FreeBoard savedFreeBoard
+                = iFreeBoardRepository.save(FreeBoard.builder()
+                .title(title)
+                .content(content)
+                .writerId(writerId)
+                .writerName(writerName)
+                .build());
+
+        //when
+        // 삭제 작업 수행
+        mockMvc.perform(delete(
+                url, savedFreeBoard.getId()
+        )).andExpect(status().isOk());
+
+        //then
+        List<FreeBoard> freeBoardList = iFreeBoardRepository.findAll();
+        // 삭제가 잘되었다면 저장소는 비어있어야한다.
+        Assertions.assertThat(freeBoardList).isEmpty();
     }
 }

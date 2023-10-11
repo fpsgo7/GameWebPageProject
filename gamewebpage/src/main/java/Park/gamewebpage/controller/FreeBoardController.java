@@ -58,6 +58,13 @@ public class FreeBoardController {
                 .body(freeBoardDTOList);
     }
 
+    /**
+     * 자유 게시판 글조회
+     * 메서드
+     * @param id
+     * @return id 값이 일치하는 GetFreeBoardDTO 객체를
+     * 가지고있는 ResponseEntity  
+     */
     @GetMapping("/freeBoard/{id}")
     public  ResponseEntity<GetFreeBoardDTO> getFreeBoard(
             @PathVariable long id
@@ -67,5 +74,21 @@ public class FreeBoardController {
         return ResponseEntity
                 .ok()
                 .body(new GetFreeBoardDTO(freeBoard));
+    }
+
+    /**
+     * 자유 게시판 글 삭제 메서드
+     * @param id
+     * @return 성공했다고 알려주는 응답코드를 
+     * 가지고 있는 ResponseEntity
+     */
+    @DeleteMapping("/freeBoard/{id}")
+    public  ResponseEntity<Void> deleteFreeBoard(
+            @PathVariable long id
+    ){
+        freeBoardService.deleteFreeBoard(id);
+        return ResponseEntity
+                .ok()
+                .build();
     }
 }

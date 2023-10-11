@@ -47,4 +47,13 @@ public class FreeBoardService {
                 .orElseThrow(()
                 -> new IllegalArgumentException("not found: "+id));
     }
+
+    /**
+     * 자유 게시판 글 삭제
+     * 메서드
+     * @param id
+     */
+    public void deleteFreeBoard(long id){
+        iFreeBoardRepository.deleteById(id);
+    }
 }
