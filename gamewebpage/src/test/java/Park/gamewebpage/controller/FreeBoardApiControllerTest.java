@@ -4,6 +4,7 @@ import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.dto.CreateFreeBoardDTO;
 import Park.gamewebpage.dto.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
+import Park.gamewebpage.url.URL;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -28,7 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class FreeBoardControllerTest {
+class FreeBoardApiControllerTest {
     protected MockMvc mockMvc;
 
     @Autowired
@@ -61,7 +61,7 @@ class FreeBoardControllerTest {
     public void createFreeBoard() throws Exception{
         // given
         // url 변수 생성
-        final String url = "/freeBoard";
+        final String url = URL.FREE_BOARD_API_URL;
 
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
@@ -98,7 +98,7 @@ class FreeBoardControllerTest {
     @Test
     public void  getListFreeBoard()throws Exception{
         // given
-        final String url = "/freeBoard";
+        final String url = URL.FREE_BOARD_API_URL;
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
         final String content = "콘텐츠1";
@@ -135,7 +135,7 @@ class FreeBoardControllerTest {
     @Test
     public void  getFreeBoard()throws Exception{
         // given
-        final String url = "/freeBoard/{id}";
+        final String url = URL.FREE_BOARD_API_URL_BY_ID;
 
         final String title = "타이틀1";
         final String content = "콘텐츠1";
@@ -169,7 +169,7 @@ class FreeBoardControllerTest {
     @Test
     public void deleteFreeBoard() throws Exception{
         // given
-        final String url = "/freeBoard/{id}";
+        final String url = URL.FREE_BOARD_API_URL_BY_ID;
 
         final String title = "타이틀1";
         final String content = "콘텐츠1";
@@ -201,7 +201,7 @@ class FreeBoardControllerTest {
     @Test
     public void updateFreeBoard() throws Exception{
         //given
-        final String url = "/freeBoard/{id}";
+        final String url = URL.FREE_BOARD_API_URL_BY_ID;
 
         final String title = "타이틀1";
         final String content = "콘텐츠1";

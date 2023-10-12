@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class FreeBoardService {
 
-    private final IFreeBoardRepository iFreeBoardRepository;
+    private final IFreeBoardRepository I_FREE_BOARD_REPOSITORY;
 
     /**
      * 자유 게시판 글 객체가 생성된다.
@@ -24,7 +24,7 @@ public class FreeBoardService {
      * @return FreeBoard 저장소에 저장되는 객체가 반환된다.
      */
     public FreeBoard createFreeBoard(CreateFreeBoardDTO createFreeBoardDTO){
-        return iFreeBoardRepository
+        return I_FREE_BOARD_REPOSITORY
                 .save(createFreeBoardDTO.toEntity());
     }
 
@@ -34,7 +34,7 @@ public class FreeBoardService {
      * @return FreeBoard 전체 조회 결과
      */
     public List<FreeBoard> getListFreeBoard(){
-        return iFreeBoardRepository.findAll();
+        return I_FREE_BOARD_REPOSITORY.findAll();
     }
 
     /**
@@ -45,7 +45,7 @@ public class FreeBoardService {
      * 없다면 IllegalArgumentException 예외 반환
      */
     public FreeBoard getFreeBoard(Long id){
-        return iFreeBoardRepository.findById(id)
+        return I_FREE_BOARD_REPOSITORY.findById(id)
                 .orElseThrow(()
                 -> new IllegalArgumentException("not found: "+id));
     }
@@ -56,7 +56,7 @@ public class FreeBoardService {
      * @param id
      */
     public void deleteFreeBoard(long id){
-        iFreeBoardRepository.deleteById(id);
+        I_FREE_BOARD_REPOSITORY.deleteById(id);
     }
 
     /**
@@ -69,7 +69,7 @@ public class FreeBoardService {
      */
     @Transactional
     public FreeBoard updateFreeBoard(long id, UpdateFreeBoardDTO updateFreeBoardDTO){
-        FreeBoard freeBoard = iFreeBoardRepository.findById(id)
+        FreeBoard freeBoard = I_FREE_BOARD_REPOSITORY.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("not found:"+id));
 
         freeBoard.setTitle(updateFreeBoardDTO.getTitle());
