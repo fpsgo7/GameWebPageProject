@@ -1,11 +1,9 @@
 package Park.gamewebpage.controller;
 
-import Park.gamewebpage.dto.GetFreeBoardDTO;
-import Park.gamewebpage.dto.GetFreeBoardViewDTO;
+import Park.gamewebpage.dto.freeboardDTO.view.GetFreeBoardViewDTO;
 import Park.gamewebpage.service.FreeBoardService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,5 +29,10 @@ public class FreeBoardViewController {
 
         return "FreeBoardList";
 
+    }
+
+    @GetMapping(URL.CREATE_FREE_BOARD_VIEW_URL)
+    public String newFreeBoardView(Model model){
+        return "createFreeBoard";
     }
 }
