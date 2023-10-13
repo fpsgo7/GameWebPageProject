@@ -4,6 +4,9 @@ import Park.gamewebpage.domain.FreeBoard;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * 블로그글 조회 뷰 제작때 미처 추가하지 못한 필드 변수 2개 추가할것!
+ */
 @Getter
 @Setter
 public class GetFreeBoardViewDTO {
