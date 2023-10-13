@@ -13,7 +13,7 @@ public class URL {
             = "/view/freeBoard/{id}";
     public final static String CREATE_FREE_BOARD_VIEW_URL
             = "/view/createFreeBoard";
-    public final static String UPDATE_FREE_BOARD_VIEW_URL_BY_ID
+    public final static String UPDATE_FREE_BOARD_VIEW_URL
             = "/view/updateFreeBoard";
 
 }
