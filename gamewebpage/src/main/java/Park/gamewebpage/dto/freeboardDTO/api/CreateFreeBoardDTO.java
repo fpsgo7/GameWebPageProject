@@ -1,4 +1,4 @@
-package Park.gamewebpage.dto;
+package Park.gamewebpage.dto.freeboardDTO.api;
 
 import Park.gamewebpage.domain.FreeBoard;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;

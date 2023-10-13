@@ -1,8 +1,8 @@
 package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.dto.CreateFreeBoardDTO;
-import Park.gamewebpage.dto.UpdateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboardDTO.api.CreateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboardDTO.api.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import Park.gamewebpage.url.URL;
 import com.fasterxml.jackson.databind.ObjectMapper;

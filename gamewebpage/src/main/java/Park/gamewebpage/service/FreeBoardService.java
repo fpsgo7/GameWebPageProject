@@ -1,8 +1,8 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.dto.CreateFreeBoardDTO;
-import Park.gamewebpage.dto.UpdateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboardDTO.api.CreateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboardDTO.api.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class FreeBoardService {
      * @param createFreeBoardDTO
      * @return FreeBoard 저장소에 저장되는 객체가 반환된다.
      */
-    public FreeBoard createFreeBoard(CreateFreeBoardDTO createFreeBoardDTO){
+    public FreeBoard createFreeBoard(CreateFreeBoardDTO  createFreeBoardDTO){
         return I_FREE_BOARD_REPOSITORY
                 .save(createFreeBoardDTO.toEntity());
     }
