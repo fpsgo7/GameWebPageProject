@@ -26,7 +26,6 @@ public class CreateFreeBoardDTO {
      *  엔티티로 변환하는 용도로 사용할 것이다.
      * @return
      */
-    @Builder
     public FreeBoard toEntity(){
         return FreeBoard.builder()
                 .title(title)
