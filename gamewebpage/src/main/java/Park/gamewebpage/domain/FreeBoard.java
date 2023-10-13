@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class FreeBoard {
+public class FreeBoard extends BaseTimeEntity{
 
     /**
      * 기본키 이며 컬럼 이름은 id,
@@ -40,14 +40,6 @@ public class FreeBoard {
 
     @Column(name = "writerName",nullable = false)
     private String writerName;
-
-    @CreatedDate // 엔티티가 생성되면 생성시간이 자동으로 저장된다.
-    @Column(name = "createdAt")
-    private LocalDateTime createdAt;
-
-    @LastModifiedDate // 엔티티가 수정될 떄 수정시간 저장
-    @Column(name = "updatedAt")
-    private String updatedAt;
 
     /**
      * 기본적인 생성자가 아닌
