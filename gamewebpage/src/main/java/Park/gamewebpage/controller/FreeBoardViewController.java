@@ -41,6 +41,12 @@ public class FreeBoardViewController {
 
     }
 
+    /**
+     * 자유 게시판 글 뷰
+     * @param id
+     * @param model
+     * @return
+     */
     @GetMapping(URL.FREE_BOARD_VIEW_URL_BY_ID)
     public String getFreeBoardView(
             @PathVariable Long id, Model model
@@ -52,7 +58,7 @@ public class FreeBoardViewController {
     }
 
     /**
-     * 자유게시판 글 생성 컨트롤러
+     * 자유게시판 글 생성 뷰 컨트롤러
      * @param model
      * @return
      */
