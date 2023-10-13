@@ -17,7 +17,6 @@ if (createButton) {
             })
         })
             .then(() => {
-                alert('등록 완료되었습니다.');
                 location.replace('/view/freeBoard');
             });
     });
@@ -32,7 +31,7 @@ if (modifyButton) {
         let params = new URLSearchParams(location.search);
         let id = params.get('id');
 
-        fetch(`/api/freeBoard/`+id, {
+        fetch('/api/freeBoard/'+id, {
             method: 'PUT',
             headers: {
                 "Content-Type": "application/json",
@@ -43,8 +42,22 @@ if (modifyButton) {
             })
         })
             .then(() => {
-                alert('수정이 완료되었습니다.');
-                location.replace('/view/freeBoard'+id);
+                location.replace('/view/freeBoard/'+id);
             });
+    });
+}
+
+// 삭제기능
+const deleteButton = document.getElementById('delete-btn');
+
+if(deleteButton){
+    deleteButton.addEventListener('click', event => {
+        let id = document.getElementById('freeBoard-id').value;
+        fetch('/api/freeBoard/'+id,{
+            method: 'DELETE'
+        })
+        .then(() => {
+            location.replace('/view/freeBoard');
+        });
     });
 }

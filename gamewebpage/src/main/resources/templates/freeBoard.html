@@ -15,7 +15,7 @@
     <dov class="col-lg-8">
       <article>
         <!-- 블로그 글 삭제를 위한 id 추가 -->
-        <iput type="hidden" id="article-id" th:value="${freeBoard.id}"></iput>
+        <input type="hidden" id="freeBoard-id" th:value="${freeBoard.id}">
         <header class="mb-4">
           <h1 class = "fw-bolder mb-1" th:text="${freeBoard.title}"></h1>
           <div class="text-muted fst-italic mb-2"
