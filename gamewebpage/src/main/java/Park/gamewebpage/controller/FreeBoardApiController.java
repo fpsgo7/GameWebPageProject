@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RestController
 public class FreeBoardApiController {
-    private final FreeBoardService FREE_BOARD_SERVICE;
+    private final FreeBoardService freeBoardService;
 
     /**
      * 자유 게시판 글생성 컨트롤러이다.
@@ -29,7 +29,7 @@ public class FreeBoardApiController {
     public ResponseEntity<FreeBoard> createFreeBoard
             (@RequestBody CreateFreeBoardDTO createFreeBoardDTO){
         FreeBoard freeBoard
-                = FREE_BOARD_SERVICE.createFreeBoard(createFreeBoardDTO);
+                = freeBoardService.createFreeBoard(createFreeBoardDTO);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -49,7 +49,7 @@ public class FreeBoardApiController {
         // 넣지않고 GetFreeBoardDTO DTO 객체로
         // 형변환 한후 대입한다.
         List<GetFreeBoardDTO> freeBoardDTOList
-                = FREE_BOARD_SERVICE.getListFreeBoard()
+                = freeBoardService.getListFreeBoard()
                 .stream()
                 //.map(freeBoard -> new GetFreeBoardDTO(freeBoard)) // 해당 문장을 줄이면 밑에처럼된다.
                 .map(GetFreeBoardDTO::new)
@@ -71,7 +71,7 @@ public class FreeBoardApiController {
     public  ResponseEntity<GetFreeBoardDTO> getFreeBoard(
             @PathVariable long id
     ){
-        FreeBoard freeBoard = FREE_BOARD_SERVICE.getFreeBoard(id);
+        FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
 
         return ResponseEntity
                 .ok()
@@ -88,19 +88,25 @@ public class FreeBoardApiController {
     public  ResponseEntity<Void> deleteFreeBoard(
             @PathVariable long id
     ){
-        FREE_BOARD_SERVICE.deleteFreeBoard(id);
+        freeBoardService.deleteFreeBoard(id);
         return ResponseEntity
                 .ok()
                 .build();
     }
 
+    /**
+     * 자유 게시판 업데이트
+     * @param id
+     * @param updateFreeBoardDTO
+     * @return UpdateFreeBoardDTO 객체 반환
+     */
     @PutMapping(URL.FREE_BOARD_API_URL_BY_ID)
     public ResponseEntity<FreeBoard> updateFreeBoard(
             @PathVariable long id,
             @RequestBody UpdateFreeBoardDTO updateFreeBoardDTO
             ){
         FreeBoard updateFreeBoard
-                = FREE_BOARD_SERVICE.updateFreeBoard(
+                = freeBoardService.updateFreeBoard(
                         id,updateFreeBoardDTO
         );
 
