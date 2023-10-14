@@ -1,22 +1,24 @@
-package Park.gamewebpage.dto.freeboardDTO.api;
+package Park.gamewebpage.dto.freeboardDTO.view;
 
 import Park.gamewebpage.domain.FreeBoard;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
- * 블로그 글 가져오기
- * title,content,writerId,writerName
+ * 블로그 글 뷰 리스트
+ * id, title, content, writerId, writerName
  */
 @Getter
 @Setter
-public class GetFreeBoardDTO {
+public class GetFreeBoardViewListDTO {
+    private final Long id;
     private final String title;
     private final String content;
     private final String writerId;
     private final String writerName;
 
-    public GetFreeBoardDTO(FreeBoard freeBoard){
+    public GetFreeBoardViewListDTO(FreeBoard freeBoard){
+        this.id = freeBoard.getId();
         this.title = freeBoard.getTitle();
         this.content = freeBoard.getContent();
         this.writerId = freeBoard.getWriterId();

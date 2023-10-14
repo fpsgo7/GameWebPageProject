@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-import java.time.LocalDateTime;
-
+/**
+ * 블로그 업데이트 뷰
+ * id, title, content
+ */
 @Getter
 @NoArgsConstructor
 public class UpdateFreeBoardViewDTO {

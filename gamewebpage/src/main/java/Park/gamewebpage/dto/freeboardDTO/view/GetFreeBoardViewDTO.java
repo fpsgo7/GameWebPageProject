@@ -2,25 +2,28 @@ package Park.gamewebpage.dto.freeboardDTO.view;
 
 import Park.gamewebpage.domain.FreeBoard;
 import lombok.Getter;
-import lombok.Setter;
+import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 /**
- * 블로그글 조회 뷰 제작때 미처 추가하지 못한 필드 변수 2개 추가할것!
+ * 블로그 글 뷰
+ * id,title, content,createAt
  */
+@NoArgsConstructor
 @Getter
-@Setter
 public class GetFreeBoardViewDTO {
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final String writerId;
-    private final String writerName;
+
+    private Long id;
+    private String title;
+    private String content;
+    private LocalDateTime createdAt;
 
     public GetFreeBoardViewDTO(FreeBoard freeBoard){
         this.id = freeBoard.getId();
         this.title = freeBoard.getTitle();
         this.content = freeBoard.getContent();
-        this.writerId = freeBoard.getWriterId();
-        this.writerName = freeBoard.getWriterName();
+        this.createdAt = freeBoard.getCreatedDate();
     }
+
 }

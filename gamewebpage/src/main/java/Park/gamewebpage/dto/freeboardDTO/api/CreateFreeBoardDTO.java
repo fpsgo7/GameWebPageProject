@@ -5,8 +5,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
 
 /**
- * FreeBoard 를 생성하기위한
- * DTO 클래스
+ * 블고그 생성용
+ * title,content,writerId,writerName
  */
 @NoArgsConstructor
 @AllArgsConstructor

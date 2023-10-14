@@ -9,6 +9,10 @@ import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
+/**
+ * 해당 클래스를 상속받은 엔티티 는
+ * 생성 시간과 수정시간이 자동으로 입력된다.
+ */
 @Getter
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)

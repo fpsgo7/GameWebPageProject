@@ -1,8 +1,8 @@
 package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.dto.freeboardDTO.view.FreeBoardViewDTO;
 import Park.gamewebpage.dto.freeboardDTO.view.GetFreeBoardViewDTO;
+import Park.gamewebpage.dto.freeboardDTO.view.GetFreeBoardViewListDTO;
 import Park.gamewebpage.dto.freeboardDTO.view.UpdateFreeBoardViewDTO;
 import Park.gamewebpage.service.FreeBoardService;
 import Park.gamewebpage.url.URL;
@@ -29,15 +29,15 @@ public class FreeBoardViewController {
      */
     @GetMapping(URL.FREE_BOARD_VIEW_URL)
     public String getFreeBoardListView(Model model){
-        List<GetFreeBoardViewDTO> freeBoardList
+        List<GetFreeBoardViewListDTO> freeBoardList
                 = freeBoardService.getListFreeBoard()
                 .stream()
-                .map(GetFreeBoardViewDTO::new)
+                .map(GetFreeBoardViewListDTO::new)
                 .collect(Collectors.toList());
 
         model.addAttribute("FreeBoardList",freeBoardList);
 
-        return "freeBoardList";
+        return "freeBoard/freeBoardList";
 
     }
 
@@ -53,8 +53,8 @@ public class FreeBoardViewController {
     ){
         FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
         model.addAttribute("freeBoard",
-                new FreeBoardViewDTO(freeBoard));
-        return "freeBoard";
+                new GetFreeBoardViewDTO(freeBoard));
+        return "freeBoard/freeBoard";
     }
 
     /**
@@ -64,7 +64,7 @@ public class FreeBoardViewController {
      */
     @GetMapping(URL.CREATE_FREE_BOARD_VIEW_URL)
     public String createFreeBoardView(Model model){
-        return "createFreeBoard";
+        return "freeBoard/createFreeBoard";
     }
 
     /**
@@ -77,6 +77,6 @@ public class FreeBoardViewController {
     public String newFreeBoardView(@RequestParam Long id, Model model){
         FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
         model.addAttribute("freeBoard",new UpdateFreeBoardViewDTO(freeBoard));
-        return "updateFreeBoard";
+        return "freeBoard/updateFreeBoard";
     }
 }
