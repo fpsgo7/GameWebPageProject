@@ -21,7 +21,7 @@
           <input type="text" class="form-control" placeholder="제목" id="title" th:value="${freeBoard.title}">
         </header>
         <section class="mb-5">
-          <textarea class="form-control h-25" rows="10" placeholder="내용" id="content"  th:value="${freeBoard.content}"></textarea>
+          <textarea class="form-control h-25" rows="10" placeholder="내용" id="content"  th:text="${freeBoard.content}"></textarea>
         </section>
         <button type="button" id="modify-btn" class="btn btn-primary btn-sm">수정</button>
       </article>
