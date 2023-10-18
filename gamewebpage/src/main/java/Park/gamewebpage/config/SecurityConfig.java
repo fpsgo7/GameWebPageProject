@@ -1,6 +1,7 @@
 package Park.gamewebpage.config;
 
 import Park.gamewebpage.service.UserDetailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,8 +16,11 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 /**
  * 스프링 시큐리티 설정
  */
+@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
+
+    private final LoginFailureHandler loginFailureHandler;
     
     /**
      * 스프링 시큐리티에 적용하지 않을 대상을
@@ -55,6 +59,7 @@ public class SecurityConfig {
                 //폼기반 로그인설정
                 .formLogin()
                 .loginPage("/login")
+                .failureHandler(loginFailureHandler) // 로그인 실패 핸들러
                 .defaultSuccessUrl("/view/freeBoard")
                 .and()
                 // 로그아웃 설정
