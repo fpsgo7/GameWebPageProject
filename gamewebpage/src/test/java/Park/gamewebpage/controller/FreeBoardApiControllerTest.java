@@ -61,7 +61,7 @@ class FreeBoardApiControllerTest {
     public void createFreeBoard() throws Exception{
         // given
         // url 변수 생성
-        final String url = URL.FREE_BOARD_API_URL;
+        final String url = URL.FREE_BOARD_API;
 
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
@@ -98,7 +98,7 @@ class FreeBoardApiControllerTest {
     @Test
     public void  getListFreeBoard()throws Exception{
         // given
-        final String url = URL.FREE_BOARD_API_URL;
+        final String url = URL.FREE_BOARD_API;
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
         final String content = "콘텐츠1";
@@ -135,7 +135,7 @@ class FreeBoardApiControllerTest {
     @Test
     public void  getFreeBoard()throws Exception{
         // given
-        final String url = URL.FREE_BOARD_API_URL_BY_ID;
+        final String url = URL.FREE_BOARD_API_BY_ID;
 
         final String title = "타이틀1";
         final String content = "콘텐츠1";
@@ -169,7 +169,7 @@ class FreeBoardApiControllerTest {
     @Test
     public void deleteFreeBoard() throws Exception{
         // given
-        final String url = URL.FREE_BOARD_API_URL_BY_ID;
+        final String url = URL.FREE_BOARD_API_BY_ID;
 
         final String title = "타이틀1";
         final String content = "콘텐츠1";
@@ -201,7 +201,7 @@ class FreeBoardApiControllerTest {
     @Test
     public void updateFreeBoard() throws Exception{
         //given
-        final String url = URL.FREE_BOARD_API_URL_BY_ID;
+        final String url = URL.FREE_BOARD_API_BY_ID;
 
         final String title = "타이틀1";
         final String content = "콘텐츠1";

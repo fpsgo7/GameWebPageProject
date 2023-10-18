@@ -27,7 +27,7 @@ public class FreeBoardViewController {
      * @param model
      * @return
      */
-    @GetMapping(URL.FREE_BOARD_VIEW_URL)
+    @GetMapping(URL.FREE_BOARD_VIEW)
     public String getFreeBoardListView(Model model){
         List<GetFreeBoardViewListDTO> freeBoardList
                 = freeBoardService.getListFreeBoard()
@@ -47,7 +47,7 @@ public class FreeBoardViewController {
      * @param model
      * @return
      */
-    @GetMapping(URL.FREE_BOARD_VIEW_URL_BY_ID)
+    @GetMapping(URL.FREE_BOARD_VIEW_BY_ID)
     public String getFreeBoardView(
             @PathVariable Long id, Model model
     ){
@@ -62,7 +62,7 @@ public class FreeBoardViewController {
      * @param model
      * @return
      */
-    @GetMapping(URL.CREATE_FREE_BOARD_VIEW_URL)
+    @GetMapping(URL.CREATE_FREE_BOARD_VIEW)
     public String createFreeBoardView(Model model){
         return "freeBoard/createFreeBoard";
     }
@@ -73,7 +73,7 @@ public class FreeBoardViewController {
      * @param model
      * @return
      */
-    @GetMapping(URL.UPDATE_FREE_BOARD_VIEW_URL)
+    @GetMapping(URL.UPDATE_FREE_BOARD_VIEW)
     public String newFreeBoardView(@RequestParam Long id, Model model){
         FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
         model.addAttribute("freeBoard",new UpdateFreeBoardViewDTO(freeBoard));
