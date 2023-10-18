@@ -30,11 +30,11 @@ public class URL {
     // User API
     public final static String USER_LOGIN_API_VIEW
             = "/login";
-    public final static String USER
+    public final static String USER_API
             = "/user";
-    public final static String USER_LOGOUT
+    public final static String USER_LOGOUT_API
             = "/logout";
     // UserView
-    public final static String USER_LOGIN_VIEW
-            = "/login";
+    public final static String USER_SIGNUP_VIEW
+            = "/signup";
 }

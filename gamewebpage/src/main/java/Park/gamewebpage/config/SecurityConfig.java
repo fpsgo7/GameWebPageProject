@@ -1,6 +1,7 @@
 package Park.gamewebpage.config;
 
 import Park.gamewebpage.service.UserDetailService;
+import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +22,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 public class SecurityConfig {
 
     private final LoginFailureHandler loginFailureHandler;
-    
+
     /**
      * 스프링 시큐리티에 적용하지 않을 대상을
      * 입력한다.
@@ -46,25 +47,28 @@ public class SecurityConfig {
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
-        throws Exception{
+            throws Exception{
         return httpSecurity
                 // HTTP 요청에 대한 인가 설정 구성 시작
                 .authorizeHttpRequests()
                 // 인증 인가 설정
                 // "/login","/signup","/user" 로 시작하는 url은 모두에게 허가
-                .antMatchers("/login","/signup","/user").permitAll()
+                .antMatchers(
+                        URL.USER_LOGIN_API_VIEW,
+                        URL.USER_SIGNUP_VIEW,
+                        URL.USER_API).permitAll()
                 // 그외 나머지는 인증후 이용가능하다.
                 .anyRequest().authenticated()
                 .and()
                 //폼기반 로그인설정
                 .formLogin()
-                .loginPage("/login")
+                .loginPage(URL.USER_LOGIN_API_VIEW)
                 .failureHandler(loginFailureHandler) // 로그인 실패 핸들러
-                .defaultSuccessUrl("/view/freeBoard")
+                .defaultSuccessUrl(URL.FREE_BOARD_VIEW)
                 .and()
                 // 로그아웃 설정
                 .logout()
-                .logoutSuccessUrl("/login")
+                .logoutSuccessUrl(URL.USER_LOGIN_API_VIEW)
                 .invalidateHttpSession(true)// 로그아웃 하면 세션 전체 삭제
                 .and()
                 //csrf 공격 방지 비활성화  (테스트 동안만 할것)
