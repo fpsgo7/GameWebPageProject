@@ -1,5 +1,6 @@
 package Park.gamewebpage.domain;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +26,12 @@ public class User implements UserDetails {
 
     @Column(name = "password")
     private String password;
+
+    @Builder
+    public User(String email,String password){
+        this.email = email;
+        this.password = password;
+    }
 
     // 사용자의 권한들 반환 메서드
     @Override

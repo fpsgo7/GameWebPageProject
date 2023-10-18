@@ -1,7 +1,6 @@
 package Park.gamewebpage.config;
 
 import Park.gamewebpage.service.UserDetailService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,7 +15,6 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 /**
  * 스프링 시큐리티 설정
  */
-@RequiredArgsConstructor
 @Configuration
 public class SecurityConfig {
     
@@ -42,6 +40,7 @@ public class SecurityConfig {
      * 로그 아웃 후에는 /login url을 get으로 실행하며
      * 로그아웃 하면 세션은 삭제된다.
      */
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
         throws Exception{
         return httpSecurity
@@ -56,7 +55,7 @@ public class SecurityConfig {
                 //폼기반 로그인설정
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/articles")
+                .defaultSuccessUrl("/view/freeBoard")
                 .and()
                 // 로그아웃 설정
                 .logout()
@@ -72,6 +71,7 @@ public class SecurityConfig {
     /**
      * 인증 관리자를 설정한다.
      */
+    @Bean
     public AuthenticationManager authenticationManager(
             HttpSecurity httpSecurity,
             BCryptPasswordEncoder bCryptPasswordEncoder,
