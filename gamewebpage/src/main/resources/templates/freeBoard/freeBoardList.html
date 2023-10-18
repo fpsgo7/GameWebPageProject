@@ -15,7 +15,7 @@
     <button type="button" id="create-btn"
             th:onclick="|location.href='@{/view/createFreeBoard}'|"
             class="btn btn-secondary btn-sm mb-3">글 등록</button>
-    <dib class="row-6" th:each="freeBoard : ${FreeBoardList}">
+    <div class="row-6" th:each="freeBoard : ${FreeBoardList}">
         <div class="card">
             <div class="card-header" th:text="${freeBoard.id}">
                 <!-- item의 id 출력 -->
@@ -25,7 +25,9 @@
                 <a th:href="@{freeBoard/{id}(id=${freeBoard.id})}" class="btn btn-primary">보러가기</a>
             </div>
         </div>
-    </dib>
+    </div>
+    <button type="button" class="btn btn-secondary"
+            onclick="location.href='/logout'">로그아웃</button>
 </div>
 </body>
 </html>
