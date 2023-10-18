@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .antMatchers(
                         URL.USER_LOGIN_API_VIEW,
                         URL.USER_SIGNUP_VIEW,
-                        URL.USER_API).permitAll()
+                        URL.USER_SIGNUP_API).permitAll()
                 // 그외 나머지는 인증후 이용가능하다.
                 .anyRequest().authenticated()
                 .and()

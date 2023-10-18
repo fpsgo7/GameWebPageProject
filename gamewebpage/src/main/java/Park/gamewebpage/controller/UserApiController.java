@@ -2,6 +2,7 @@ package Park.gamewebpage.controller;
 
 import Park.gamewebpage.dto.freeboardDTO.user.CreateUserDTO;
 import Park.gamewebpage.service.UserService;
+import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -20,10 +21,10 @@ public class UserApiController {
     /**
      * 회원가입을 담당하는 메서드
      */
-    @PostMapping("/user")
+    @PostMapping(URL.USER_SIGNUP_API)
     public String signup(CreateUserDTO createUserDTO){
         userService.createUser(createUserDTO); // 회원가입 서비스
-        return "redirect:/login"; // 회원가입이 완료된 이후에 로그인 페이지로 이동
+        return "redirect:"+URL.USER_LOGIN_API_VIEW; // 회원가입이 완료된 이후에 로그인 페이지로 이동
     }
 
     /**
@@ -31,10 +32,10 @@ public class UserApiController {
      * SecurityContextLogoutHandler 의 logout을 통하여 로그아웃하여
      * 스프링 시큐리티를 활용한다.
      */
-    @GetMapping("/logout")
+    @GetMapping(URL.USER_LOGOUT_API)
     public String logout(HttpServletRequest request, HttpServletResponse response){
         new SecurityContextLogoutHandler().logout(request,response
         , SecurityContextHolder.getContext().getAuthentication());
-        return "redirect:/login";
+        return "redirect:"+URL.USER_LOGIN_API_VIEW;
     }
 }
