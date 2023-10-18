@@ -1,4 +1,4 @@
-package Park.gamewebpage.dto.freeboardDTO.view;
+package Park.gamewebpage.dto.freeboard.view;
 
 import Park.gamewebpage.domain.FreeBoard;
 import lombok.Getter;

@@ -1,6 +1,6 @@
 package Park.gamewebpage.controller;
 
-import Park.gamewebpage.dto.freeboardDTO.user.CreateUserDTO;
+import Park.gamewebpage.dto.user.CreateUserDTO;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;

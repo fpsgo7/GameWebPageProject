@@ -1,4 +1,4 @@
-package Park.gamewebpage.dto.freeboardDTO.user;
+package Park.gamewebpage.dto.user;
 
 import lombok.Getter;
 import lombok.Setter;

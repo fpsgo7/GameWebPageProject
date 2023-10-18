@@ -1,9 +1,9 @@
 package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.dto.freeboardDTO.view.GetFreeBoardViewDTO;
-import Park.gamewebpage.dto.freeboardDTO.view.GetFreeBoardViewListDTO;
-import Park.gamewebpage.dto.freeboardDTO.view.UpdateFreeBoardViewDTO;
+import Park.gamewebpage.dto.freeboard.view.GetFreeBoardViewDTO;
+import Park.gamewebpage.dto.freeboard.view.GetFreeBoardViewListDTO;
+import Park.gamewebpage.dto.freeboard.view.UpdateFreeBoardViewDTO;
 import Park.gamewebpage.service.FreeBoardService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;

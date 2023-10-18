@@ -1,7 +1,7 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.User;
-import Park.gamewebpage.dto.freeboardDTO.user.CreateUserDTO;
+import Park.gamewebpage.dto.user.CreateUserDTO;
 import Park.gamewebpage.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
