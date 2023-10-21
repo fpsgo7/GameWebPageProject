@@ -1,4 +1,4 @@
-package Park.gamewebpage.config.jwt;
+package Park.gamewebpage.config.token.jwt;
 
 import lombok.Getter;
 import lombok.Setter;

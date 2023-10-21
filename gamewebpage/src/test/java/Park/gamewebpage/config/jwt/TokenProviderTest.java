@@ -1,5 +1,7 @@
 package Park.gamewebpage.config.jwt;
 
+import Park.gamewebpage.config.token.jwt.JwtProperties;
+import Park.gamewebpage.config.token.jwt.TokenProvider;
 import Park.gamewebpage.domain.User;
 import Park.gamewebpage.repository.IUserRepository;
 import io.jsonwebtoken.Jwts;

@@ -1,5 +1,6 @@
 package Park.gamewebpage.config.jwt;
 
+import Park.gamewebpage.config.token.jwt.JwtProperties;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
