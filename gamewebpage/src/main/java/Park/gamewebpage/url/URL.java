@@ -8,7 +8,8 @@ package Park.gamewebpage.url;
  * 주석에서 나와있는 ,js, html 파일에서 도 수정해주면된다.
  */
 public class URL {
-    // FreeBoardAPI
+
+    /* FreeBoardAPI */
     /**
      * freeBoard.js
      */
@@ -16,7 +17,8 @@ public class URL {
             = "/api/freeBoard";
     public final static String FREE_BOARD_API_BY_ID
             = "/api/freeBoard/{id}";
-    // FreeBoardView
+
+    /* FreeBoardView */
     /**
      * freeBoard.js
      */
@@ -38,7 +40,7 @@ public class URL {
     public final static String UPDATE_FREE_BOARD_VIEW
             = "/view/updateFreeBoard";
 
-    // User API
+    /* User API */
     /**
      * login.html
      */
@@ -54,7 +56,11 @@ public class URL {
      */
     public final static String USER_LOGOUT_API
             = "/logout";
-    // UserView
+    /* UserView */
     public final static String USER_SIGNUP_VIEW
             = "/signup";
+
+    /* Token */
+    public final static String TOKEN_API
+            =  "/api/token";
 }
