@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,9 +28,9 @@ public class FreeBoardApiController {
      */
     @PostMapping(URL.FREE_BOARD_API)
     public ResponseEntity<FreeBoard> createFreeBoard
-            (@RequestBody CreateFreeBoardDTO createFreeBoardDTO){
+            (@RequestBody CreateFreeBoardDTO createFreeBoardDTO, Principal principal){
         FreeBoard freeBoard
-                = freeBoardService.createFreeBoard(createFreeBoardDTO);
+                = freeBoardService.createFreeBoard(createFreeBoardDTO, principal.getName());
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

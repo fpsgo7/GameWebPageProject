@@ -17,8 +17,6 @@ public class CreateFreeBoardDTO {
 
     private String title;
     private String content;
-    private String writerId;
-    private String writerName;
 
     /**
      * 빌더 패턴을 사용해 DTO를 생성
@@ -26,12 +24,11 @@ public class CreateFreeBoardDTO {
      *  엔티티로 변환하는 용도로 사용할 것이다.
      * @return
      */
-    public FreeBoard toEntity(){
+    public FreeBoard toEntity(String writerId){
         return FreeBoard.builder()
                 .title(title)
                 .content(content)
                 .writerId(writerId)
-                .writerName(writerName)
                 .build();
     }
 }

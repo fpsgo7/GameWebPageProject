@@ -35,11 +35,8 @@ public class FreeBoard extends BaseTimeEntity{
     @Column(name = "content",nullable = false)
     private String content;
 
-    @Column(name = "writerId",nullable = false)
+    @Column(name = "writer_id",nullable = false)
     private String writerId;
-
-    @Column(name = "writerName",nullable = false)
-    private String writerName;
 
     /**
      * 기본적인 생성자가 아닌
@@ -48,13 +45,11 @@ public class FreeBoard extends BaseTimeEntity{
      * @param title
      * @param content
      * @param writerId
-     * @param writerName
      */
     @Builder
-    public FreeBoard(String title, String content, String writerId, String writerName){
+    public FreeBoard(String title, String content, String writerId){
         this.title = title;
         this.content = content;
         this.writerId = writerId;
-        this.writerName = writerName;
     }
 }

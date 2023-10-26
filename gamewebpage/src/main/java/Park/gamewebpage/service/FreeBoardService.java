@@ -23,9 +23,9 @@ public class FreeBoardService {
      * @param createFreeBoardDTO
      * @return FreeBoard 저장소에 저장되는 객체가 반환된다.
      */
-    public FreeBoard createFreeBoard(CreateFreeBoardDTO  createFreeBoardDTO){
+    public FreeBoard createFreeBoard(CreateFreeBoardDTO  createFreeBoardDTO, String userName){
         return iFreeBoardRepository
-                .save(createFreeBoardDTO.toEntity());
+                .save(createFreeBoardDTO.toEntity(userName));
     }
 
     /**
