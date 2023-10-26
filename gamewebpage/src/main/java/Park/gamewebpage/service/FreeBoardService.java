@@ -5,6 +5,7 @@ import Park.gamewebpage.dto.freeboard.api.CreateFreeBoardDTO;
 import Park.gamewebpage.dto.freeboard.api.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -56,7 +57,11 @@ public class FreeBoardService {
      * @param id
      */
     public void deleteFreeBoard(long id){
+        FreeBoard freeBoard = iFreeBoardRepository.findById(id)
+                        .orElseThrow(() -> new IllegalArgumentException("not found:"+id));
+        checkWriterId(freeBoard);
         iFreeBoardRepository.deleteById(id);
+
     }
 
     /**
@@ -72,9 +77,22 @@ public class FreeBoardService {
         FreeBoard freeBoard = iFreeBoardRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("not found:"+id));
 
+        checkWriterId(freeBoard);
+
         freeBoard.setTitle(updateFreeBoardDTO.getTitle());
         freeBoard.setContent(updateFreeBoardDTO.getContent());
 
         return  freeBoard;
+    }
+
+    /**
+     * 게시글을 작성한 유저인지 확인해준다.
+     */
+    private static void checkWriterId(FreeBoard freeBoard){
+        String userName = SecurityContextHolder.getContext().getAuthentication()
+                .getName();
+        if(!freeBoard.getWriterId().equals(userName)){
+            throw new IllegalArgumentException("not authorized");
+        }
     }
 }
