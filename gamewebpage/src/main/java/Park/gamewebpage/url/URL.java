@@ -8,6 +8,9 @@ package Park.gamewebpage.url;
  * 주석에서 나와있는 ,js, html 파일에서 도 수정해주면된다.
  */
 public class URL {
+    /* Util */
+    public final static String API
+            = "/api";
 
     /* FreeBoardAPI */
     /**
@@ -56,6 +59,7 @@ public class URL {
      */
     public final static String USER_LOGOUT_API
             = "/logout";
+
     /* UserView */
     public final static String USER_SIGNUP_VIEW
             = "/signup";

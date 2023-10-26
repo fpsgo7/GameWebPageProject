@@ -36,4 +36,14 @@ public class UserService {
                 .orElseThrow(()-> new IllegalArgumentException("Unexpected user"));
     }
 
+    /**
+     * 이메일을 입력받아 users 테이블에서
+     * 유저를 찾고 없으면
+     * 예외를 발생시킨다.
+     * OAuth2에서 제공하는 이메일은 유일 값이기 때문에 해당 메서드로 유저를 찾을 수 있기 때문이다.
+     */
+    public  User findByEmail(String email){
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
+    }
 }

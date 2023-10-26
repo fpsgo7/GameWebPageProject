@@ -12,7 +12,6 @@ import javax.persistence.*;
  */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-@Setter
 @Entity
 public class RefreshToken {
 
@@ -32,4 +31,8 @@ public class RefreshToken {
         this.refreshToken = refreshToken;
     }
 
+    public RefreshToken updateRefreshToken(String newRefreshToken){
+        this.refreshToken = newRefreshToken;
+        return this;
+    }
 }

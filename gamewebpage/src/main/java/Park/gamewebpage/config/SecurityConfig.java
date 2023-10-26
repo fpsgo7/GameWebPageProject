@@ -1,16 +1,27 @@
 package Park.gamewebpage.config;
 
-import Park.gamewebpage.service.UserDetailService;
+import Park.gamewebpage.config.oauth.OAuth2AuthorizationRequestRepository;
+import Park.gamewebpage.config.oauth.OAuth2SuccessHandler;
+import Park.gamewebpage.config.oauth.OAuth2UserService;
+import Park.gamewebpage.config.token.TokenAuthenticationFilter;
+import Park.gamewebpage.config.token.jwt.TokenProvider;
+import Park.gamewebpage.repository.IRefreshTokenRepository;
+import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+
+import javax.servlet.Filter;
 
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
 
@@ -22,6 +33,10 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 public class SecurityConfig {
 
     private final LoginFailureHandler loginFailureHandler;
+    private final OAuth2UserService oAuth2UserService;
+    private final TokenProvider tokenProvider;
+    private final IRefreshTokenRepository refreshTokenRepository;
+    private final UserService userService;
 
     /**
      * 스프링 시큐리티에 적용하지 않을 대상을
@@ -39,60 +54,81 @@ public class SecurityConfig {
     /**
      * 특정 HTTP 요청에 대한
      * 웹 기반 보안 구성 설정한다.
-     * "/login","/signup","/user" 왜에 나머지
-     * URL은 인증후 사용가능하며
-     * 로그인 url 은 /login 이며 post로 오면 실행
-     * 로그 아웃 후에는 /login url을 get으로 실행하며
-     * 로그아웃 하면 세션은 삭제된다.
      */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
             throws Exception{
-        return httpSecurity
-                // HTTP 요청에 대한 인가 설정 구성 시작
-                .authorizeHttpRequests()
-                // 인증 인가 설정
-                // "/login","/signup","/user" 로 시작하는 url은 모두에게 허가
-                .antMatchers(
-                        URL.USER_LOGIN_API_VIEW,
-                        URL.USER_SIGNUP_VIEW,
-                        URL.USER_SIGNUP_API).permitAll()
-                // 그외 나머지는 인증후 이용가능하다.
-                .anyRequest().authenticated()
-                .and()
-                //폼기반 로그인설정
-                .formLogin()
+        // 기능 테스트를 위해 비활성화 시킨다.
+        httpSecurity.csrf().disable();
+        // 세션 제어를 위해사용한다.
+        // OAuth2로그인 에서는 세션을 사용하지 않으며
+        // 기존 로그인 방식에서만 사용한다.
+        httpSecurity.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
+
+        // 만들어둔 토큰 필터 클래스 TokenAuthenticationFilter  을
+        // 활용하여 헤더를 확인할 커스텀 필터를 추가한다.
+        httpSecurity.addFilterBefore(getTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        // 토큰 재발급 URL은 인증 없이 접근 가능하도록 설정한다.
+        // 그외에 API 경로로 시작하는 URL은 전부 인증이 필요하게한다.
+        httpSecurity.authorizeRequests()
+                .antMatchers(URL.TOKEN_API).permitAll()
+                .antMatchers(URL.API+"/**").authenticated()
+                .anyRequest().permitAll();
+        // /api로 시작하는 url인 경우 401 상태 코드를 반환하도록 예외처리
+        httpSecurity.exceptionHandling()
+                .defaultAuthenticationEntryPointFor(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED),
+                        new AntPathRequestMatcher(URL.API+"/**"));
+
+
+        /* oauth2Login() 설정 */
+        // OAuth2에 필요한 정보를 세션이 아닌 쿠키에 저장해서
+        // 쓸 수 있도록 인증 요청과 관련된 상태를 저장할 저장소를 설정한다.
+        // 인증 성공 시 실행할 핸들러도 설정한다.
+        httpSecurity.oauth2Login()
                 .loginPage(URL.USER_LOGIN_API_VIEW)
-                .failureHandler(loginFailureHandler) // 로그인 실패 핸들러
+                .authorizationEndpoint()
+                .authorizationRequestRepository(getOAuth2AuthorizationRequestBasedOnCookieRepository())
+                .and()
+                .successHandler(getOAuth2SuccessHandler())
+                .userInfoEndpoint()
+                .userService(oAuth2UserService);
+        /* 기본 로그인 설정*/
+        httpSecurity.formLogin()
+                .loginPage(URL.USER_LOGIN_API_VIEW)
                 .defaultSuccessUrl(URL.FREE_BOARD_VIEW)
-                .and()
-                // 로그아웃 설정
-                .logout()
+                .failureHandler(loginFailureHandler);
+        /* 로그 아웃 설정*/
+        httpSecurity.logout()
                 .logoutSuccessUrl(URL.USER_LOGIN_API_VIEW)
-                .invalidateHttpSession(true)// 로그아웃 하면 세션 전체 삭제
-                .and()
-                //csrf 공격 방지 비활성화  (테스트 동안만 할것)
-                .csrf()
-                .disable()
-                .build();
+                .invalidateHttpSession(true);
+
+        return httpSecurity.build();
+
     }
 
     /**
-     * 인증 관리자를 설정한다.
+     * @return OAuth2SuccessHandler 객체
      */
-    @Bean
-    public AuthenticationManager authenticationManager(
-            HttpSecurity httpSecurity,
-            BCryptPasswordEncoder bCryptPasswordEncoder,
-            UserDetailService userDetailService
-    )throws Exception{
-        return httpSecurity
-                .getSharedObject(AuthenticationManagerBuilder.class)
-                // 사용자 서비스 설정
-                .userDetailsService(userDetailService)// 사용자 정보를 가져올 서비스 UserDetailsService 을 상속받은 클래스
-                .passwordEncoder(bCryptPasswordEncoder) // 페스워드 인코더
-                .and()
-                .build();
+    private OAuth2SuccessHandler getOAuth2SuccessHandler() {
+        return new OAuth2SuccessHandler(tokenProvider,refreshTokenRepository,getOAuth2AuthorizationRequestBasedOnCookieRepository(),
+                userService);
+    }
+
+    /**
+     * @return OAuth2AuthorizationRequestRepository 객체
+     */
+    private OAuth2AuthorizationRequestRepository getOAuth2AuthorizationRequestBasedOnCookieRepository() {
+        return new OAuth2AuthorizationRequestRepository();
+    }
+
+    /**
+     * tokenProvider 을 인자값으로 하여
+     * TokenAuthenticationFilter 객체를 생성한 후 반환한다.
+     */
+    private Filter getTokenAuthenticationFilter() {
+        return new TokenAuthenticationFilter(tokenProvider);
     }
 
     /**
