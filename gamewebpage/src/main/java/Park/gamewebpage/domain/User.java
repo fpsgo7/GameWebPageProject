@@ -27,10 +27,25 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
+    // 사용자 이름
+    @Column(name = "nickname", unique = false)
+    private String nickname;
+
     @Builder
-    public User(String email,String password){
+    public User(String email,String password,String nickname){
         this.email = email;
         this.password = password;
+        this.nickname = nickname;
+    }
+
+    /**
+     * 닉네임을 변경한다. (중복 허용)
+     * @param nickname 닉네임값
+     * @return User 객체 반환
+     */
+    public User updateNickName(String nickname){
+        this.nickname = nickname;
+        return this;
     }
 
     // 사용자의 권한들 반환 메서드

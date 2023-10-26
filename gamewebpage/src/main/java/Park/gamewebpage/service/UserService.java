@@ -23,6 +23,7 @@ public class UserService {
                         .email(createUserDTO.getEmail())
                         .password(bCryptPasswordEncoder
                                 .encode(createUserDTO.getPassword()))
+                        .nickname(createUserDTO.getNickname())
                         .build())
                 .getId(); // 아이디 반환
     }
