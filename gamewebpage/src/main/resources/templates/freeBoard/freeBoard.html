@@ -19,7 +19,7 @@
         <header class="mb-4">
           <h1 class = "fw-bolder mb-1" th:text="${freeBoard.title}"></h1>
           <div class="text-muted fst-italic mb-2"
-               th:text="|Posted on ${#temporals.format(freeBoard.createdAt, 'yyyy-MM-dd HH:mm')} By ${freeBoard.writerId}|"></div>
+               th:text="|Posted on ${#temporals.format(freeBoard.createdDate, 'yyyy-MM-dd HH:mm')} By ${freeBoard.writerId}|"></div>
         </header>
         <section class="mb-5">
           <p class="fs-5 mb4" th:text="${freeBoard.content}"></p>

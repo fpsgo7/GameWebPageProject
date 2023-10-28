@@ -17,13 +17,15 @@ public class GetFreeBoardViewDTO {
     private Long id;
     private String title;
     private String content;
-    private LocalDateTime createdAt;
+    private String writerId;
+    private LocalDateTime createdDate;
 
     public GetFreeBoardViewDTO(FreeBoard freeBoard){
         this.id = freeBoard.getId();
         this.title = freeBoard.getTitle();
         this.content = freeBoard.getContent();
-        this.createdAt = freeBoard.getCreatedDate();
+        this.writerId = freeBoard.getWriterId();
+        this.createdDate = freeBoard.getCreatedDate();
     }
 
 }

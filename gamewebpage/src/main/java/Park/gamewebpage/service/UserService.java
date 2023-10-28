@@ -11,12 +11,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService {
     private final IUserRepository userRepository;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
      * 유저 추가 서비스
      */
     public Long createUser(CreateUserDTO createUserDTO){
+        /**
+         * 해당 객체를 클래스 자체에서 생성하면 SecrityConfig와의
+         * 스프링 빈순환 참조가 발생할 수 있으므로
+         * 메서드에 작성해준다.
+         */
+        BCryptPasswordEncoder bCryptPasswordEncoder
+                = new BCryptPasswordEncoder();
+
         return userRepository
                 .save(User
                         .builder()

@@ -15,13 +15,11 @@ public class GetFreeBoardViewListDTO {
     private final String title;
     private final String content;
     private final String writerId;
-    private final String writerName;
 
     public GetFreeBoardViewListDTO(FreeBoard freeBoard){
         this.id = freeBoard.getId();
         this.title = freeBoard.getTitle();
         this.content = freeBoard.getContent();
         this.writerId = freeBoard.getWriterId();
-        this.writerName = freeBoard.getWriterName();
     }
 }

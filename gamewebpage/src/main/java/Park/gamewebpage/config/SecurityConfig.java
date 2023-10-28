@@ -89,7 +89,7 @@ public class SecurityConfig {
         httpSecurity.oauth2Login()
                 .loginPage(URL.USER_LOGIN_API_VIEW)
                 .authorizationEndpoint()
-                .authorizationRequestRepository(getOAuth2AuthorizationRequestBasedOnCookieRepository())
+                .authorizationRequestRepository(getOAuth2AuthorizationRequestRepository())
                 .and()
                 .successHandler(getOAuth2SuccessHandler())
                 .userInfoEndpoint()
@@ -111,15 +111,19 @@ public class SecurityConfig {
     /**
      * @return OAuth2SuccessHandler 객체
      */
-    private OAuth2SuccessHandler getOAuth2SuccessHandler() {
-        return new OAuth2SuccessHandler(tokenProvider,refreshTokenRepository,getOAuth2AuthorizationRequestBasedOnCookieRepository(),
+    @Bean
+    public OAuth2SuccessHandler getOAuth2SuccessHandler() {
+        return new OAuth2SuccessHandler(tokenProvider,
+                refreshTokenRepository,
+                getOAuth2AuthorizationRequestRepository(),
                 userService);
     }
 
     /**
      * @return OAuth2AuthorizationRequestRepository 객체
      */
-    private OAuth2AuthorizationRequestRepository getOAuth2AuthorizationRequestBasedOnCookieRepository() {
+    @Bean
+    public OAuth2AuthorizationRequestRepository getOAuth2AuthorizationRequestRepository() {
         return new OAuth2AuthorizationRequestRepository();
     }
 
@@ -127,7 +131,8 @@ public class SecurityConfig {
      * tokenProvider 을 인자값으로 하여
      * TokenAuthenticationFilter 객체를 생성한 후 반환한다.
      */
-    private Filter getTokenAuthenticationFilter() {
+    @Bean
+    public Filter getTokenAuthenticationFilter() {
         return new TokenAuthenticationFilter(tokenProvider);
     }
 

@@ -91,16 +91,16 @@ if (modifyButton) {
         })
 
         function success() {
-          alter('수정 완료되었습니다.');
+          alert('수정 완료되었습니다.');
           location.replace('/view/freeBoard/'+id)
         }
 
         function fail() {
-          alter('수정 실패하였습니다.');
+          alert('수정 실패하였습니다.');
           location.replace('/view/freeBoard/'+id)
         }
 
-        httpRequest('PUT','/api/freeboard/'+id,body,success,fail);
+        httpRequest('PUT','/api/freeBoard/'+id,body,success,fail);
     });
 }
 
@@ -111,12 +111,12 @@ if(deleteButton){
     deleteButton.addEventListener('click', event => {
         let id = document.getElementById('freeBoard-id').value;
         function success() {
-          alter('삭제 완료되었습니다.');
+          alert('삭제 완료되었습니다.');
           location.replace('/view/freeBoard')
         }
 
         function fail() {
-          alter('삭제 실패하였습니다.');
+          alert('삭제 실패하였습니다.');
           location.replace('/view/freeBoard')
         }
 
