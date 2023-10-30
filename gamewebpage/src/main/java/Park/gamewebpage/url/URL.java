@@ -67,4 +67,11 @@ public class URL {
     /* Token */
     public final static String TOKEN_API
             =  "/api/token";
+
+    /* Game Character*/
+    public static final String GAME_CHARACTER_API_BY_EMAIL
+            = "/gameCharacter/{email}";
+
+    public static final String GAME_CHARACTER_API_BY_EMAIL
+            = "/gameCharacter";
 }

@@ -6,14 +6,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class UpdateGameCharacterDTO {
+public class UpdateGameCharacterApiDTO {
     private String email;
     private int highScore;
-    private String nickName;
+    private String nickname;
 
-    public UpdateGameCharacterDTO(GameCharacter gameCharacter){
+    public UpdateGameCharacterApiDTO(GameCharacter gameCharacter){
         this.email = gameCharacter.getEmail();
         this.highScore = gameCharacter.getHighScore();
-        this.nickName = gameCharacter.getNickname();
+        this.nickname = gameCharacter.getNickname();
     }
 }

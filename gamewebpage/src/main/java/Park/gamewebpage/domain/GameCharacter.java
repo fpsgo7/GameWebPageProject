@@ -21,7 +21,6 @@ public class GameCharacter {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    // users 테이블의 닉네임 참조
     @Column(name = "nickname", unique = false)
     private String nickname;
     
