@@ -1,7 +1,8 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.GameCharacter;
-import Park.gamewebpage.dto.Character.UpdateGameCharacterApiDTO;
+import Park.gamewebpage.dto.Character.UpdateGameCharacterHighScoreDTO;
+import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
 import Park.gamewebpage.repository.IGameCharacterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,42 +45,43 @@ public class GameCharacterService {
 
     /**
      * 게임 캐릭터의 점수를 수정한다 (향후 필요하면 사용한다.)
-     * @param updateGameCharacterApiDTO
+     * @param updateGameCharacterNicknameDTO
      * @return 게임 캐릭터 객체
      */
     @Transactional // 게임 캐릭터를 찾는게 실패하면 작업을 취소한다.
-    public GameCharacter updateGameCharacterHighScore(UpdateGameCharacterApiDTO updateGameCharacterApiDTO){
+    public GameCharacter updateGameCharacterHighScore(String email, UpdateGameCharacterHighScoreDTO updateGameCharacterNicknameDTO){
         GameCharacter gameCharacter
                 = iGameCharacterRepository
-                .findByEmail(updateGameCharacterApiDTO.getEmail())
+                .findByEmail(email)
                 .orElseThrow(() ->
                         new IllegalArgumentException(
                                 "Unexpected GameCharacter"));
 
         gameCharacter
                 .setHighScore(
-                        updateGameCharacterApiDTO
+                        updateGameCharacterNicknameDTO
                                 .getHighScore());
         return gameCharacter;
     }
     
     /**
      * 닉네임을 변경한다.
-     * @param updateGameCharacterApiDTO
+     * @param updateGameCharacterNicknameDTO
      * @return 게임 케릭터 객체
      */
     @Transactional // 게임 캐릭터를 찾는게 실패하면 작업을 취소한다.
-    public GameCharacter updateGameCharacterNickName(String email,UpdateGameCharacterApiDTO updateGameCharacterApiDTO){
+    public GameCharacter updateGameCharacterNickName(String email
+            , UpdateGameCharacterNicknameDTO updateGameCharacterNicknameDTO){
         GameCharacter gameCharacter
                 = iGameCharacterRepository
-                .findByEmail(updateGameCharacterApiDTO.getEmail())
+                .findByEmail(email)
                 .orElseThrow(() ->
                         new IllegalArgumentException(
                                 "Unexpected GameCharacter"));
 
         gameCharacter
                 .setNickname(
-                        updateGameCharacterApiDTO
+                        updateGameCharacterNicknameDTO
                                 .getNickname());
         return gameCharacter;
     }

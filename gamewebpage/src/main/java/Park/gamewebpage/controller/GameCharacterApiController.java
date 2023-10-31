@@ -2,7 +2,7 @@ package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.GameCharacter;
 import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
-import Park.gamewebpage.dto.Character.UpdateGameCharacterApiDTO;
+import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
 import Park.gamewebpage.service.GameCharacterService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
@@ -42,8 +42,8 @@ public class GameCharacterApiController {
      * @return 게임 캐릭터 리스트
      */
     @GetMapping(URL.GAME_CHARACTER_API)
-    public ResponseEntity<List<GameCharacter>> getGameCharacterList(){
-        List<GameCharacter> GameCharacterList
+    public ResponseEntity<List<GetGameCharacterDTO>> getGameCharacterList(){
+        List<GetGameCharacterDTO> GameCharacterList
                 = gameCharacterService.getListGameCharacter()
                 .stream()
                 .map(GetGameCharacterDTO::new)
@@ -63,7 +63,7 @@ public class GameCharacterApiController {
     @PutMapping(URL.GAME_CHARACTER_API_BY_EMAIL)
     public ResponseEntity<GameCharacter> updateNickNameGameCharacter(
             @PathVariable String email,
-            @RequestBody UpdateGameCharacterApiDTO updateGameCharacterApiDTO
+            @RequestBody UpdateGameCharacterNicknameDTO updateGameCharacterApiDTO
     ){
         GameCharacter gameCharacter
                 = gameCharacterService

@@ -70,8 +70,8 @@ public class URL {
 
     /* Game Character*/
     public static final String GAME_CHARACTER_API_BY_EMAIL
-            = "/gameCharacter/{email}";
+            = "/api/gameCharacter/{email}";
 
-    public static final String GAME_CHARACTER_API_BY_EMAIL
-            = "/gameCharacter";
+    public static final String GAME_CHARACTER_API
+            = "/api/gameCharacter";
 }

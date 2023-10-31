@@ -73,7 +73,8 @@ public class FreeBoardService {
      * @return id 로 찾은 freeBoard
      */
     @Transactional
-    public FreeBoard updateFreeBoard(long id, UpdateFreeBoardDTO updateFreeBoardDTO){
+    public FreeBoard updateFreeBoard(long id
+            , UpdateFreeBoardDTO updateFreeBoardDTO){
         FreeBoard freeBoard = iFreeBoardRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("not found:"+id));
 

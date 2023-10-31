@@ -25,7 +25,11 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
+/**
+ * 현제 시점에는 기능이 변경되어
+ * 테스트를 위해서는 수정이 필요하다.
+ * 테스트를 하고 싶으면 수정 후 테스트할것
+ */
 @SpringBootTest
 @AutoConfigureMockMvc
 class FreeBoardApiControllerTest {
@@ -66,12 +70,10 @@ class FreeBoardApiControllerTest {
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
         final String content = "콘텐츠1";
-        final String writerId = "사용자아이디1";
-        final String writerName = "사용자이름1";
 
         // 테스트에 사용할 CreateFreeBoardDTO 생성
         final CreateFreeBoardDTO createFreeBoardDTO
-                = new CreateFreeBoardDTO(title,content,writerId,writerName);
+                = new CreateFreeBoardDTO(title,content);
 
         final String requestBody
                 = objectMapper.writeValueAsString(createFreeBoardDTO);
@@ -102,14 +104,10 @@ class FreeBoardApiControllerTest {
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
         final String content = "콘텐츠1";
-        final String writerId = "사용자아이디1";
-        final String writerName = "사용자이름1";
 
         iFreeBoardRepository.save(FreeBoard.builder()
                 .title(title)
                 .content(content)
-                .writerId(writerId)
-                .writerName(writerName)
                 .build());
 
         // when
@@ -126,9 +124,7 @@ class FreeBoardApiControllerTest {
                 // andExpect는 결과를 기대하는 것으로
                 // 바로 밑 문장은 왼쪽과 오른쪽 같이 같은지 확인한다
                 .andExpect(jsonPath("$[0].content").value(content))
-                .andExpect(jsonPath("$[0].title").value(title))
-                .andExpect(jsonPath("$[0].writerId").value(writerId))
-                .andExpect(jsonPath("$[0].writerName").value(writerName));
+                .andExpect(jsonPath("$[0].title").value(title));
     }
 
     @DisplayName("getFreeBoard: 자유게시판 글 조회 성공.")
@@ -147,7 +143,6 @@ class FreeBoardApiControllerTest {
                 .title(title)
                 .content(content)
                 .writerId(writerId)
-                .writerName(writerName)
                 .build());
 
         //when
@@ -182,7 +177,6 @@ class FreeBoardApiControllerTest {
                 .title(title)
                 .content(content)
                 .writerId(writerId)
-                .writerName(writerName)
                 .build());
 
         //when
@@ -214,7 +208,6 @@ class FreeBoardApiControllerTest {
                                 .title(title)
                                 .content(content)
                                 .writerId(writerId)
-                                .writerName(writerName)
                                 .build());
 
         final String newTitle = "new title";
