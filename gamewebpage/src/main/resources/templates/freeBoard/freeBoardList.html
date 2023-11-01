@@ -6,6 +6,7 @@
     <link rel="stylesheet" href = "http://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>
 </head>
 <body>
+<div th:include="header/header.html" th:remove="tag"></div>  
 <div class="p-5 mb-5 text-center</> bg-light">
     <h1 class="mb-3"> 자유 게시판 </h1>
     <h4 class="mb-3"> 바르고 고운말을 사용해주세요.</h4>
@@ -26,8 +27,7 @@
             </div>
         </div>
     </div>
-    <button type="button" class="btn btn-secondary"
-            onclick="location.href='/logout'">로그아웃</button>
+
 </div>
 <script src="/js/freeBoard.js"></script>
 <script src="/js/token.js"></script>
