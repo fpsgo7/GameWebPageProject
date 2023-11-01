@@ -1,6 +1,6 @@
 // 생성 기능
 const createButton = document.getElementById('create-btn');
-
+/* 생성 버튼은 비로그인 유저에게 막혀있지만 만약을 위해 확인한다.*/
 if (createButton) {
     createButton.addEventListener('click', event => {
       body = JSON.stringify({
@@ -119,7 +119,7 @@ if(deleteButton){
           alert('삭제 실패하였습니다.');
           location.replace('/view/freeBoard')
         }
-
+        /* http 메서드는 DELETE 이며 경로는 /api/freeBoard/'+id 이다. */
         httpRequest('DELETE','/api/freeBoard/'+id,null,success,fail);
     });
 }
