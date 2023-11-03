@@ -1,3 +1,5 @@
+<html xmlns:th="<http://www.thymeleaf.org>"
+      xmlns:sec="<http://www.thymeleaf.org/extras/spring-security>">
 <head>
   <meta charset="UTF-8">
   <!-- 부트 스트랩 가져오기 -->
@@ -18,7 +20,7 @@
         <a class="nav-link" href="/view/freeBoard">자유 게시판 <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active" sec:authorize="isAuthenticated()">
-        <a class="nav-link" href="#">유저 정보 (미구현)<span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{|/view/gameCharacter/${#authentication.name}|}">캐릭터 정보<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="#">랭킹 (미구현)<span class="sr-only">(current)</span></a>

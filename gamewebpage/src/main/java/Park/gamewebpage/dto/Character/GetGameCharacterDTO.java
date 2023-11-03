@@ -2,8 +2,10 @@ package Park.gamewebpage.dto.Character;
 
 import Park.gamewebpage.domain.GameCharacter;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+@RequiredArgsConstructor
 @Getter
 @Setter
 public class GetGameCharacterDTO {
@@ -16,4 +18,5 @@ public class GetGameCharacterDTO {
         this.highScore = gameCharacter.getHighScore();
         this.nickname = gameCharacter.getNickname();
     }
+
 }

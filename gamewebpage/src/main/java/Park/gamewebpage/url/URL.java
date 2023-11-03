@@ -24,6 +24,7 @@ public class URL {
     /* FreeBoardView */
     /**
      * freeBoard.js
+     * header.html
      */
     public final static String FREE_BOARD_VIEW
             = "/view/freeBoard";
@@ -74,4 +75,10 @@ public class URL {
 
     public static final String GAME_CHARACTER_API
             = "/api/gameCharacter";
+
+    /**
+     * header.html
+     */
+    public static final String GAME_CHARACTER_VIEW_BY_EMAIL
+            = "/view/gameCharacter/{email}";
 }
