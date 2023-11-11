@@ -4,7 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Table(name ="Characters")// 테이블이름을 UserCharacters 로 설정
+@Table(name ="GameCharacters")// 테이블이름을 UserCharacters 로 설정
 @Entity
 @Getter
 @Setter
