@@ -18,6 +18,11 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 // 자바 클래스에 프로퍼티 값을 가져와서 사용하는 애너테이션
+// application.properties 의 jwt 로 시작하는
+// 대상의 값들을 가져온다.
+// # for Token
+// jwt.issuer = Park@email.com
+// jwt.secret_key = game-springBoot
 @ConfigurationProperties("jwt")
 public class JwtProperties {
     private String issuer;// 이슈 발급자 값

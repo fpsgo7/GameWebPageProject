@@ -17,7 +17,10 @@ import java.time.Duration;
 import java.util.Date;
 import java.util.Map;
 
-
+/**
+ * 테스트하기전 sql 자동 실행을 막아둬야 테스트실행이
+ * 정상적으로 된다.
+ */
 @SpringBootTest
 class TokenProviderTest {
 

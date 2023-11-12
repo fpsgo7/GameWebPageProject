@@ -68,20 +68,21 @@ class TokenApiControllerTest {
          * 요청 객체를 생성한다.
          */
         final String url = URL.TOKEN_API;
-
+        // 테스트 유저 
         User testUser = userRepository.save(User.builder()
                 .email("user@gmail.com")
                 .password("test")
                 .build());
-
+        // 리프레시 토큰값 생성
         String refreshToken = JwtFactory.builder()
                 .claims(Map.of("id",testUser.getId()))
                 .build()
                 .createToken(jwtProperties);
-
+        // 리프레시 토큰 저장소에 저장한다. (즉 서버에 저장할 것이란 의미이다)
         refreshTokenRepository.save(new RefreshToken(
                 testUser.getId(),refreshToken));
 
+        // 액세스 토큰 요청하기
         CreateAccessTokenRequest request = new CreateAccessTokenRequest();
         request.setRefreshToken(refreshToken);
         final String requestBody = objectMapper.writeValueAsString(request);
