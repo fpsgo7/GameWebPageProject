@@ -28,6 +28,7 @@ public class FreeBoardApiController {
      */
     @PostMapping(URL.FREE_BOARD_API)
     public ResponseEntity<FreeBoard> createFreeBoard
+            // Principal 로그인된 유저의 앤티티 를 나타내는 인터페이스이다.
             (@RequestBody CreateFreeBoardDTO createFreeBoardDTO, Principal principal){
         FreeBoard freeBoard
                 = freeBoardService.createFreeBoard(createFreeBoardDTO, principal.getName());

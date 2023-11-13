@@ -27,6 +27,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 
 /**
  * 스프링 시큐리티 설정
+ * 빈등록을 활용하여 객체를 생성 반환받아 사용한다.
  */
 @RequiredArgsConstructor
 @Configuration
@@ -89,8 +90,10 @@ public class SecurityConfig {
         httpSecurity.oauth2Login()
                 .loginPage(URL.USER_LOGIN_API_VIEW)
                 .authorizationEndpoint()
+                // Authorization 요청과 관련된 상태 저장
                 .authorizationRequestRepository(getOAuth2AuthorizationRequestRepository())
                 .and()
+                // 인증 성공 시 실행할 핸들러
                 .successHandler(getOAuth2SuccessHandler())
                 .userInfoEndpoint()
                 .userService(oAuth2UserService);

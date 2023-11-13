@@ -1,8 +1,9 @@
 // 생성 기능
 const createButton = document.getElementById('create-btn');
-/* 생성 버튼은 비로그인 유저에게 막혀있지만 만약을 위해 확인한다.*/
+
 if (createButton) {
     createButton.addEventListener('click', event => {
+      // JavaScript 값이나 객체를 JSON 문자열로 변환
       body = JSON.stringify({
         title: document.getElementById('title').value,
         content: document.getElementById('content').value,
@@ -15,11 +16,16 @@ if (createButton) {
         alert('등록 실패하였습니다..');
         location.replace('/view/freeBoard');
       }
+      // httpRequest 함수를 통하여 http 요청을 한다
       httpRequest('POST','/api/freeBoard',body,success,fail)
     });
 }
 
 // HTTP 요청을 보내는 함수
+// 요청을 보낼때 액세스 토큰도 함꼐 보냅니다.
+// 만약 응답에 권한이 없다는 에러코드가 발생하면
+// 리프레시 토큰과 함꼐 새로운 액세스 토큰을 요청하고,
+// 전달받은 액세스 토큰으로 다시 API를 요청한다.
 function httpRequest(method,url,body,success,fail){
   fetch(url,{
     method: method,

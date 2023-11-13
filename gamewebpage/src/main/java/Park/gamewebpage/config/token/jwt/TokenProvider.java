@@ -21,6 +21,9 @@ import java.util.Set;
  * 올바른 토큰인지 유효성 검사후
  * 토큰에 필요한 정보를 가져오는
  * 클래스이다.
+ *
+ * 액세스 토큰을 생성하는데 사용하며
+ * 리프레시 토큰 생성에도 사용된다.
  */
 @RequiredArgsConstructor
 @Service

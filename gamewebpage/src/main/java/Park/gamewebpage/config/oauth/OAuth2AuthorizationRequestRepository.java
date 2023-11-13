@@ -17,25 +17,38 @@ import javax.servlet.http.HttpServletResponse;
  * 사용하는 AuthorizationRequestRepository 클래스를
  * 구현해 쿠키를 사용해 OAuth 의 정보를
  * 가져오고 저장하는 로직을 작성한다.
+ *
+ * 사용되는 곳으로는 SecurityConfig에서
+ * .authorizationRequestRepository 메서드의 인자값으로
+ * Authorization 요청과 관련된 상태 저장에 쓰이며
+ *
+ * OAuth2SuccessHandler 객체를 생성하는 생성자의 인자값
+ * 으로 쓰인다.
  */
 public class OAuth2AuthorizationRequestRepository implements AuthorizationRequestRepository<OAuth2AuthorizationRequest> {
 
-    public final static String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";
-    private final static int COOKIE_EXPIRE_SECONDS = 18000;
+    public final static String OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME = "oauth2_auth_request";// 쿠키 이름
+    private final static int COOKIE_EXPIRE_SECONDS = 18000;// 쿠키 만료 시간
 
     /**
      * 쿠키를 객체화 해서 가져오기
+     *
+     * 인자값인 HttpServletRequest와
+     * 연관된 OAuth2AuthorizationRequest를 반환한다.
      * @param request the {@code HttpServletRequest}
      * @return 쿠키를 객체화한것
      */
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
+        // 해당 인자값으로 쿠키를 가져온다.
         Cookie cookie = WebUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
-        return CookieUtil.deserializeToObject(cookie, OAuth2AuthorizationRequest.class);
+        return CookieUtil.deserializeToObject(cookie, OAuth2AuthorizationRequest.class); 
     }
 
     /**
-     * 쿠키 추가하기
+     * 쿠키 추가를 통하여
+     * 제공된 HttpServletRequest 및/또는 HttpServletResponse에
+     * 연결하는 OAuth2AuthorizationRequest를 유지합니다.
      * @param authorizationRequest the {@link OAuth2AuthorizationRequest}
      * @param request the {@code HttpServletRequest}
      * @param response the {@code HttpServletResponse}
@@ -63,11 +76,19 @@ public class OAuth2AuthorizationRequestRepository implements AuthorizationReques
         return null;
     }
 
+    /**
+     * 제공된 HttpServletRequest와 연결된 OAuth2AuthorizationRequest를 제거하고 반환합니다.
+     * 사용할 수 없는 경우 null을 반환합니다.
+     */
     @Override
     public OAuth2AuthorizationRequest removeAuthorizationRequest(HttpServletRequest request, HttpServletResponse response) {
         return this.loadAuthorizationRequest(request);
     }
 
+    /**
+     * 쿠키 삭제를 실행해준다.
+     * 재생성에 사용되기도한다.
+     */
     public void removeAuthorizationRequestCookies(HttpServletRequest request, HttpServletResponse response) {
         CookieUtil.deleteCookie(request, response, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME);
     }
