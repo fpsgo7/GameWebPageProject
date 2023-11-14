@@ -1,6 +1,7 @@
 package Park.gamewebpage.config;
 
 import Park.gamewebpage.config.oauth.OAuth2AuthorizationRequestRepository;
+import Park.gamewebpage.config.oauth.OAuth2LogoutSuccessHandler;
 import Park.gamewebpage.config.oauth.OAuth2SuccessHandler;
 import Park.gamewebpage.config.oauth.OAuth2UserService;
 import Park.gamewebpage.config.token.TokenAuthenticationFilter;
@@ -104,7 +105,7 @@ public class SecurityConfig {
                 .failureHandler(loginFailureHandler);
         /* 로그 아웃 설정*/
         httpSecurity.logout()
-                .logoutSuccessUrl(URL.USER_LOGIN_API_VIEW)
+                .logoutSuccessHandler(getOAuth2LogoutSuccessHandler())
                 .invalidateHttpSession(true);
 
         return httpSecurity.build();
@@ -145,5 +146,15 @@ public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return  new BCryptPasswordEncoder();
+    }
+
+    /**
+     * 로그아웃 성공 핸들러
+     */
+    @Bean
+    public OAuth2LogoutSuccessHandler getOAuth2LogoutSuccessHandler(){
+        return  new OAuth2LogoutSuccessHandler(tokenProvider, refreshTokenRepository,
+                getOAuth2AuthorizationRequestRepository(),
+                userService);
     }
 }
