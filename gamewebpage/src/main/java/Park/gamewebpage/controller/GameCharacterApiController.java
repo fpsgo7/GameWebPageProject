@@ -2,6 +2,7 @@ package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.GameCharacter;
 import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
+import Park.gamewebpage.dto.Character.IGetGameCharacterRankDTO;
 import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
 import Park.gamewebpage.service.GameCharacterService;
 import Park.gamewebpage.url.URL;
@@ -44,10 +45,24 @@ public class GameCharacterApiController {
     @GetMapping(URL.GAME_CHARACTER_API)
     public ResponseEntity<List<GetGameCharacterDTO>> getGameCharacterList(){
         List<GetGameCharacterDTO> GameCharacterList
-                = gameCharacterService.getListGameCharacter()
+                = gameCharacterService.getGameCharacterList()
                 .stream()
                 .map(GetGameCharacterDTO::new)
                 .collect(Collectors.toList());
+
+        return ResponseEntity
+                .ok()
+                .body(GameCharacterList);
+    }
+
+    /**
+     * 게임 케릭터 순위 전체 조회 메서드이다.
+     * @return 게임 캐릭터 리스트
+     */
+    @GetMapping(URL.GAME_CHARACTER_RANK_API)
+    public ResponseEntity<List<IGetGameCharacterRankDTO>> getGameCharacterRankList(){
+        List<IGetGameCharacterRankDTO> GameCharacterList
+                = gameCharacterService.getGameCharacterRankList();
 
         return ResponseEntity
                 .ok()

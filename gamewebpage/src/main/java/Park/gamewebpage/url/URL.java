@@ -76,9 +76,16 @@ public class URL {
     public static final String GAME_CHARACTER_API
             = "/api/gameCharacter";
 
+    public static final String GAME_CHARACTER_RANK_API
+            = "/api/gameCharacter/rank";
+
     /**
      * header.html
      */
     public static final String GAME_CHARACTER_VIEW_BY_EMAIL
             = "/view/gameCharacter/{email}";
+
+    public static final String GAME_CHARACTER_RANK_VIEW
+            = "/view/gameCharacter/rank";
+
 }

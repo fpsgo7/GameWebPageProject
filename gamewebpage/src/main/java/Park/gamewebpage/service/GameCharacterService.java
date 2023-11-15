@@ -1,6 +1,7 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.GameCharacter;
+import Park.gamewebpage.dto.Character.IGetGameCharacterRankDTO;
 import Park.gamewebpage.dto.Character.UpdateGameCharacterHighScoreDTO;
 import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
 import Park.gamewebpage.repository.IGameCharacterRepository;
@@ -37,8 +38,16 @@ public class GameCharacterService {
      * 가져온다.
      * @return 게임 캐릭터 전체 조회 결과
      */
-    public List<GameCharacter> getListGameCharacter(){
+    public List<GameCharacter> getGameCharacterList(){
         return iGameCharacterRepository.findAll();
+    }
+
+    /**
+     * 게임 캐릭터 순위 대로 가져온다.
+     * @return 게임 캐릭터 점수 정렬 조회 결과
+     */
+    public List<IGetGameCharacterRankDTO> getGameCharacterRankList(){
+        return iGameCharacterRepository.RankByHighScore();
     }
 
     // UPDATE
