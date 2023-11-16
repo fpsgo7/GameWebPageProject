@@ -116,49 +116,6 @@ class GameCharacterApiControllerTest {
                 .andExpect(jsonPath("$[1].email").value("2"));
 
     }
-    @DisplayName("게임 캐릭터리스트 랭킹 정보 가져오기")
-    @Test
-    void getRankListGameCharacter() throws Exception{
-
-        //given
-        final String url = URL.GAME_CHARACTER_RANK_API;
-
-        GameCharacter gameCharacter1 =
-                iGameCharacterRepository.save(
-                        GameCharacter.builder()
-                                .email("1")
-                                .nickname("1")
-                                .highScore(1)
-                                .build());
-        GameCharacter gameCharacter2 =
-                iGameCharacterRepository.save(
-                        GameCharacter.builder()
-                                .email("2")
-                                .nickname("2")
-                                .highScore(2)
-                                .build());
-        GameCharacter gameCharacter3 =
-                iGameCharacterRepository.save(
-                        GameCharacter.builder()
-                                .email("3")
-                                .nickname("3")
-                                .highScore(2)
-                                .build());
-
-        //when
-        final ResultActions resultActions
-                = mockMvc.perform(get(url)
-                .accept(MediaType.APPLICATION_JSON));
-
-        // then
-        resultActions
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].ranking").value("1"))
-                .andExpect(jsonPath("$[1].ranking").value("1"))
-                .andExpect(jsonPath("$[2].ranking").value("3"));
-
-    }
-
 
     @DisplayName("게임 캐릭터리 닉네임 수정하기")
     @Test

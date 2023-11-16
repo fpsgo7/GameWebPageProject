@@ -2,7 +2,6 @@ package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.GameCharacter;
 import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
-import Park.gamewebpage.dto.Character.IGetGameCharacterRankDTO;
 import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
 import Park.gamewebpage.service.GameCharacterService;
 import Park.gamewebpage.url.URL;
@@ -39,6 +38,7 @@ public class GameCharacterApiController {
     }
 
     /**
+     * 테스트 용
      * 게임 케릭터 전체 조회 메서드이다.
      * @return 게임 캐릭터 리스트
      */
@@ -56,20 +56,7 @@ public class GameCharacterApiController {
     }
 
     /**
-     * 게임 케릭터 순위 전체 조회 메서드이다.
-     * @return 게임 캐릭터 리스트
-     */
-    @GetMapping(URL.GAME_CHARACTER_RANK_API)
-    public ResponseEntity<List<IGetGameCharacterRankDTO>> getGameCharacterRankList(){
-        List<IGetGameCharacterRankDTO> GameCharacterList
-                = gameCharacterService.getGameCharacterRankList();
-
-        return ResponseEntity
-                .ok()
-                .body(GameCharacterList);
-    }
-
-    /**
+     * 테스트용
      * 게임 캐릭터의 닉네임을 수정한다.
      * @param email
      * @param updateGameCharacterApiDTO
@@ -89,9 +76,10 @@ public class GameCharacterApiController {
     }
 
     /**
+     * 테스트용
      * 게임 캐릭터를 삭제하는 메서드이다.
      * @param email
-     * @return 성공 실패값
+     * @return 성공 또는 실패값
      */
     @DeleteMapping(URL.GAME_CHARACTER_API_BY_EMAIL)
     public ResponseEntity<Void> deleteGameCharacter(

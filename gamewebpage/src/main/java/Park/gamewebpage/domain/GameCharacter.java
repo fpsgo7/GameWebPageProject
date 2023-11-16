@@ -23,6 +23,7 @@ public class GameCharacter {
     @Column(name = "nickname", unique = false)
     private String nickname;
     
+    // 향후 필요 없어 보이면 없엘것
     @Column(name = "high_score", unique = false)
     private int highScore;
 
