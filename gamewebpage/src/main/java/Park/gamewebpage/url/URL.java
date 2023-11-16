@@ -77,7 +77,7 @@ public class URL {
             = "/api/gameCharacter";
 
     public static final String GAME_CHARACTER_RANK_API
-            = "/api/gameCharacter/rank";
+            = "/api/gameCharacterRank";
 
     /**
      * header.html
@@ -85,7 +85,10 @@ public class URL {
     public static final String GAME_CHARACTER_VIEW_BY_EMAIL
             = "/view/gameCharacter/{email}";
 
+    /**
+     * gameCharacterRank.html
+     */
     public static final String GAME_CHARACTER_RANK_VIEW
-            = "/view/gameCharacter/rank";
+            = "/view/gameCharacterRank";
 
 }
