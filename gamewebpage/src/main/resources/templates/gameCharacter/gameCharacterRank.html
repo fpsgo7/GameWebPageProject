@@ -7,6 +7,11 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script th:inline="javascript">
+        var Ranking =1;
+
+    </script>
 </head>
 <body>
   <table class="table">
@@ -16,15 +21,16 @@
         <th scope="col">이메일</th>
         <th scope="col">케릭터 이름</th>
         <th scope="col">점수</th>
+          <th scope="col">점수 부여 날짜</th>
       </tr>
     </thead>
     <tbody>
-      <tr th:each = "gameCharacterRank:${gameCharacterRankList}">
-        <!--<th scope="row" th:text="${gameCharacterRank.ranking}">1</th>-->
+      <tr th:each = "gameCharacterRank, gameCharacterRankStat:${gameCharacterRankList}">
+        <th scope="row" th:text="(${gameCharacterRankStat.count}+(${nowPage}-1)*10)" >1</th>
         <td th:text="${gameCharacterRank.email}" >1@1</td>
         <td th:text="${gameCharacterRank.gameCharacterNickname}" >이름</td>
         <td th:text="${gameCharacterRank.highScore}" >150</td>
-          <td th:text="${gameCharacterRank.lastedTime}" >150</td>
+          <td th:text="${gameCharacterRank.lastedTime}" >2023-12-12 21:52:20</td>
       </tr>
     </tbody>
   </table>
