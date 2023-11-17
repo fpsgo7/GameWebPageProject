@@ -20,11 +20,11 @@
     </thead>
     <tbody>
       <tr th:each = "gameCharacterRank:${gameCharacterRankList}">
-        <th scope="row" th:text="${gameCharacterRank.ranking}">1</th>
+        <!--<th scope="row" th:text="${gameCharacterRank.ranking}">1</th>-->
         <td th:text="${gameCharacterRank.email}" >1@1</td>
-        <td th:text="${gameCharacterRank.gamecharacternickname}" >이름</td>
-        <td th:text="${gameCharacterRank.highscore}" >150</td>
-          <td th:text="${gameCharacterRank.lastedtime}" >150</td>
+        <td th:text="${gameCharacterRank.gameCharacterNickname}" >이름</td>
+        <td th:text="${gameCharacterRank.highScore}" >150</td>
+          <td th:text="${gameCharacterRank.lastedTime}" >150</td>
       </tr>
     </tbody>
   </table>

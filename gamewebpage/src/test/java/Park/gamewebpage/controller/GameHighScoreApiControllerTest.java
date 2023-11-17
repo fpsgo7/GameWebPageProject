@@ -55,7 +55,7 @@ class GameHighScoreApiControllerTest {
     }
 
     @Test
-    void getGameCharacterRankList() throws Exception {
+    void getGameCharacterRankPage() throws Exception {
         //given
         final String url = URL.GAME_CHARACTER_RANK_API;
 
@@ -63,7 +63,7 @@ class GameHighScoreApiControllerTest {
                 iGameHighScoreRepository.save(
                         GameHighScore.builder()
                                 .email("1")
-                                .nickname("1")
+                                .gameCharacterNickname("1")
                                 .highScore(1)
                                 .lastedTime(LocalDateTime.now())
                                 .build());
@@ -71,7 +71,7 @@ class GameHighScoreApiControllerTest {
                 iGameHighScoreRepository.save(
                         GameHighScore.builder()
                                 .email("2")
-                                .nickname("2")
+                                .gameCharacterNickname("2")
                                 .highScore(2)
                                 .lastedTime(LocalDateTime.now())
                                 .build());
@@ -79,7 +79,7 @@ class GameHighScoreApiControllerTest {
                 iGameHighScoreRepository.save(
                         GameHighScore.builder()
                                 .email("3")
-                                .nickname("3")
+                                .gameCharacterNickname("3")
                                 .highScore(3)
                                 .lastedTime(LocalDateTime.now())
                                 .build());
@@ -92,9 +92,9 @@ class GameHighScoreApiControllerTest {
         // then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].ranking").value("1"))
-                .andExpect(jsonPath("$[1].ranking").value("2"))
-                .andExpect(jsonPath("$[2].ranking").value("3"));
+                .andExpect(jsonPath("$[0].email").value("3"))
+                .andExpect(jsonPath("$[1].email").value("2"))
+                .andExpect(jsonPath("$[2].email").value("1"));
 
     }
 }

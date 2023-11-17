@@ -1,5 +1,6 @@
 package Park.gamewebpage.controller;
 
+import Park.gamewebpage.domain.GameHighScore;
 import Park.gamewebpage.dto.hiscore.IGetRankByHighScoreDTO;
 import Park.gamewebpage.service.GameHighScoreService;
 import Park.gamewebpage.url.URL;
@@ -9,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -21,23 +23,24 @@ public class GameHighScoreViewController {
      * 게임 캐릭터 랭크를 보여주는 컨트롤러
      * 페이징을 사용한다.
      * @param model
-     * @param pageable
      * @return
      */
     @GetMapping(URL.GAME_CHARACTER_RANK_VIEW)
     public String getRankListGameCharacter(
             Model model,
-            // @PageableDefault(현제페이지값, 한페이지당 허가되는 개수 , 정렬조건, 오름, 내림 차순)
-            // pageable을 매개변수로 설정한 후 위와 같이 요청이 오면 JpaRepository는 그에 해당하는 Pageable 객체를 자동으로 만들어준다.
-            // 즉 전체리스트를 그대로 가져오면 여기서 패이징을 해준다.
-            @PageableDefault(page=0, size=10, sort="ranking", direction= Sort.Direction.DESC) Pageable pageable
+            // PageRequest.of 를 사용하는 경우 추가해줘야하는 문장잉다.
+            @RequestParam(required = false, defaultValue = "0") int page
     ){
+        // 정렬 객체 생성 (해당 객체를 통해 정렬된다)
+        Sort sort = Sort.by(
+                Sort.Order.desc("highScore"),
+                Sort.Order.asc("lastedTime")    );
+        // Pageable 객체 생성 해당 객체를 통해 Pageable이 적용된다.
+        Pageable pageable =
+                PageRequest.of(page , 10, sort);
         // 게임캐릭터 순위 리스트 정보 가져오기
-        List<IGetRankByHighScoreDTO> gameCharacterRankList
-                = gameHighScoreService.getGameCharacterRankList();
-        PageRequest pageRequest = PageRequest.of(0, 10);
-        Page<IGetRankByHighScoreDTO> gameCharacterRankPage
-               = new PageImpl<>(gameCharacterRankList.subList(0, 10),pageRequest, gameCharacterRankList.size());
+        Page<GameHighScore> gameCharacterRankPage
+                = gameHighScoreService.getGameCharacterRankList(pageable);
 
         //페이지블럭 처리
         //1을 더해주는 이유는 pageable은 0부터라 1을 처리하려면 1을 더해서 시작해주어야 한다.

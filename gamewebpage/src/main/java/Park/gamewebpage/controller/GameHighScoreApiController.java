@@ -1,9 +1,15 @@
 package Park.gamewebpage.controller;
 
+import Park.gamewebpage.domain.GameHighScore;
 import Park.gamewebpage.dto.hiscore.IGetRankByHighScoreDTO;
 import Park.gamewebpage.service.GameHighScoreService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +27,15 @@ public class GameHighScoreApiController {
      * @return 게임 캐릭터 리스트
      */
     @GetMapping(URL.GAME_CHARACTER_RANK_API)
-    public ResponseEntity<List<IGetRankByHighScoreDTO>> getGameCharacterRankList(){
-        List<IGetRankByHighScoreDTO> gameCharacterRankList
-                = gameHighScoreService.getGameCharacterRankList();
+    public ResponseEntity<List<GameHighScore>> getGameCharacterRankList(){
+        Sort sort = Sort.by(
+                Sort.Order.desc("highScore"),
+                Sort.Order.asc("lastedTime")    );
+        Pageable pageable =
+                PageRequest.of(0, 10, sort);
+
+        List<GameHighScore> gameCharacterRankList
+                = gameHighScoreService.getGameCharacterRankList(pageable).toList();
 
         return ResponseEntity
                 .ok()
