@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
  * id, title, content, writer, writerName
  * 으로 구성되어있다.
  */
+@Table(name = "free_board")
 @Entity
 @Getter
 @Setter

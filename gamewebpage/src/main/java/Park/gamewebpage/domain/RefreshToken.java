@@ -10,6 +10,7 @@ import javax.persistence.*;
 /**
  * 리프레시 토큰 엔티티
  */
+@Table(name ="refresh_token")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)// 기본 생성자를 protected로 설정
 @Getter
 @Entity
