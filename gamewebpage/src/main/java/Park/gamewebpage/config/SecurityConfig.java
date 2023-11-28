@@ -48,7 +48,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer(){
         return (web) -> web.ignoring()
                 // H2 데이터베이스 콘솔 (aws의 mysql 사용할 때는 비활성화 할것)
-                // .requestMatchers(toH2Console())
+                 .requestMatchers(toH2Console())
                 // static 경로에 있는 파일들
                 .antMatchers("/static/**");
     }
