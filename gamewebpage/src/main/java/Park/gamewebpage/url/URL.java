@@ -44,6 +44,10 @@ public class URL {
     public final static String UPDATE_FREE_BOARD_VIEW
             = "/view/updateFreeBoard";
 
+    /* FreeBoardComment*/
+    public final static String FREE_BOARD_COMMENT_API
+            = "/api/freeBoard/{id}/freeBoardComment";
+
     /* User API */
     /**
      * login.html

@@ -33,9 +33,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * 현제 시점에는 기능이 변경되어
- * 테스트를 위해서는 수정이 필요하다.
- * 테스트를 하고 싶으면 수정 후 테스트할것
+ * 글 생성 관련 테스트를 위한
+ * 파일이다.
  */
 @SpringBootTest
 @AutoConfigureMockMvc

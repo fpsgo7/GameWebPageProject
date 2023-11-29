@@ -5,8 +5,11 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.*;
 
 /**
- * 블고그 생성용
+ * 자유게시판 글 생성용
  * title,content,writerId,writerName
+ * 게시판 글추가에 글 작성날짜를 넣어야할 것같지만
+ * 글 작성 날짜와 수정 시간은 엔티티 클래스 수정으로
+ * 스프링에 의하여 데이터베이스에 자동 입력된다
  */
 @NoArgsConstructor
 @AllArgsConstructor
