@@ -6,6 +6,7 @@ import Park.gamewebpage.domain.User;
 import Park.gamewebpage.dto.freeboard.api.CreateFreeBoardDTO;
 import Park.gamewebpage.dto.freeboardcomment.api.CreateFreeBoardCommentDTO;
 import Park.gamewebpage.repository.IFreeBoardCommentRepository;
+import Park.gamewebpage.repository.IFreeBoardRepository;
 import Park.gamewebpage.repository.IUserRepository;
 import Park.gamewebpage.url.URL;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,6 +51,9 @@ class FreeBoardCommentApiControllerTest {
     IFreeBoardCommentRepository iFreeBoardCommentRepository;
 
     @Autowired
+    IFreeBoardRepository iFreeBoardRepository;
+
+    @Autowired
     IUserRepository iUserRepository;
 
     User user;
@@ -65,6 +69,7 @@ class FreeBoardCommentApiControllerTest {
                 .webAppContextSetup(webApplicationContext)
                 .build();
 
+        iFreeBoardRepository.deleteAll();
         iFreeBoardCommentRepository.deleteAll();
     }
 
@@ -85,39 +90,23 @@ class FreeBoardCommentApiControllerTest {
      * 댓글을 달 대상인  자유게시판 글 이다.
      * @throws Exception
      */
-    public void createFreeBoard() throws Exception{
-        // given
-        // url 변수 생성
-        final String url = URL.FREE_BOARD_API;
-
+    public FreeBoard createFreeBoard() throws Exception{
         // CreateFreeBoardDTO 객체에 담을 변수
         final String title = "타이틀1";
         final String content = "콘텐츠1";
 
-        // 테스트에 사용할 CreateFreeBoardDTO 생성
-        final CreateFreeBoardDTO createFreeBoardDTO
-                = new CreateFreeBoardDTO(title,content);
-
-        final String requestBody
-                = objectMapper.writeValueAsString(createFreeBoardDTO);
-
-        Principal principal = Mockito.mock(Principal.class);
-        Mockito.when(principal.getName()).thenReturn("username");
-
-        // when
-        // 설정한 내용을 바타으로 요청을 전송한다.
-        ResultActions result
-                = mockMvc.perform(post(url)
-                .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .principal(principal)
-                .content(requestBody));
+        return iFreeBoardRepository.save(FreeBoard.builder()
+                .title("title")
+                .writerId(user.getUsername())
+                .content("content")
+                .build());
     }
 
     @DisplayName("createFreeBoard: 자유게시판 글 추가에 성공하였다.")
     @Test
     void createFreeBoardComment() throws Exception{
         // 자유게시판 하나 생성후 시작
-        createFreeBoard();
+        FreeBoard freeBoard = createFreeBoard();
         // given
         // url 변수 생성
         // 미리생성된 자유게시판을 대상으로 한다.
@@ -128,7 +117,7 @@ class FreeBoardCommentApiControllerTest {
 
         // 테스트에 사용할 CreateFreeBoardDTO 생성
         final CreateFreeBoardCommentDTO createFreeBoardCommentDTO
-                = new CreateFreeBoardCommentDTO(comment);
+                = new CreateFreeBoardCommentDTO(comment,freeBoard);
 
         final String requestBody
                 = objectMapper.writeValueAsString(createFreeBoardCommentDTO);

@@ -4,6 +4,7 @@ import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 /**
@@ -20,10 +21,12 @@ import lombok.NoArgsConstructor;
 public class CreateFreeBoardCommentDTO {
 
     private String comment;
+    private FreeBoard freeBoard;
 
     public FreeBoardComment toEntity(String writerId){
         return FreeBoardComment.builder()
                 .comment(comment)
+                .freeBoard(freeBoard)
                 .writerId(writerId)
                 .build();
     }
