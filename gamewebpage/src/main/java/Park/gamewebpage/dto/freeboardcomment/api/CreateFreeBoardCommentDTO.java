@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * 자유 게시판 댓글 생성용
@@ -15,6 +16,7 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @AllArgsConstructor
+@Setter
 // Test의 writeValueAsString 가 해당 클래스의 생성자를 찾지 못해
 // 해당 애너테이션을 적용하였다.
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)

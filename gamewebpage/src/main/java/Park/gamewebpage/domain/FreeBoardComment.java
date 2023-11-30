@@ -33,9 +33,10 @@ public class FreeBoardComment extends BaseTimeEntity{
 
 
     @Builder
-    public FreeBoardComment(String comment, String writerId) {
+    public FreeBoardComment(String comment, String writerId, FreeBoard freeBoard) {
         this.comment = comment;
         this.writerId = writerId;
+        this.freeBoard = freeBoard;
     }
 
 

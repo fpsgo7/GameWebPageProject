@@ -110,12 +110,10 @@ class FreeBoardCommentApiControllerTest {
         // given
         // url 변수 생성
         // 미리생성된 자유게시판을 대상으로 한다.
-        final String url = "/api/freeBoard/1/freeBoardComment";
+        final String url = "/api/freeBoard/"+freeBoard.getId()+"/freeBoardComment";
 
-        // CreateFreeBoardDTO 객체에 담을 변수
         final String comment = "코맨트";
 
-        // 테스트에 사용할 CreateFreeBoardDTO 생성
         final CreateFreeBoardCommentDTO createFreeBoardCommentDTO
                 = new CreateFreeBoardCommentDTO(comment,freeBoard);
 
