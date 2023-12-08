@@ -1,9 +1,11 @@
 package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.FreeBoard;
+import Park.gamewebpage.domain.FreeBoardComment;
 import Park.gamewebpage.dto.freeboard.view.GetFreeBoardViewDTO;
 import Park.gamewebpage.dto.freeboard.view.GetFreeBoardViewListDTO;
 import Park.gamewebpage.dto.freeboard.view.UpdateFreeBoardViewDTO;
+import Park.gamewebpage.dto.freeboardcomment.GetFreeBoardCommentDTO;
 import Park.gamewebpage.service.FreeBoardService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
@@ -52,6 +54,11 @@ public class FreeBoardViewController {
             @PathVariable Long id, Model model
     ){
         FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
+        List<FreeBoardComment> freeBoardComments = freeBoard.getComments();
+
+        if(freeBoardComments !=null && !freeBoardComments.isEmpty()){
+            model.addAttribute("freeBoardComments" , freeBoardComments);
+        }
         model.addAttribute("freeBoard",
                 new GetFreeBoardViewDTO(freeBoard));
         return "freeBoard/freeBoard";

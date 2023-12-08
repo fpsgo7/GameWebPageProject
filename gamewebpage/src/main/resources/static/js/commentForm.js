@@ -11,11 +11,11 @@ if (createFreeBoardComment) {
       });
       function success() {
         alert('등록 완료되었습니다.');
-        location.replace('/view/freeBoard'+id);
+        location.replace('/view/freeBoard/'+id);
       }
       function fail() {
         alert('등록 실패하였습니다..');
-        location.replace('/view/freeBoard'+id);
+        location.replace('/view/freeBoard/'+id);
       }
       // httpRequest 함수를 통하여 http 요청을 한다
       httpRequest('POST','/api/freeBoard/'+id+'/freeBoardComment',body,success,fail)
