@@ -6,6 +6,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,7 +42,7 @@ public class FreeBoard extends BaseTimeEntity{
     private String writerId;
 
     /**
-     * mappedBy : 대상의 팰드 명을 넣는다.(컬럼명 X)
+     * mappedBy : Many 대상의 팰드 명을 넣는다.(컬럼명 X)
      * fetch = FetchType.EAGER : 게시글 UI에서 댓글을 바로 보여주기 위해 FetchType을 EAGER로 설정해줬다
      * 게시글이 삭제되면 댓글 또한 삭제되어야 하기 때문에 CascadeType.REMOVE 속성 지정
      * @OrderBy 어노테이션을 이용하여 간단히 정렬 처리
