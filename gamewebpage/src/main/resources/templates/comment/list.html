@@ -14,18 +14,26 @@
     </style>
 </head>
 <div class="row-6" th:each="freeBoardComment : ${freeBoardComments}">
+    <input type="hidden" id="freeBoardComment-id" th:value="${freeBoardComment.id}">
     <div id="commentBody" class="d-flex flex-row comment-row m-t-0">
       <div class="p-2"><img src="https://i.imgur.com/Ur43esv.jpg" alt="user" width="50" class="rounded-circle"></div>
          <div class="comment-text w-100">
            <h6 class="font-medium" th:text="${freeBoardComment.writerId}" >작성자 이름</h6>
            <span class="m-b-15 d-block" th:text="${freeBoardComment.comment}">댓글 내용 </span>
          <div class="comment-footer">
-           <span class="text-muted float-right" th:text="${freeBoardComment.createdDate}">작성 :작성 날짜</span>
-            <span class="text-muted float-right">    &nbsp;&nbsp;</span>
-           <span class="text-muted float-right" th:text="${freeBoardComment.modifiedDate}">수정 :수정 날짜</span>
+             <span class="text-muted float-right" th:text="| 수정 날짜 : ${freeBoardComment.modifiedDate}|">수정 날짜</span>
+             <span class="text-muted float-right" th:text="| 작성 날짜 : ${freeBoardComment.createdDate}|">작성 날짜</span>
              <span th:if="${freeBoardComment.writerId} == ${#authentication.name}">
-               <button type="button" class="btn btn-success btn-sm">수정</button>
-               <button type="button" class="btn btn-danger btn-sm">삭제</button>
+               <button type="button" class="btn btn-success btn-sm " data-target="#collapseUpdateComment" data-toggle="collapse" >수정</button>
+               <button id="deleteFreeBoardComment-btn" type="button" class="btn btn-danger btn-sm">삭제</button>
+               <div class="collapse" id="collapseUpdateComment" aria-expanded="false" style="height: 0px;">
+                 <div class="well">
+                   <div class="form-group">
+                     <textarea id="updateFreeBoardComment-comment" class="form-control" rows="3" th:text="${freeBoardComment.comment}"></textarea>
+                   </div>
+                   <button type="button" id="updateFreeBoardComment-btn" class="btn btn-outline-primary bi bi-pencil-square"> 수정</button>
+                 </div>
+               </div>
              </span>
          </div>
        </div>

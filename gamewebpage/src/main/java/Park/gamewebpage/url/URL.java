@@ -45,9 +45,17 @@ public class URL {
             = "/view/updateFreeBoard";
 
     /* FreeBoardComment*/
+    /**
+     * commendForm.js
+     */
     public final static String FREE_BOARD_COMMENT_API
-            = "/api/freeBoard/{id}/freeBoardComment";
+            = "/api/freeBoard/{freeBoardId}/freeBoardComment";
 
+    /**
+     * commendForm.js
+     */
+    public final static String FREE_BOARD_COMMENT_API_BY_ID
+            = "/api/freeBoard/{freeBoardId}/freeBoardComment/{id}";
     /* User API */
     /**
      * login.html

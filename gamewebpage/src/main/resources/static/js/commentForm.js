@@ -1,8 +1,8 @@
 // 자유 게시판 댓글 추가 기능
-const createFreeBoardComment = document.getElementById('createFreeBoardComment-btn');
+const createButton = document.getElementById('createFreeBoardComment-btn');
 
-if (createFreeBoardComment) {
-    createFreeBoardComment.addEventListener('click', event => {
+if (createButton) {
+    createButton.addEventListener('click', event => {
       // url의 id 값 가져오기
       let id = document.getElementById('freeBoard-id').value;
       // JavaScript 값이나 객체를 JSON 문자열로 변환
@@ -22,6 +22,52 @@ if (createFreeBoardComment) {
     });
 }
 
+// 자유게시판 댓글 수정하기
+const updateButton = document.getElementById('updateFreeBoardComment-btn');
+
+if(updateButton){
+    updateButton.addEventListener('click', event => {
+        let id = document.getElementById('freeBoardComment-id').value;
+        let freeBoardId = document.getElementById('freeBoard-id').value;
+        body = JSON.stringify({
+            comment: document.getElementById('updateFreeBoardComment-comment').value
+        })
+
+        function success() {
+          alert('수정 완료되었습니다.');
+          location.replace('/view/freeBoard/'+id);
+        }
+        function fail() {
+          alert('수정 실패하였습니다.');
+          location.replace('/view/freeBoard/'+id);
+        }
+        // httpRequest 함수를 통하여 http 요청을 한다
+        httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail)
+    });
+}
+
+
+// 자유게시판 댓글 삭제하기
+const deleteButton = document.getElementById('deleteFreeBoardComment-btn');
+
+if(deleteButton){
+    deleteButton.addEventListener('click', event => {
+        let id = document.getElementById('freeBoardComment-id').value;
+        let freeBoardId = document.getElementById('freeBoard-id').value;
+
+
+        function success() {
+          alert('삭제 완료되었습니다.');
+          location.replace('/view/freeBoard/'+id);
+        }
+        function fail() {
+          alert('삭제 실패하였습니다.');
+          location.replace('/view/freeBoard/'+id);
+        }
+        // httpRequest 함수를 통하여 http 요청을 한다
+        httpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail)
+    });
+}
 
 // HTTP 요청을 보내는 함수
 function httpRequest(method,url,body,success,fail){

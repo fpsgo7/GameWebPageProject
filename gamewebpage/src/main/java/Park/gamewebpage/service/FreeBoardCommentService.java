@@ -2,9 +2,11 @@ package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.FreeBoardComment;
 import Park.gamewebpage.dto.freeboardcomment.api.CreateFreeBoardCommentDTO;
+import Park.gamewebpage.dto.freeboardcomment.api.UpdateFreeBoardCommentDTO;
 import Park.gamewebpage.repository.IFreeBoardCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -25,9 +27,23 @@ public class FreeBoardCommentService {
     }
 
     /**
-     * 해당 게시판 글의 댓글을 가져오는 것은
-     * 자유 게시판 서비스에서 담당한다.
+     * 자유 게시판 댓글 수정
+     * @param freeBoardId 자유게시판 글 아이디 (어느 글 소속인지 알아야함)
+     * @param id 댓글 아이디
+     * @param updateFreeBoardCommentDTO 가져온 객체
      */
+    @Transactional
+    public void update(Long freeBoardId, Long id, UpdateFreeBoardCommentDTO updateFreeBoardCommentDTO){
+        FreeBoardComment freeBoardComment = iFreeBoardCommentRepository.findByFreeBoardIdAndId(freeBoardId,id)
+                .orElseThrow(()->new IllegalArgumentException("해당 댓글은 없습니다."+id));
+        freeBoardComment.setComment(updateFreeBoardCommentDTO.getComment());
+    }
 
 
+    @Transactional
+    public void delete(Long freeBoardId, Long id){
+        FreeBoardComment freeBoardComment = iFreeBoardCommentRepository.findByFreeBoardIdAndId(freeBoardId,id)
+                .orElseThrow(()->new IllegalArgumentException("해당 댓글은 없습니다."+id));
+        iFreeBoardCommentRepository.delete(freeBoardComment);
+    }
 }
