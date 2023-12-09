@@ -1,4 +1,4 @@
-package Park.gamewebpage.controller;
+package Park.gamewebpage.controller.gamecharacter;
 
 import Park.gamewebpage.domain.GameCharacter;
 import Park.gamewebpage.dto.Character.GetGameCharacterDTO;

@@ -1,4 +1,4 @@
-package Park.gamewebpage.controller;
+package Park.gamewebpage.controller.user;
 
 import Park.gamewebpage.dto.user.CreateUserDTO;
 import Park.gamewebpage.service.UserService;

@@ -1,4 +1,4 @@
-package Park.gamewebpage.controller;
+package Park.gamewebpage.controller.FreeBoard;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.dto.freeboard.api.CreateFreeBoardDTO;
@@ -97,7 +97,7 @@ public class FreeBoardApiController {
     }
 
     /**
-     * 자유 게시판 업데이트
+     * 자유 게시판 수정
      * @param id
      * @param updateFreeBoardDTO
      * @return UpdateFreeBoardDTO 객체 반환

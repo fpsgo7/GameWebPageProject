@@ -1,4 +1,4 @@
-package Park.gamewebpage.controller;
+package Park.gamewebpage.controller.FreeBoard;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;

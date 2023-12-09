@@ -1,4 +1,4 @@
-// 생성 기능
+/* 생성 기능 */
 const createButton = document.getElementById('create-btn');
 
 if (createButton) {

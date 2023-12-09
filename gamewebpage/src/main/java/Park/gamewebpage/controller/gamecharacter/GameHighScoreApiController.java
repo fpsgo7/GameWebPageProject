@@ -1,4 +1,4 @@
-package Park.gamewebpage.controller;
+package Park.gamewebpage.controller.gamecharacter;
 
 import Park.gamewebpage.domain.GameHighScore;
 import Park.gamewebpage.service.GameHighScoreService;

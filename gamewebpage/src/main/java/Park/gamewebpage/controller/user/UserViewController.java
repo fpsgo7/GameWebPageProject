@@ -1,4 +1,4 @@
-package Park.gamewebpage.controller;
+package Park.gamewebpage.controller.user;
 
 import Park.gamewebpage.url.URL;
 import org.springframework.stereotype.Controller;
