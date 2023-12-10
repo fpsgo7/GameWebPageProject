@@ -1,8 +1,7 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.GameCharacter;
-import Park.gamewebpage.dto.Character.UpdateGameCharacterHighScoreDTO;
-import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
+import Park.gamewebpage.dto.Character.GameCharacterRequestDTO;
 import Park.gamewebpage.repository.IGameCharacterRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,11 +44,11 @@ public class GameCharacterService {
 
     /**
      * 게임 캐릭터의 점수를 수정한다 (향후 필요하면 사용한다.)
-     * @param updateGameCharacterNicknameDTO
+     * @param gameCharacterRequestDTO
      * @return 게임 캐릭터 객체
      */
     @Transactional // 게임 캐릭터를 찾는게 실패하면 작업을 취소한다.
-    public GameCharacter updateGameCharacterHighScore(String email, UpdateGameCharacterHighScoreDTO updateGameCharacterNicknameDTO){
+    public GameCharacter updateGameCharacterHighScore(String email, GameCharacterRequestDTO gameCharacterRequestDTO){
         GameCharacter gameCharacter
                 = iGameCharacterRepository
                 .findByEmail(email)
@@ -59,19 +58,19 @@ public class GameCharacterService {
 
         gameCharacter
                 .setHighScore(
-                        updateGameCharacterNicknameDTO
+                        gameCharacterRequestDTO
                                 .getHighScore());
         return gameCharacter;
     }
     
     /**
      * 닉네임을 변경한다.
-     * @param updateGameCharacterNicknameDTO
+     * @param gameCharacterRequestDTO
      * @return 게임 케릭터 객체
      */
     @Transactional // 게임 캐릭터를 찾는게 실패하면 작업을 취소한다.
     public GameCharacter updateGameCharacterNickName(String email
-            , UpdateGameCharacterNicknameDTO updateGameCharacterNicknameDTO){
+            , GameCharacterRequestDTO gameCharacterRequestDTO){
         GameCharacter gameCharacter
                 = iGameCharacterRepository
                 .findByEmail(email)
@@ -81,7 +80,7 @@ public class GameCharacterService {
 
         gameCharacter
                 .setNickname(
-                        updateGameCharacterNicknameDTO
+                        gameCharacterRequestDTO
                                 .getNickname());
         return gameCharacter;
     }

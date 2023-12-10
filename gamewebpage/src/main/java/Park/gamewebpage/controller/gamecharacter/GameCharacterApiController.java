@@ -1,8 +1,8 @@
 package Park.gamewebpage.controller.gamecharacter;
 
 import Park.gamewebpage.domain.GameCharacter;
-import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
-import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
+import Park.gamewebpage.dto.Character.GameCharacterRequestDTO;
+import Park.gamewebpage.dto.Character.GameCharacterResponseDTO;
 import Park.gamewebpage.service.GameCharacterService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +24,14 @@ public class GameCharacterApiController {
      * @return 게임 캐릭터 객체 또는 null
      */
     @GetMapping(URL.GAME_CHARACTER_API_BY_EMAIL)
-    public ResponseEntity<GetGameCharacterDTO> getGameCharacter(
+    public ResponseEntity<GameCharacterResponseDTO> getGameCharacter(
             @PathVariable String email
     ){
         GameCharacter gameCharacter = gameCharacterService.findByEmail(email);
 
         if(gameCharacter != null){
             return ResponseEntity.ok()
-                    .body(new GetGameCharacterDTO(gameCharacter));
+                    .body(new GameCharacterResponseDTO(gameCharacter));
         }else {
             return null;
         }
@@ -43,11 +43,11 @@ public class GameCharacterApiController {
      * @return 게임 캐릭터 리스트
      */
     @GetMapping(URL.GAME_CHARACTER_API)
-    public ResponseEntity<List<GetGameCharacterDTO>> getGameCharacterList(){
-        List<GetGameCharacterDTO> GameCharacterList
+    public ResponseEntity<List<GameCharacterResponseDTO>> getGameCharacterList(){
+        List<GameCharacterResponseDTO> GameCharacterList
                 = gameCharacterService.getGameCharacterList()
                 .stream()
-                .map(GetGameCharacterDTO::new)
+                .map(GameCharacterResponseDTO::new)
                 .collect(Collectors.toList());
 
         return ResponseEntity
@@ -59,17 +59,17 @@ public class GameCharacterApiController {
      * 테스트용
      * 게임 캐릭터의 닉네임을 수정한다.
      * @param email
-     * @param updateGameCharacterApiDTO
+     * @param gameCharacterRequestDTO
      * @return 게임 캐릭터 객체
      */
     @PutMapping(URL.GAME_CHARACTER_API_BY_EMAIL)
     public ResponseEntity<GameCharacter> updateNickNameGameCharacter(
             @PathVariable String email,
-            @RequestBody UpdateGameCharacterNicknameDTO updateGameCharacterApiDTO
+            @RequestBody GameCharacterRequestDTO gameCharacterRequestDTO
     ){
         GameCharacter gameCharacter
                 = gameCharacterService
-                .updateGameCharacterNickName(email,updateGameCharacterApiDTO);
+                .updateGameCharacterNickName(email,gameCharacterRequestDTO);
         return ResponseEntity
                 .ok()
                 .body(gameCharacter);
