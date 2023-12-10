@@ -1,6 +1,5 @@
 package Park.gamewebpage.dto.Character;
 
-import Park.gamewebpage.domain.GameCharacter;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

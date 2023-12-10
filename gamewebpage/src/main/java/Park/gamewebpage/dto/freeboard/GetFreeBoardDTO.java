@@ -1,13 +1,11 @@
 package Park.gamewebpage.dto.freeboard;
 
 import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.domain.FreeBoardComment;
 import Park.gamewebpage.dto.freeboardcomment.GetFreeBoardCommentDTO;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

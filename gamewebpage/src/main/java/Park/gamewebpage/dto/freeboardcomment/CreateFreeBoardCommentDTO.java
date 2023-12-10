@@ -1,10 +1,9 @@
-package Park.gamewebpage.dto.freeboardcomment.api;
+package Park.gamewebpage.dto.freeboardcomment;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 

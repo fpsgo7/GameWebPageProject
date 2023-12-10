@@ -1,7 +1,6 @@
 package Park.gamewebpage.domain;
 
 import lombok.*;
-
 import javax.persistence.*;
 
 /**

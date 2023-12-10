@@ -1,8 +1,8 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.FreeBoardComment;
-import Park.gamewebpage.dto.freeboardcomment.api.CreateFreeBoardCommentDTO;
-import Park.gamewebpage.dto.freeboardcomment.api.UpdateFreeBoardCommentDTO;
+import Park.gamewebpage.dto.freeboardcomment.CreateFreeBoardCommentDTO;
+import Park.gamewebpage.dto.freeboardcomment.UpdateFreeBoardCommentDTO;
 import Park.gamewebpage.repository.IFreeBoardCommentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

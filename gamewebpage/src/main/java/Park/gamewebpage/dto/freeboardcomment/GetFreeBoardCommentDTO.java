@@ -5,9 +5,6 @@ import Park.gamewebpage.domain.FreeBoardComment;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor

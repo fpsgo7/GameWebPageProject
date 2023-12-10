@@ -1,6 +1,5 @@
 package Park.gamewebpage.controller;
 
-import Park.gamewebpage.domain.GameCharacter;
 import Park.gamewebpage.domain.GameHighScore;
 import Park.gamewebpage.repository.IGameHighScoreRepository;
 import Park.gamewebpage.url.URL;
@@ -18,7 +17,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.time.LocalDateTime;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;

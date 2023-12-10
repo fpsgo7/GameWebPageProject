@@ -1,6 +1,5 @@
 package Park.gamewebpage.util.cookie;
 
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.util.SerializationUtils;
 
 import javax.servlet.http.Cookie;

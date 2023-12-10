@@ -3,7 +3,7 @@ package Park.gamewebpage.controller;
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;
 import Park.gamewebpage.domain.User;
-import Park.gamewebpage.dto.freeboardcomment.api.CreateFreeBoardCommentDTO;
+import Park.gamewebpage.dto.freeboardcomment.CreateFreeBoardCommentDTO;
 import Park.gamewebpage.repository.IFreeBoardCommentRepository;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import Park.gamewebpage.repository.IUserRepository;

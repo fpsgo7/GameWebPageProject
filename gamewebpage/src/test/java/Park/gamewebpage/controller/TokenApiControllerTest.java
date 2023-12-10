@@ -8,7 +8,6 @@ import Park.gamewebpage.dto.token.CreateAccessTokenRequest;
 import Park.gamewebpage.repository.IRefreshTokenRepository;
 import Park.gamewebpage.repository.IUserRepository;
 import Park.gamewebpage.url.URL;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,7 +23,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
