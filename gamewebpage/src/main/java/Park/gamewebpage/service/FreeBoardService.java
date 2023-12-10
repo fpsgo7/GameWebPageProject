@@ -1,8 +1,8 @@
 package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.dto.freeboard.api.CreateFreeBoardDTO;
-import Park.gamewebpage.dto.freeboard.api.UpdateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboard.CreateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboard.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

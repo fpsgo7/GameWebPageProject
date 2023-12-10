@@ -1,10 +1,6 @@
 package Park.gamewebpage.controller.FreeBoard;
 
-import Park.gamewebpage.domain.FreeBoard;
-import Park.gamewebpage.domain.FreeBoardComment;
-import Park.gamewebpage.dto.freeboard.view.GetFreeBoardViewDTO;
-import Park.gamewebpage.dto.freeboard.view.GetFreeBoardViewListDTO;
-import Park.gamewebpage.dto.freeboard.view.UpdateFreeBoardViewDTO;
+import Park.gamewebpage.dto.freeboard.GetFreeBoardDTO;
 import Park.gamewebpage.dto.freeboardcomment.GetFreeBoardCommentDTO;
 import Park.gamewebpage.service.FreeBoardService;
 import Park.gamewebpage.url.URL;
@@ -31,10 +27,10 @@ public class FreeBoardViewController {
      */
     @GetMapping(URL.FREE_BOARD_VIEW)
     public String getFreeBoardListView(Model model){
-        List<GetFreeBoardViewListDTO> freeBoardList
+        List<GetFreeBoardDTO> freeBoardList
                 = freeBoardService.getListFreeBoard()
                 .stream()
-                .map(GetFreeBoardViewListDTO::new)
+                .map(GetFreeBoardDTO::new)
                 .collect(Collectors.toList());
 
         model.addAttribute("FreeBoardList",freeBoardList);
@@ -53,14 +49,13 @@ public class FreeBoardViewController {
     public String getFreeBoardView(
             @PathVariable Long id, Model model
     ){
-        FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
-        List<FreeBoardComment> freeBoardComments = freeBoard.getComments();
+        GetFreeBoardDTO freeBoard = new GetFreeBoardDTO(freeBoardService.getFreeBoard(id));
+        List<GetFreeBoardCommentDTO> freeBoardComments = freeBoard.getFreeBoardComments();
 
         if(freeBoardComments !=null && !freeBoardComments.isEmpty()){
             model.addAttribute("freeBoardComments" , freeBoardComments);
         }
-        model.addAttribute("freeBoard",
-                new GetFreeBoardViewDTO(freeBoard));
+        model.addAttribute("freeBoard",freeBoard);
         return "freeBoard/freeBoard";
     }
 
@@ -82,8 +77,8 @@ public class FreeBoardViewController {
      */
     @GetMapping(URL.UPDATE_FREE_BOARD_VIEW)
     public String newFreeBoardView(@RequestParam Long id, Model model){
-        FreeBoard freeBoard = freeBoardService.getFreeBoard(id);
-        model.addAttribute("freeBoard",new UpdateFreeBoardViewDTO(freeBoard));
+        GetFreeBoardDTO freeBoard = new GetFreeBoardDTO(freeBoardService.getFreeBoard(id));
+        model.addAttribute("freeBoard",freeBoard);
         return "freeBoard/updateFreeBoard";
     }
 }

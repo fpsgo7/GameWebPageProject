@@ -1,8 +1,6 @@
 package Park.gamewebpage.controller.FreeBoard;
 
-import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;
-import Park.gamewebpage.dto.freeboard.api.CreateFreeBoardDTO;
 import Park.gamewebpage.dto.freeboardcomment.api.CreateFreeBoardCommentDTO;
 import Park.gamewebpage.dto.freeboardcomment.api.UpdateFreeBoardCommentDTO;
 import Park.gamewebpage.service.FreeBoardCommentService;

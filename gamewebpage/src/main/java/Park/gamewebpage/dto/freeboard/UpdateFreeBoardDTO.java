@@ -1,4 +1,4 @@
-package Park.gamewebpage.dto.freeboard.api;
+package Park.gamewebpage.dto.freeboard;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

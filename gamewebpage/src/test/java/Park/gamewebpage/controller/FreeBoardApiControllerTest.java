@@ -2,8 +2,8 @@ package Park.gamewebpage.controller;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.User;
-import Park.gamewebpage.dto.freeboard.api.CreateFreeBoardDTO;
-import Park.gamewebpage.dto.freeboard.api.UpdateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboard.CreateFreeBoardDTO;
+import Park.gamewebpage.dto.freeboard.UpdateFreeBoardDTO;
 import Park.gamewebpage.repository.IFreeBoardRepository;
 import Park.gamewebpage.repository.IUserRepository;
 import Park.gamewebpage.url.URL;

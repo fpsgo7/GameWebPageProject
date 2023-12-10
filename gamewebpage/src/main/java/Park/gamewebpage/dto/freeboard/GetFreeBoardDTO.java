@@ -1,4 +1,4 @@
-package Park.gamewebpage.dto.freeboard.api;
+package Park.gamewebpage.dto.freeboard;
 
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;
