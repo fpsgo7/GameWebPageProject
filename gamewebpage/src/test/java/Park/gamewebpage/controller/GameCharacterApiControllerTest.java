@@ -1,7 +1,8 @@
 package Park.gamewebpage.controller;
 
+import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.GameCharacter;
-import Park.gamewebpage.dto.Character.GameCharacterRequestDTO;
+import Park.gamewebpage.dto.Character.UpdateGameCharacterNicknameDTO;
 import Park.gamewebpage.repository.IGameCharacterRepository;
 import Park.gamewebpage.url.URL;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -15,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -131,13 +133,13 @@ class GameCharacterApiControllerTest {
                                 .highScore(1)
                                 .build());
 
-        GameCharacterRequestDTO gameCharacterRequestDTO
-                = new GameCharacterRequestDTO(0, newNickname);
+        UpdateGameCharacterNicknameDTO updateGameCharacterNicknameDTO
+                = new UpdateGameCharacterNicknameDTO(newNickname);
         //when
         ResultActions resultActions
                 = mockMvc.perform(put(url,gameCharacter.getEmail())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .content(objectMapper.writeValueAsString(gameCharacterRequestDTO)));
+                .content(objectMapper.writeValueAsString(updateGameCharacterNicknameDTO)));
 
         // then
         resultActions.andExpect(status().isOk());

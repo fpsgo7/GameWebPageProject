@@ -1,7 +1,7 @@
 package Park.gamewebpage.controller.gamecharacter;
 
 import Park.gamewebpage.domain.GameCharacter;
-import Park.gamewebpage.dto.Character.GameCharacterResponseDTO;
+import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
 import Park.gamewebpage.service.GameCharacterService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
@@ -30,10 +30,10 @@ public class GameCharacterViewController {
 
         if(gameCharacter != null){
             model.addAttribute("gameCharacter"
-                    , new GameCharacterResponseDTO(gameCharacter));
+                    , new GetGameCharacterDTO(gameCharacter));
         }else {
             model.addAttribute("gameCharacter"
-                    , new GameCharacterResponseDTO(null,0,null));
+                    , new GetGameCharacterDTO(null,0,null));
         }
         return "gameCharacter/gameCharacter";
     }

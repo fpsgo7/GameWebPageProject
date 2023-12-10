@@ -8,12 +8,12 @@ import lombok.Setter;
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class GameCharacterResponseDTO {
+public class GetGameCharacterDTO {
     private final String email;
     private final int highScore;
     private final String nickname;
 
-    public GameCharacterResponseDTO(GameCharacter gameCharacter){
+    public GetGameCharacterDTO(GameCharacter gameCharacter){
         this.email = gameCharacter.getEmail();
         this.highScore = gameCharacter.getHighScore();
         this.nickname = gameCharacter.getNickname();
