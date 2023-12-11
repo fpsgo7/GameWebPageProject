@@ -20,7 +20,7 @@ public class FreeBoardComment extends BaseTimeEntity{
     @Column(name = "id",updatable = false)
     private Long id;
 
-    @Column(name = "comment",nullable = false)
+    @Column(name = "comment_text",nullable = false)
     private String comment;
 
     @Column(name = "writer_id",nullable = false)

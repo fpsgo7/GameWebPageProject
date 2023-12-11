@@ -1,16 +1,16 @@
 spring:
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: none
     show-sql: true
     properties:
       hibernate:
-
         format_sql: true
-    defer-datasource-initialization: true
+    defer-datasource-initialization: false
   datasource:
-    url: jdbc:h2:mem:gametestdb
-    username: sa
+    url: jdbc:mysql://localhost:3306/mywebgameproject?useSSL=false&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
   h2:
     console:
       enabled: true
@@ -26,6 +26,6 @@ spring:
               - profile
 # jwt
 jwt:
-  issuer: Park@email.com
-  secret_key: game-springBoot
+  issuer: a
+  secret_key: b
 
