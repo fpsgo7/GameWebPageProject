@@ -21,13 +21,13 @@ public class GameHighScore {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "game_character_nickname", unique = false)
+    @Column(name = "game_character_nickname")
     private String gameCharacterNickname;
 
-    @Column(name = "high_score", unique = false)
+    @Column(name = "high_score", nullable = false)
     private int highScore;
 
-    @Column(name = "lasted_time")
+    @Column(name = "lasted_time", nullable = false)
     private LocalDateTime lastedTime;
 
     @Builder

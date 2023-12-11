@@ -27,7 +27,7 @@ public class FreeBoardComment extends BaseTimeEntity{
     private String writerId;
 
     @ManyToOne
-    @JoinColumn(name = "free_board_id")
+    @JoinColumn(name = "free_board_id", nullable = false)
     private FreeBoard freeBoard;
 
 

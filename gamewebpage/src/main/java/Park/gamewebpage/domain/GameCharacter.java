@@ -20,11 +20,11 @@ public class GameCharacter {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "nickname", unique = false)
+    @Column(name = "nickname", nullable = false)
     private String nickname;
     
     // 향후 필요 없어 보이면 없엘것
-    @Column(name = "high_score", unique = false)
+    @Column(name = "high_score")
     private int highScore;
 
     @Builder

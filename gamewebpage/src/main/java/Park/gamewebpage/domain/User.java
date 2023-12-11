@@ -24,11 +24,11 @@ public class User implements UserDetails {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     // 사용자 이름
-    @Column(name = "nickname", unique = false)
+    @Column(name = "nickname", nullable = false)
     private String nickname;
 
     @Builder
