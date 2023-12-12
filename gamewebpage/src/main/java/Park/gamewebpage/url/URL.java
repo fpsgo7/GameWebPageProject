@@ -18,6 +18,9 @@ public class URL {
      */
     public final static String FREE_BOARD_API
             = "/api/freeBoard";
+    /**
+     * freeBoard.js
+     */
     public final static String FREE_BOARD_API_BY_ID
             = "/api/freeBoard/{id}";
 
@@ -56,6 +59,7 @@ public class URL {
      */
     public final static String FREE_BOARD_COMMENT_API_BY_ID
             = "/api/freeBoard/{freeBoardId}/freeBoardComment/{id}";
+
     /* User API */
     /**
      * login.html
@@ -65,8 +69,13 @@ public class URL {
     /**
      * signup.html
      */
+    public final static String USER_SIGNUP_API
+            = "/api/signup";
+    /**
+     *
+     */
     public final static String USER_API
-            = "/user";
+            = "/api/user";
     /**
      * userinfo.html
      */
@@ -79,8 +88,11 @@ public class URL {
             = "/logout";
 
     /* UserView */
+    /**
+     * login.html
+     */
     public final static String USER_SIGNUP_VIEW
-            = "/signup";
+            = "/view/signup";
     /**
      * header.html
      */

@@ -23,7 +23,7 @@ public class UserApiController {
     /**
      * 회원가입을 담당하는 메서드
      */
-    @PostMapping(URL.USER_API)
+    @PostMapping(URL.USER_SIGNUP_API)
     public String signup(CreateUserDTO createUserDTO){
         userService.createUser(createUserDTO); // 회원가입 서비스
         return "redirect:"+URL.USER_LOGIN_API_VIEW; // 회원가입이 완료된 이후에 로그인 페이지로 이동

@@ -76,6 +76,7 @@ public class SecurityConfig {
         // 그외에 API 경로로 시작하는 URL은 전부 인증이 필요하게한다.
         httpSecurity.authorizeRequests()
                 .antMatchers(URL.TOKEN_API).permitAll()
+                .antMatchers(URL.USER_SIGNUP_API).permitAll()
                 .antMatchers(URL.API+"/**").authenticated()
                 .anyRequest().permitAll();
         // /api로 시작하는 url인 경우 401 상태 코드를 반환하도록 예외처리
