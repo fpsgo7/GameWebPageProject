@@ -65,7 +65,7 @@ public class URL {
     /**
      * signup.html
      */
-    public final static String USER_SIGNUP_API
+    public final static String USER_API
             = "/user";
     /**
      * freeBoardList.html

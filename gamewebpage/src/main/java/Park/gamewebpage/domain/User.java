@@ -18,7 +18,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
-    public Long id;
+    private Long id;
 
     // 실질적으로 로그인에 사용되는 아이디
     @Column(name = "email", nullable = false, unique = true)

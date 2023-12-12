@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 
 /**
  * 블로그 글 가져오기
- * title,content,writerId,writerName
  */
 @Getter
 @Setter
