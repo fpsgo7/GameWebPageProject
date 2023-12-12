@@ -57,7 +57,7 @@ public class UserService {
     /**
      * 회원 탈퇴 서비스
      */
-    public void delete(User user){
-        userRepository.delete(user);
+    public void deleteById(Long id){
+        userRepository.deleteById(id);
     }
 }

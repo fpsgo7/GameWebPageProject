@@ -68,6 +68,11 @@ public class URL {
     public final static String USER_API
             = "/user";
     /**
+     * userinfo.html
+     */
+    public final static String USER_DELETE_API
+            = "/api/user/delete";
+    /**
      * freeBoardList.html
      */
     public final static String USER_LOGOUT_API
@@ -76,6 +81,13 @@ public class URL {
     /* UserView */
     public final static String USER_SIGNUP_VIEW
             = "/signup";
+    /**
+     * header.html
+     */
+    public final static String USER_VIEW_BY_EMAIL
+            = "/view/user/{email}";
+    public final static String USER_VIEW
+            = "/view/user/";
 
     /* Token */
     public final static String TOKEN_API

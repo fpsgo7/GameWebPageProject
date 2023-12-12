@@ -42,21 +42,20 @@ public class UserApiController {
     }
 
 
-    @DeleteMapping(URL.USER_API)
+    @PostMapping(URL.USER_DELETE_API)
     public String deleteUser(
-            @RequestBody GetUserDTO userDTO
+            @ModelAttribute GetUserDTO getUser
     ) {
-        User user
-                = userService
-                .findByEmail(userDTO.getEmail());
+        GetUserDTO user
+                = new GetUserDTO(userService.findByEmail(getUser.getEmail()));
         // 비밀전호는 BCryptPasswordEncoder 로 암호화 되있기 때문에 encoder.matches가 필요하다.
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-        if(encoder.matches(userDTO.getPassword(),user.getPassword())){
-            userService.delete(user);
+        if(encoder.matches(getUser.getPassword(),user.getPassword())){
+            userService.deleteById(user.getId());
             return "redirect:" + URL.USER_LOGIN_API_VIEW;
         }else {
-            return "redirect:" + URL.USER_LOGIN_API_VIEW;
+            return "redirect:" + URL.USER_VIEW+user.getEmail();
         }
     }
 }
