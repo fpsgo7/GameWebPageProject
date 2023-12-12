@@ -53,4 +53,11 @@ public class UserService {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("Unexpected user"));
     }
+
+    /**
+     * 회원 탈퇴 서비스
+     */
+    public void delete(User user){
+        userRepository.delete(user);
+    }
 }
