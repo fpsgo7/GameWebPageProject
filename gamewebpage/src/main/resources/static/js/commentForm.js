@@ -4,21 +4,21 @@ const createButton = document.getElementById('createFreeBoardComment-btn');
 if (createButton) {
     createButton.addEventListener('click', event => {
       // url의 id 값 가져오기
-      let id = document.getElementById('freeBoard-id').value;
+      let freeBoardId = document.getElementById('freeBoard-id').value;
       // JavaScript 값이나 객체를 JSON 문자열로 변환
       body = JSON.stringify({
         comment: document.getElementById('comment').value,
       });
       function success() {
         alert('등록 완료되었습니다.');
-        location.replace('/view/freeBoard/'+id);
+        location.replace('/view/freeBoard/'+freeBoardId);
       }
       function fail() {
         alert('등록 실패하였습니다..');
-        location.replace('/view/freeBoard/'+id);
+        location.replace('/view/freeBoard/'+freeBoardId);
       }
       // httpRequest 함수를 통하여 http 요청을 한다
-      httpRequest('POST','/api/freeBoard/'+id+'/freeBoardComment',body,success,fail)
+      httpRequest('POST','/api/freeBoard/'+freeBoardId+'/freeBoardComment',body,success,fail)
     });
 }
 
@@ -35,11 +35,11 @@ if(updateButton){
 
         function success() {
           alert('수정 완료되었습니다.');
-          location.replace('/view/freeBoard/'+id);
+          location.replace('/view/freeBoard/'+freeBoardId);
         }
         function fail() {
           alert('수정 실패하였습니다.');
-          location.replace('/view/freeBoard/'+id);
+          location.replace('/view/freeBoard/'+freeBoardId);
         }
         // httpRequest 함수를 통하여 http 요청을 한다
         httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail)
@@ -58,11 +58,11 @@ if(deleteButton){
 
         function success() {
           alert('삭제 완료되었습니다.');
-          location.replace('/view/freeBoard/'+id);
+          location.replace('/view/freeBoard/'+freeBoardId);
         }
         function fail() {
           alert('삭제 실패하였습니다.');
-          location.replace('/view/freeBoard/'+id);
+          location.replace('/view/freeBoard/'+freeBoardId);
         }
         // httpRequest 함수를 통하여 http 요청을 한다
         httpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail)
