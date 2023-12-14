@@ -20,5 +20,9 @@
     </form>
 </div>
 </span>
+<script th:inline="javascript" >
+  // 어떤 로그인인지 알려주는 세션값을 가져온다.
+  var loginStyle = [[${session.LoginStyle}]];
+</script>
 <!-- commentForm.js 가져오기 -->
 <script src="/js/commentForm.js"></script>

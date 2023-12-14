@@ -1,10 +1,7 @@
-/*
-    createFreeBoard.html
+/*  createFreeBoard.html
     freeBoard.html
     freeBoardList.html
-    updateFreeBoard.html
-*/
-// 세션에서 어떤 방식으로 로그인했는지 알아온다.
+    updateFreeBoard.html*/
 /* 생성 기능 */
 const createButton = document.getElementById('create-btn');
 
@@ -25,9 +22,9 @@ if (createButton) {
       }
       if(loginStyle=="Oauth2Login"){
         // oauth2HttpRequest 함수를 통하여 http 요청을 한다
-        oauth2HttpRequest('POST','/api/freeBoard',body,success,fail)
+        oauth2HttpRequest('POST','/api/freeBoard',body,success,fail);
       }else{
-        httpRequest('POST','/api/freeBoard',body,success,fail)
+        httpRequest('POST','/api/freeBoard',body,success,fail);
       }
 
     });

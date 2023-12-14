@@ -17,8 +17,12 @@ if (createButton) {
         alert('등록 실패하였습니다..');
         location.replace('/view/freeBoard/'+freeBoardId);
       }
-      // httpRequest 함수를 통하여 http 요청을 한다
-      httpRequest('POST','/api/freeBoard/'+freeBoardId+'/freeBoardComment',body,success,fail)
+      if(loginStyle=="Oauth2Login"){
+        oauth2HttpRequest('POST','/api/freeBoard/'+freeBoardId+'/freeBoardComment',body,success,fail);
+      }else{
+        httpRequest('POST','/api/freeBoard/'+freeBoardId+'/freeBoardComment',body,success,fail);
+      }
+
     });
 }
 
@@ -41,8 +45,11 @@ if(updateButton){
           alert('수정 실패하였습니다.');
           location.replace('/view/freeBoard/'+freeBoardId);
         }
-        // httpRequest 함수를 통하여 http 요청을 한다
-        httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail)
+        if(loginStyle=="Oauth2Login"){
+            oauth2HttpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
+        }else{
+            httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
+        }
     });
 }
 
@@ -64,13 +71,34 @@ if(deleteButton){
           alert('삭제 실패하였습니다.');
           location.replace('/view/freeBoard/'+freeBoardId);
         }
-        // httpRequest 함수를 통하여 http 요청을 한다
-        httpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail)
+         if(loginStyle=="Oauth2Login"){
+            oauth2HttpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail);
+        }else{
+            httpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail);
+        }
     });
 }
 
-// HTTP 요청을 보내는 함수
+// 기본적인 HTTP 요청을 보내는 함수
 function httpRequest(method,url,body,success,fail){
+  fetch(url,{
+    method: method,
+    headers: {
+      'Content-Type':  'application/json',
+    },
+    body: body
+    }).then(response => {
+    if(response.status === 200 || response.status === 201 ){
+      return success();
+    }
+    else {
+      return fail();
+    }
+  });
+}
+
+// HTTP 요청을 보내는 함수
+function oauth2HttpRequest(method,url,body,success,fail){
   fetch(url,{
     method: method,
     headers: {
