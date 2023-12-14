@@ -25,58 +25,46 @@ if (createCommentButton) {
 
     });
 }
-
-// 자유게시판 댓글 수정하기
-const updateCommentButton = document.getElementById('updateFreeBoardComment-btn');
-
-if(updateCommentButton){
-    updateCommentButton.addEventListener('click', event => {
-        let id = document.getElementById('freeBoardComment-id').value;
-        let freeBoardId = document.getElementById('freeBoard-id').value;
-        body = JSON.stringify({
-            comment: document.getElementById('updateFreeBoardComment-comment').value
-        })
-        alert(id);
-        function success() {
-          alert('수정 완료되었습니다.');
-          location.replace('/view/freeBoard/'+freeBoardId);
-        }
-        function fail() {
-          alert('수정 실패하였습니다.');
-          location.replace('/view/freeBoard/'+freeBoardId);
-        }
-        if(loginStyle=="Oauth2Login"){
-            oauth2HttpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
-        }else{
-            httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
-        }
-    });
+// 댓글 수정하기
+// 버튼의 onclick 에 함수 실행을위한 함수명과 매계변수로 id 값을 넣어
+// 해당버튼이 클릭되면 id값을 받아 실행된다.
+function updateComment(id) {
+  alert(id);
+  let freeBoardId = document.getElementById('freeBoard-id').value;
+  body = JSON.stringify({
+      comment: document.getElementById('updateFreeBoardComment-comment'+id).value
+  })
+  function success() {
+    alert('수정 완료되었습니다.');
+    location.replace('/view/freeBoard/'+freeBoardId);
+  }
+  function fail() {
+    alert('수정 실패하였습니다.');
+    location.replace('/view/freeBoard/'+freeBoardId);
+  }
+  if(loginStyle=="Oauth2Login"){
+      oauth2HttpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
+  }else{
+      httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
+  }
 }
 
-
-// 자유게시판 댓글 삭제하기
-const deleteCommentButton = document.getElementById('deleteFreeBoardComment-btn');
-
-if(deleteCommentButton){
-    deleteCommentButton.addEventListener('click', event => {
-        let id = document.getElementById('freeBoardComment-id').value;
-        let freeBoardId = document.getElementById('freeBoard-id').value;
-        alert(id);
-
-        function success() {
-          alert('삭제 완료되었습니다.');
-          location.replace('/view/freeBoard/'+freeBoardId);
-        }
-        function fail() {
-          alert('삭제 실패하였습니다.');
-          location.replace('/view/freeBoard/'+freeBoardId);
-        }
-         if(loginStyle=="Oauth2Login"){
-            oauth2HttpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail);
-        }else{
-            httpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail);
-        }
-    });
+function deleteComment(id){
+    alert(id);
+    let freeBoardId = document.getElementById('freeBoard-id').value;
+    function success() {
+      alert('삭제 완료되었습니다.');
+      location.replace('/view/freeBoard/'+freeBoardId);
+    }
+    function fail() {
+      alert('삭제 실패하였습니다.');
+      location.replace('/view/freeBoard/'+freeBoardId);
+    }
+     if(loginStyle=="Oauth2Login"){
+        oauth2HttpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail);
+    }else{
+        httpRequest('DELETE','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,null,success,fail);
+    }
 }
 
 // 기본적인 HTTP 요청을 보내는 함수

@@ -11,13 +11,11 @@
 </head>
 <span sec:authorize="isAuthenticated()">
 <div class="container">
-    <form>
-        <div class="form-group">
-            <label for="comment">댓글:</label>
-            <textarea class="form-control" rows="5" id="comment"></textarea>
-        </div>
-        <button id="createFreeBoardComment-btn" type="submit" class="btn btn-primary">제출</button>
-    </form>
+    <div class="form-group">
+        <label for="comment">댓글:</label>
+        <textarea class="form-control" rows="5" id="comment"></textarea>
+    </div>
+    <button id="createFreeBoardComment-btn" class="btn btn-primary">제출</button>
 </div>
 </span>
 <script th:inline="javascript" >
