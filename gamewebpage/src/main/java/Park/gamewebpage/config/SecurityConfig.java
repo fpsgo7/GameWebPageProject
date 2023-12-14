@@ -23,8 +23,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.servlet.Filter;
-
 import static org.springframework.boot.autoconfigure.security.servlet.PathRequest.toH2Console;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 스프링 시큐리티 설정
@@ -35,6 +35,7 @@ import static org.springframework.boot.autoconfigure.security.servlet.PathReques
 public class SecurityConfig {
 
     private final LoginFailureHandler loginFailureHandler;
+    private final LoginSuccessHandler loginSuccessHandler;
     private final OAuth2UserService oAuth2UserService;
     private final TokenProvider tokenProvider;
     private final IRefreshTokenRepository refreshTokenRepository;
@@ -102,7 +103,7 @@ public class SecurityConfig {
         /* 기본 로그인 설정*/
         httpSecurity.formLogin()
                 .loginPage(URL.USER_LOGIN_API_VIEW)
-                .defaultSuccessUrl(URL.FREE_BOARD_VIEW)
+                .successHandler(loginSuccessHandler)
                 .failureHandler(loginFailureHandler);
         /* 로그 아웃 설정*/
         httpSecurity.logout()

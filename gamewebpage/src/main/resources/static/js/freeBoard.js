@@ -1,3 +1,10 @@
+/*
+    createFreeBoard.html
+    freeBoard.html
+    freeBoardList.html
+    updateFreeBoard.html
+*/
+// 세션에서 어떤 방식으로 로그인했는지 알아온다.
 /* 생성 기능 */
 const createButton = document.getElementById('create-btn');
 
@@ -16,17 +23,41 @@ if (createButton) {
         alert('등록 실패하였습니다..');
         location.replace('/view/freeBoard');
       }
-      // httpRequest 함수를 통하여 http 요청을 한다
-      httpRequest('POST','/api/freeBoard',body,success,fail)
+      if(loginStyle=="Oauth2Login"){
+        // oauth2HttpRequest 함수를 통하여 http 요청을 한다
+        oauth2HttpRequest('POST','/api/freeBoard',body,success,fail)
+      }else{
+        httpRequest('POST','/api/freeBoard',body,success,fail)
+      }
+
     });
 }
 
+// 기본적인 HTTP 요청을 보내는 함수
+function httpRequest(method,url,body,success,fail){
+  fetch(url,{
+    method: method,
+    headers: {
+      'Content-Type':  'application/json',
+    },
+    body: body
+    }).then(response => {
+    if(response.status === 200 || response.status === 201 ){
+      return success();
+    }
+    else {
+      return fail();
+    }
+  });
+}
+
+// Oauth2 일떄 사용하는
 // HTTP 요청을 보내는 함수
 // 요청을 보낼때 액세스 토큰도 함꼐 보냅니다.
 // 만약 응답에 권한이 없다는 에러코드가 발생하면
 // 리프레시 토큰과 함꼐 새로운 액세스 토큰을 요청하고,
 // 전달받은 액세스 토큰으로 다시 API를 요청한다.
-function httpRequest(method,url,body,success,fail){
+function oauth2HttpRequest(method,url,body,success,fail){
   fetch(url,{
     method: method,
     headers: {
@@ -57,7 +88,7 @@ function httpRequest(method,url,body,success,fail){
       }).then(result =>{
         // 재발급이 성공하면 로컬 스토리지 값을 새로운 액세스 토큰으로 한다.
         localStorage.setItem('access_token', result.accessToken);
-        httpRequest(method,url,body,success,fail);
+        oauth2HttpRequest(method,url,body,success,fail);
       }).catch(error => fail());
     }else {
       return fail();
@@ -106,7 +137,11 @@ if (modifyButton) {
           location.replace('/view/freeBoard/'+id)
         }
 
-        httpRequest('PUT','/api/freeBoard/'+id,body,success,fail);
+        if(loginStyle=="Oauth2Login"){
+            oauth2HttpRequest('PUT','/api/freeBoard/'+id,body,success,fail);
+        }else{
+            httpRequest('PUT','/api/freeBoard/'+id,body,success,fail);
+        }
     });
 }
 
@@ -125,7 +160,13 @@ if(deleteButton){
           alert('삭제 실패하였습니다.');
           location.replace('/view/freeBoard')
         }
-        /* http 메서드는 DELETE 이며 경로는 /api/freeBoard/'+id 이다. */
-        httpRequest('DELETE','/api/freeBoard/'+id,null,success,fail);
+        if(loginStyle=="Oauth2Login"){
+            /* http 메서드는 DELETE 이며 경로는 /api/freeBoard/'+id 이다. */
+            oauth2HttpRequest('DELETE','/api/freeBoard/'+id,null,success,fail);
+        }else{
+            httpRequest('DELETE','/api/freeBoard/'+id,null,success,fail);
+        }
+
+
     });
 }

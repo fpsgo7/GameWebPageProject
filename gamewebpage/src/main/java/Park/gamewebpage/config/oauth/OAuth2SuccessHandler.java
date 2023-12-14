@@ -17,6 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -59,6 +60,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
                                         HttpServletResponse response,
                                         Authentication authentication)
             throws IOException, ServletException {
+        // 해당 로그인 방식을 알려준다.
+        HttpSession session = request.getSession();
+        session.setAttribute("LoginStyle","Oauth2Login");
+
         // authentication인증 객체에서 사용자 정보를 가져와 OAuth2User 객체를 생성
         OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
         // oAuth2User의 이메일값으로 유저 객체를 가져온다.
