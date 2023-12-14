@@ -1,8 +1,8 @@
-// 자유 게시판 댓글 추가 기능
-const createButton = document.getElementById('createFreeBoardComment-btn');
+//자유 게시판 댓글 추가 기능
+const createCommentButton = document.getElementById('createFreeBoardComment-btn');
 
-if (createButton) {
-    createButton.addEventListener('click', event => {
+if (createCommentButton) {
+    createCommentButton.addEventListener('click', event => {
       // url의 id 값 가져오기
       let freeBoardId = document.getElementById('freeBoard-id').value;
       // JavaScript 값이나 객체를 JSON 문자열로 변환
@@ -27,16 +27,16 @@ if (createButton) {
 }
 
 // 자유게시판 댓글 수정하기
-const updateButton = document.getElementById('updateFreeBoardComment-btn');
+const updateCommentButton = document.getElementById('updateFreeBoardComment-btn');
 
-if(updateButton){
-    updateButton.addEventListener('click', event => {
+if(updateCommentButton){
+    updateCommentButton.addEventListener('click', event => {
         let id = document.getElementById('freeBoardComment-id').value;
         let freeBoardId = document.getElementById('freeBoard-id').value;
         body = JSON.stringify({
             comment: document.getElementById('updateFreeBoardComment-comment').value
         })
-
+        alert(id);
         function success() {
           alert('수정 완료되었습니다.');
           location.replace('/view/freeBoard/'+freeBoardId);
@@ -55,13 +55,13 @@ if(updateButton){
 
 
 // 자유게시판 댓글 삭제하기
-const deleteButton = document.getElementById('deleteFreeBoardComment-btn');
+const deleteCommentButton = document.getElementById('deleteFreeBoardComment-btn');
 
-if(deleteButton){
-    deleteButton.addEventListener('click', event => {
+if(deleteCommentButton){
+    deleteCommentButton.addEventListener('click', event => {
         let id = document.getElementById('freeBoardComment-id').value;
         let freeBoardId = document.getElementById('freeBoard-id').value;
-
+        alert(id);
 
         function success() {
           alert('삭제 완료되었습니다.');
