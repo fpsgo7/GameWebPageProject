@@ -37,7 +37,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     public static final String REFRESH_TOKEN_COOKIE_NAME ="refresh_token";// 리프레시 토큰 
     public static final Duration REFRESH_TOKEN_DURATION = Duration.ofDays(7);// 리프레시 토큰 기간
     public static final Duration ACCESS_TOKEN_DURATION = Duration.ofDays(1);// 액세스 토큰 기간
-    public static final String REDIRECT_PATH = URL.FREE_BOARD_VIEW; // 리다이렉트하면 가는 경로
+    public static final String REDIRECT_PATH = URL.USER_VIEW_OAUTH2; // 리다이렉트하면 가는 경로
 
     private final TokenProvider tokenProvider;// 토큰 제공자
     private final IRefreshTokenRepository refreshTokenRepository;// 리프레시 토큰 저장소
@@ -76,7 +76,15 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // 2. 액세스 토큰 생성 -> 패스에 액세스 토큰 추가
         // http://localhost:8080/view/freeBoard?token=dsfl2k21jdsl3kf... 방식으로 만든다.
         String accessToken = tokenProvider.generateToken(user, ACCESS_TOKEN_DURATION);
-        String redirectUrl = getRedirectUrl(accessToken);
+        // 만약 처음으로 Oauth2 로그인을 하였다면 비밀번호 생성화면으로 이동하는 URI를 제공한다..
+        // 비밀번호가 존재할경우 바로 자유게시판으로 이동하는 URI를 제공한다.
+        String redirectUrl;
+        if(user.getPassword()!=null){
+            redirectUrl = getRedirectUrl(accessToken,REDIRECT_PATH+"?id=Password");
+        }else{
+            redirectUrl = getRedirectUrl(accessToken,REDIRECT_PATH+"?id=nonePassword");
+        }
+
         // 3. 인증 관련 설정값, 쿠키 제거
         // 인증 프로세스를 진행하면서 세션과 쿠키에 임시로 저장해둔 인증 관련 데이터를 제거한다.
         //
@@ -86,8 +94,6 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         clearAuthenticationAttributes(request,response);
         // 4. 리다이렉트
         getRedirectStrategy().sendRedirect(request,response,redirectUrl);
-
-
     }
     /**
      * 인증 관련 설정값 쿠키 제거
@@ -104,8 +110,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
      * @param accessToken 액세스 토큰 객체
      * @return 액세스 토큰 내용을 가지고 있는 Uri 반환
      */
-    private String getRedirectUrl(String accessToken) {
-        return UriComponentsBuilder.fromUriString(REDIRECT_PATH)
+    private String getRedirectUrl(String accessToken,String uri) {
+        return UriComponentsBuilder.fromUriString(uri)
                 .queryParam("token",accessToken)
                 .build()
                 .toString();

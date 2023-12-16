@@ -42,4 +42,21 @@ public class UserViewController {
         model.addAttribute("user", user);
         return "user/userinfo";
     }
+
+    /**
+     * Oauth2 로그인 중 뷰 열기
+     */
+    @GetMapping(URL.USER_VIEW_OAUTH2)
+    public String loginningOauth2View(){
+        return "user/oauth2loginning";
+    }
+    /**
+     * Oauth2 유저 비밀번호 생성
+     * 뷰 열기
+     */
+    @GetMapping(URL.USER_VIEW_OAUTH2_PW)
+    public String createOauth2PWView(
+    ){
+        return "user/oauth2usercreatepw";
+    }
 }

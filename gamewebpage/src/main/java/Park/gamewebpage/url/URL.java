@@ -87,12 +87,16 @@ public class URL {
     public final static String USER_LOGOUT_API
             = "/logout";
 
-    /* UserView */
+    /* User View */
     /**
      * login.html
      */
     public final static String USER_SIGNUP_VIEW
             = "/view/signup";
+
+    public final static String USER_VIEW_OAUTH2
+            = "/view/user/oauth2";
+
     /**
      * header.html
      */
@@ -100,7 +104,8 @@ public class URL {
             = "/view/user/{email}";
     public final static String USER_VIEW
             = "/view/user/";
-
+    public final static String USER_VIEW_OAUTH2_PW
+            = "/view/user/oauth2/pw";
     /* Token */
     public final static String TOKEN_API
             =  "/api/token";

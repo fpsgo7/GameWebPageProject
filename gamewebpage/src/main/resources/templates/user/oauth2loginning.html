@@ -1,0 +1,82 @@
+<head>
+    <script>
+        window.onload=function(){
+          const urlParams = new URLSearchParams(window.location.search);
+          const id = urlParams.get('id');
+          // 실제 이동은 여기서 진행한다.
+          function success() {
+            alert('로그인 성공했습니다..');
+            if(id=="nonePassword")
+              location.replace('/view/user/oauth2/pw');
+            else
+              location.replace('/view/freeBoard');
+          }
+          function fail() {
+            alert('로그인 실패했습니다.');
+            location.replace('/login');
+          }
+          // 해당 경로는 토큰 을 활성화 하기 위한 경로로
+          // 해당 경로로 실제 이동 되지 않는다.
+          if(id=="nonePassword"){
+            oauth2HttpRequest('GET','/view/user/oauth2/pw',null,success,fail);
+          }else{
+            oauth2HttpRequest('GET','/view/freeBoard',null,success,fail);
+          }
+        }
+        function oauth2HttpRequest(method,url,body,success,fail){
+          fetch(url,{
+            method: method,
+            headers: {
+              // 로컬 스토리지에서 액세스 토큰 값을 헤더에 추가한다.
+              Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+              'Content-Type':  'application/json',
+            },
+            body: body
+          }).then(response => {
+            if(response.status === 200 || response.status === 201 ){
+              return success();
+            }
+            const refresh_token = getCookie('refresh_token');
+            if(response.status === 401 && refresh_token){
+              fetch('/api/token',{
+                method: 'POST',
+                headers: {
+                  Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  refreshToken: getCookie('refresh_token'),
+                }),
+              }).then(res => {
+                if(res.ok){
+                  return res.json();
+                }
+              }).then(result =>{
+                // 재발급이 성공하면 로컬 스토리지 값을 새로운 액세스 토큰으로 한다.
+                localStorage.setItem('access_token', result.accessToken);
+                oauth2HttpRequest(method,url,body,success,fail);
+              }).catch(error => fail());
+            }else {
+              return fail();
+            }
+          });
+        }
+        // 쿠키를가져오는 함수
+        function getCookie(key){
+          var result = null;
+          var cookie = document.cookie.split(';');
+          cookie.some(function(item){
+            item = item.replace(' ','');
+
+            var dic = item.split('=');
+
+            if(key === dic[0]){
+              result = dic[1];
+              return true;
+            }
+          });
+          return result;
+        }
+
+    </script>
+</head>
