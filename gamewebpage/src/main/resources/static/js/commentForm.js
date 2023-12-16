@@ -117,7 +117,7 @@ function oauth2HttpRequest(method,url,body,success,fail){
       }).then(result =>{
         // 재발급이 성공하면 로컬 스토리지 값을 새로운 액세스 토큰으로 한다.
         localStorage.setItem('access_token', result.accessToken);
-        httpRequest(method,url,body,success,fail);
+        oauth2HttpRequest(method,url,body,success,fail);
       }).catch(error => fail());
     }else {
       return fail();
