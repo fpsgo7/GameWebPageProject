@@ -28,6 +28,7 @@ public class URL {
     /**
      * freeBoard.js
      * header.html
+     * oauth2usercreatepw.html
      */
     public final static String FREE_BOARD_VIEW
             = "/view/freeBoard";
@@ -72,7 +73,7 @@ public class URL {
     public final static String USER_SIGNUP_API
             = "/api/signup";
     /**
-     *
+     * oauth2usercreatepw.html
      */
     public final static String USER_API
             = "/api/user";
@@ -104,6 +105,9 @@ public class URL {
             = "/view/user/{email}";
     public final static String USER_VIEW
             = "/view/user/";
+    /**
+     * oauth2usercreatepw.html
+     */
     public final static String USER_VIEW_OAUTH2_PW
             = "/view/user/oauth2/pw";
     /* Token */

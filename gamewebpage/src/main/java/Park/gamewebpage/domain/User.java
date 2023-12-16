@@ -3,6 +3,7 @@ package Park.gamewebpage.domain;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -13,6 +14,7 @@ import java.util.Collection;
 @Entity
 @NoArgsConstructor
 @Getter
+@Setter// 유저 정보 수정 작업을 위해 사용한다.
 public class User implements UserDetails {
 
     @Id

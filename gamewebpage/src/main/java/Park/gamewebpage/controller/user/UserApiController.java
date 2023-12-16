@@ -1,11 +1,12 @@
 package Park.gamewebpage.controller.user;
 
-import Park.gamewebpage.domain.User;
 import Park.gamewebpage.dto.user.CreateUserDTO;
 import Park.gamewebpage.dto.user.GetUserDTO;
+import Park.gamewebpage.dto.user.UpdateUserDTO;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 @RequiredArgsConstructor
 @Controller
@@ -57,5 +59,16 @@ public class UserApiController {
         }else {
             return "redirect:" + URL.USER_VIEW+user.getEmail();
         }
+    }
+
+    @PutMapping(URL.USER_API)
+    public ResponseEntity<Void> updateUser(
+            @RequestBody UpdateUserDTO userDTO,
+            Principal principal
+            ){
+        userService.updateUser(userDTO,principal.getName());
+        return ResponseEntity
+                .ok()
+                .build();
     }
 }

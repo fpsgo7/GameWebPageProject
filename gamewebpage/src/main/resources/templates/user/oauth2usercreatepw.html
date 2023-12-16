@@ -18,21 +18,94 @@
             <div class="card-body p-5 text-center">
                 <h2 class="text-white">회원 가입을 환영합니다.</h2>
                 <p class="text-white-50 mt-2 mb-5">앞으로 게임접속과 회원 수정을 위한 비밀번호를 입력해 주십시요.</p>
-
                 <div class = "mb-2">
-                    <form action="" method="POST">
-                        <input type="hidden" name="email" th:value="${#authentication.name}" >
-                        <div class="mb-3">
-                            <label class="form-label text-white">비밀번호</label>
-                            <input type="password" class="form-control" name="password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    <div class="mb-3">
+                        <label class="form-label text-white">비밀번호</label>
+                        <input id="password" name="password" type="password" class="form-control" >
+                    </div>
+                    <button id="modify-btn" class="btn btn-primary">비밀번호 생성</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
 </body>
-<script src="/js/token.js"></script>
+<script>
+    // 수정 기능
+    const modifyButton = document.getElementById('modify-btn');
+    if (modifyButton) {
+      // 클릭 이벤트가 감지되면 수정 API 요청
+      modifyButton.addEventListener('click', event => {
+
+          body = JSON.stringify({
+            password: document.getElementById('password').value
+          })
+
+          function success() {
+            alert('비밀번호 입력 완료했습니다.');
+            location.replace('/view/freeBoard');
+          }
+
+          function fail() {
+            alert('비밀번호 입력 실패하였습니다.');
+            location.replace('/view/user/oauth2/pw');
+          }
+          oauth2HttpRequest('PUT','/api/user',body,success,fail);
+      });
+    }
+    function oauth2HttpRequest(method,url,body,success,fail){
+        fetch(url,{
+          method: method,
+          headers: {
+            // 로컬 스토리지에서 액세스 토큰 값을 헤더에 추가한다.
+            Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+            'Content-Type':  'application/json',
+          },
+          body: body
+        }).then(response => {
+          if(response.status === 200 || response.status === 201 ){
+            return success();
+          }
+          const refresh_token = getCookie('refresh_token');
+          if(response.status === 401 && refresh_token){
+            fetch('/api/token',{
+              method: 'POST',
+              headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                refreshToken: getCookie('refresh_token'),
+              }),
+            }).then(res => {
+              if(res.ok){
+                return res.json();
+              }
+            }).then(result =>{
+              // 재발급이 성공하면 로컬 스토리지 값을 새로운 액세스 토큰으로 한다.
+              localStorage.setItem('access_token', result.accessToken);
+              oauth2HttpRequest(method,url,body,success,fail);
+            }).catch(error => fail());
+          }else {
+            return fail();
+          }
+        });
+      }
+      // 쿠키를가져오는 함수
+      function getCookie(key){
+        var result = null;
+        var cookie = document.cookie.split(';');
+        cookie.some(function(item){
+          item = item.replace(' ','');
+
+          var dic = item.split('=');
+
+          if(key === dic[0]){
+            result = dic[1];
+            return true;
+          }
+        });
+        return result;
+      }
+</script>
 </html>

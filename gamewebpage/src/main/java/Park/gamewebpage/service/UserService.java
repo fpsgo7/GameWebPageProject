@@ -2,10 +2,12 @@ package Park.gamewebpage.service;
 
 import Park.gamewebpage.domain.User;
 import Park.gamewebpage.dto.user.CreateUserDTO;
+import Park.gamewebpage.dto.user.UpdateUserDTO;
 import Park.gamewebpage.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
@@ -59,5 +61,21 @@ public class UserService {
      */
     public void deleteById(Long id){
         userRepository.deleteById(id);
+    }
+
+    /**
+     * 회원 정보 수정 서비스
+     */
+    @Transactional
+    public void updateUser(UpdateUserDTO userDTO, String email){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String newPassword = null;
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(()-> new IllegalArgumentException("not found:"+email));
+        if(userDTO.getNickname() != null)
+            user.setNickname(userDTO.getNickname());
+        if(userDTO.getPassword() != null)
+            newPassword= bCryptPasswordEncoder.encode(userDTO.getPassword());
+            user.setPassword(newPassword);
     }
 }
