@@ -50,10 +50,10 @@ public class UserApiController {
 
     @PostMapping(URL.USER_DELETE_API)
     public String deleteUser(
-            @ModelAttribute GetUserDTO getUser
+            @ModelAttribute GetUserDTO getUser,Principal principal
     ) {
         GetUserDTO user
-                = new GetUserDTO(userService.findByEmail(getUser.getEmail()));
+                = new GetUserDTO(userService.findByEmail(principal.getName()));
         // 비밀전호는 BCryptPasswordEncoder 로 암호화 되있기 때문에 encoder.matches가 필요하다.
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 

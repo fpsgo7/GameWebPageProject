@@ -36,7 +36,6 @@
     </form>
     <h1>회원탈퇴</h1>
     <form action="/api/user/delete" method="post" content-type>
-      <input type="hidden" name="email" th:value="${user.email}">
       <div class="form-group">
           <label>비밀번호:</label>
           <input type="password" class="form-control" name="password">

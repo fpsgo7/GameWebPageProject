@@ -26,8 +26,6 @@ if (checkPWButton) {
       }
     });
 }
-// 회원 탈퇴하기
-
 // 기본적인 HTTP 요청을 보내는 함수
 function httpRequest(method,url,body,success,fail){
   fetch(url,{
