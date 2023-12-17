@@ -6,8 +6,12 @@ import Park.gamewebpage.dto.user.UpdateUserDTO;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
+import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -70,5 +74,35 @@ public class UserApiController {
         return ResponseEntity
                 .ok()
                 .build();
+    }
+
+    @PostMapping(URL.USER_PASSWORD_API)
+    public ResponseEntity<JSONObject> checkPW(
+            @RequestBody GetUserDTO userDTO,
+            Principal principal
+    ){
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        GetUserDTO user =new GetUserDTO(userService.findByEmail(principal.getName()));
+        JSONObject isTrue = new JSONObject();
+        JSONArray itemList = new JSONArray();
+        JSONObject item1 = new JSONObject();
+
+        if(encoder.matches(userDTO.getPassword(),user.getPassword())){
+            item1.put("isTrue", "true");
+            itemList.add(item1);
+            isTrue.put("items", itemList);
+            System.out.println(isTrue.toString());
+            System.out.println(isTrue.toJSONString());
+            return ResponseEntity
+                    .ok()
+                    .body(isTrue);
+        }else {
+            item1.put("isTrue", "false");
+            itemList.add(item1);
+            isTrue.put("items", itemList);
+            return ResponseEntity
+                    .ok()
+                    .body(isTrue);
+        }
     }
 }

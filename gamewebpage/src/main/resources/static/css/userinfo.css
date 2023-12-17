@@ -1,0 +1,61 @@
+@charset "utf-8";
+/*팝업창*/
+/*팝업창 전체*/
+.popup{
+display: show;/*안보이게함*/
+/*해당 위치에 고정됨*/
+position: fixed;
+left: 50%;
+top: -6%;
+z-index: 100; /*무조건 보여지게 됨*/
+transform: translate(-50%, 22%); /*x축으로 -50퍼 만큼 이동 y 축으로 22퍼 이동*/
+/*해당 팝업 창의 내용들과 팝업창과의 거리*/
+padding: 52px 45px 60px;
+/*팝업창 크기*/
+width: 510px;
+height: 600px;
+/*해당 팝업 창을 박스로 싸맴*/
+box-sizing: border-box;
+background: #fff;/*해당 팝업창의 색깔 팝업창 밭깥의 색깔은 아니다.*/
+}
+/*팝업창 h2 글씨*/
+.popup h2{
+padding: 0 0 16px;
+border-bottom: 3px solid #444;
+color: #222;
+font-weight: normal;
+text-align: center;
+line-height: 170%;
+font-size: 36px;
+}
+
+/*가입 하기 버튼과 위의 내용과 나누기위해 사용*/
+.popup .con{
+padding:0 0 20; border-bottom: 2px solid #e8e8e8;
+
+}
+
+/*팝업창의 테이블*/
+.popup table.type1 th{
+font-size: 16px; color: #222; text-align: left; font-weight: normal;
+padding:30px 0;
+}
+/*밑의 확인 버튼 위치를 지정함*/
+.popup .conformBtn{
+text-align: center;
+padding: 30px 0 0;
+}
+/*확인 버튼 꾸미기*/
+.popup .close{
+display: inline-block;
+width: 120px; height: 40px; background: #de4f41; line-height: 40px;
+color :#fff;text-align: center; border-radius: 3px;
+border: none;
+cursor: pointer;
+}
+.popup .close:hover { background-color: Red; }
+/*팝업창 바깥*/
+/*회원가입창 바깥 쪽을 어둡게 하는 기능을한다. */
+.popupdark{
+position: fixed; left: 0; top: 0; z-index: 99; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: show;
+}
