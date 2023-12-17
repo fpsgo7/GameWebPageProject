@@ -8,8 +8,8 @@ if (checkPWButton) {
       body = JSON.stringify({
         password: document.getElementById('checkPassword').value,
       });
-      function success(isTrue) {
-        if(isTrue=="true"){
+      function success(json) {
+        if(json.items[0].isTrue=="true"){
             alert("인증 완료");
             document.getElementById("popup").style.display ='none';
             document.getElementById("popupdark").style.display ='none';
@@ -18,7 +18,6 @@ if (checkPWButton) {
         }
       }
       function fail() {
-        alert("서버 오류가 발생하였습니다.");
       }
       if(loginStyle=="Oauth2Login"){
         oauth2HttpRequest('POST','/api/user/password',body,success,fail);
@@ -27,6 +26,8 @@ if (checkPWButton) {
       }
     });
 }
+// 회원 탈퇴하기
+
 // 기본적인 HTTP 요청을 보내는 함수
 function httpRequest(method,url,body,success,fail){
   fetch(url,{
@@ -39,7 +40,7 @@ function httpRequest(method,url,body,success,fail){
         if(response.status === 200 || response.status === 201 ){
           response.json()
           .then((json) => {
-            return success(json.items[0].isTrue);
+            return success(json);
           });
         }
         else {
@@ -62,7 +63,7 @@ function oauth2HttpRequest(method,url,body,success,fail){
     if(response.status === 200 || response.status === 201 ){
       response.json()
       .then((json) => {
-        return success(json.items[0].isTrue);
+        return success(json);
       });
     }
     const refresh_token = getCookie('refresh_token');
