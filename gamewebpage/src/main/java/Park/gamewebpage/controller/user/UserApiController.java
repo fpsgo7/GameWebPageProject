@@ -14,7 +14,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -64,15 +63,31 @@ public class UserApiController {
         }
     }
 
-    @PutMapping(URL.USER_API)
-    public ResponseEntity<Void> updateUser(
+    /**
+     * 유저 업데이트를 위한 컨트롤러
+     * @param userDTO
+     * @param principal
+     * @return
+     */
+    @PatchMapping(URL.USER_API)
+    public ResponseEntity<JSONObject> updateUser(
             @RequestBody UpdateUserDTO userDTO,
             Principal principal
             ){
+        JSONObject jsonObject = new JSONObject();
+        JSONArray itemList = new JSONArray();
+        JSONObject successLink = new JSONObject();
+        JSONObject failLink = new JSONObject();
+
         userService.updateUser(userDTO,principal.getName());
+        successLink.put("successLink",URL.FREE_BOARD_VIEW);
+        failLink.put("failLink",URL.USER_VIEW+principal.getName());
+        itemList.add(successLink);
+        itemList.add(failLink);
+        jsonObject.put("jsonObject",itemList);
         return ResponseEntity
                 .ok()
-                .build();
+                .body(jsonObject);
     }
 
     /**

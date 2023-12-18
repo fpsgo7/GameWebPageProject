@@ -14,13 +14,11 @@
 <div class="container">
     <th:block th:if="${session.LoginStyle}!='Oauth2Login'">
         <h1>이름 수정</h1>
-        <form action="미정" method="post">
-            <div class="form-group">
-                <label>이름:</label>
-                <input type="text" class="form-control" name="nickname" th:value="${user.nickname}">
-            </div>
-            <button type="submit" class="btn btn-primary">수정하기</button>
-        </form>
+        <div class="form-group">
+            <label>이름:</label>
+            <input id="newNickname" type="text" class="form-control" th:value="${user.nickname}">
+        </div>
+        <button id="changeNickname-btn" class="btn btn-primary">수정하기</button>
     </th:block>
     <h1>비밀번호 수정</h1>
     <div class="form-group">
@@ -31,7 +29,7 @@
         <label>변경할 비밀번호:</label>
         <input id="newPassword" type="password" class="form-control">
     </div>
-    <button id="changePW-btn" type="submit" class="btn btn-primary">수정하기</button>
+    <button id="changePW-btn" class="btn btn-primary">수정하기</button>
 
     <h1>회원탈퇴</h1>
     <form action="/api/user/delete" method="post" content-type>

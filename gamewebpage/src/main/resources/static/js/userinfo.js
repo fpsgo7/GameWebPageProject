@@ -53,6 +53,27 @@ if (changePWButton) {
       }
     });
 }
+// 이름 변경하기
+const changeNickNameButton = document.getElementById('changeNickname-btn');
+if (changeNickNameButton) {
+    changeNickNameButton.addEventListener('click', event => {
+      // JavaScript 값이나 객체를 JSON 문자열로 변환
+      body = JSON.stringify({
+        nickname: document.getElementById('newNickname').value
+      });
+      function success(json) {
+        alert("이름 변경 성공.");
+        location.replace(json.jsonObject[0].successLink);
+      }
+      function fail() {
+        alert("이름 변경 실패.");
+        location.replace(json.jsonObject[1].failLink);
+      }
+      // Oauth2 로그인은 닉네임 변경을 하지 않는다.(Oauth2 계정자체의 이름이 있기 때문)
+      httpRequest('PATCH','/api/user',body,success,fail);
+
+    });
+}
 
 // 기본적인 HTTP 요청을 보내는 함수
 function httpRequest(method,url,body,success,fail){
