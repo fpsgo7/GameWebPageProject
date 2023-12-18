@@ -9,7 +9,7 @@ if (checkPWButton) {
         password: document.getElementById('checkPassword').value,
       });
       function success(json) {
-        if(json.items[0].isTrue=="true"){
+        if(json.isSuccess=="true"){
             alert("인증 완료");
             document.getElementById("popup").style.display ='none';
             document.getElementById("popupdark").style.display ='none';
@@ -36,12 +36,12 @@ if (changePWButton) {
         newPassword: document.getElementById('newPassword').value
       });
       function success(json) {
-        if(json.jsonObject[0].isSuccess=="true"){
+        if(json.isSuccess=="true"){
             alert("비밀번호 변경 성공");
-            location.replace(json.jsonObject[1].link);
+            location.replace(json.successLink);
         }else{
-            alert("비밀번호 변경 실패.");
-            location.replace(json.jsonObject[1].link);
+            alert("비밀번호가 잘봇 되었습니다.");
+            location.replace(json.failLink);
         }
       }
       function fail() {
@@ -63,11 +63,11 @@ if (changeNickNameButton) {
       });
       function success(json) {
         alert("이름 변경 성공.");
-        location.replace(json.jsonObject[0].successLink);
+        location.replace(json.successLink);
       }
       function fail() {
         alert("이름 변경 실패.");
-        location.replace(json.jsonObject[1].failLink);
+        location.replace(json.failLink);
       }
       // Oauth2 로그인은 닉네임 변경을 하지 않는다.(Oauth2 계정자체의 이름이 있기 때문)
       httpRequest('PATCH','/api/user',body,success,fail);

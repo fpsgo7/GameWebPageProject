@@ -24,6 +24,7 @@ import java.security.Principal;
 @Controller
 public class UserApiController {
     private final UserService userService;
+    JSONObject jsonObject = new JSONObject();
 
     /**
      * 회원가입을 담당하는 메서드
@@ -74,17 +75,10 @@ public class UserApiController {
             @RequestBody UpdateUserDTO userDTO,
             Principal principal
             ){
-        JSONObject jsonObject = new JSONObject();
-        JSONArray itemList = new JSONArray();
-        JSONObject successLink = new JSONObject();
-        JSONObject failLink = new JSONObject();
-
         userService.updateUser(userDTO,principal.getName());
-        successLink.put("successLink",URL.FREE_BOARD_VIEW);
-        failLink.put("failLink",URL.USER_VIEW+principal.getName());
-        itemList.add(successLink);
-        itemList.add(failLink);
-        jsonObject.put("jsonObject",itemList);
+        jsonObject.clear();
+        jsonObject.put("successLink",URL.FREE_BOARD_VIEW);
+        jsonObject.put("failLink",URL.USER_VIEW+principal.getName());
         return ResponseEntity
                 .ok()
                 .body(jsonObject);
@@ -103,25 +97,16 @@ public class UserApiController {
     ){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         GetUserDTO user =new GetUserDTO(userService.findByEmail(principal.getName()));
-        JSONObject isTrue = new JSONObject();
-        JSONArray itemList = new JSONArray();
-        JSONObject items = new JSONObject();
 
+        jsonObject.clear();
         if(encoder.matches(userDTO.getPassword(),user.getPassword())){
-            items.put("isTrue", "true");
-            itemList.add(items);
-            isTrue.put("items", itemList);
-            return ResponseEntity
-                    .ok()
-                    .body(isTrue);
+            jsonObject.put("isSuccess", "true");
         }else {
-            items.put("isTrue", "false");
-            itemList.add(items);
-            isTrue.put("items", itemList);
-            return ResponseEntity
-                    .ok()
-                    .body(isTrue);
+            jsonObject.put("isSuccess", "false");
         }
+        return ResponseEntity
+                .ok()
+                .body(jsonObject);
     }
 
     @PatchMapping(URL.USER_PASSWORD_API)
@@ -132,27 +117,17 @@ public class UserApiController {
         GetUserDTO userDTO
                 = new GetUserDTO(userService.findByEmail(principal.getName()));
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-
-        JSONObject jsonObject = new JSONObject();
-        JSONArray itemList = new JSONArray();
-        JSONObject isSuccess = new JSONObject();
-        JSONObject link = new JSONObject();
+        jsonObject.clear();
         if(encoder.matches(updatePWDTO.getOldPassword(),userDTO.getPassword())){
             UpdateUserDTO updateUserDTO = new UpdateUserDTO();
             updateUserDTO.setPassword(updatePWDTO.getNewPassword());
             userService.updateUser(updateUserDTO,userDTO.getEmail());
-
-            isSuccess.put("isSuccess","true");
-            link.put("link",URL.FREE_BOARD_VIEW);
-
+            jsonObject.put("isSuccess","true");
         }else {
-            System.out.println("아이디 비번이 틀립니다.");
-            isSuccess.put("isSuccess","false");
-            link.put("link",URL.USER_VIEW+userDTO.getEmail());
+            jsonObject.put("isSuccess","false");
         }
-        itemList.add(isSuccess);
-        itemList.add(link);
-        jsonObject.put("jsonObject",itemList);
+        jsonObject.put("successLink",URL.FREE_BOARD_VIEW);
+        jsonObject.put("failLink",URL.USER_VIEW+userDTO.getEmail());
         return ResponseEntity
                 .ok()
                 .body(jsonObject);
