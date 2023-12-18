@@ -89,6 +89,7 @@ public class URL {
             = "/logout";
     /**
      * userinfo.js
+     * userinfo.html
      */
     public final static String USER_PASSWORD_API
             = "/api/user/password";

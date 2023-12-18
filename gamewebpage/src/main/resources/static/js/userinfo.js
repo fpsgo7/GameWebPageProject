@@ -26,6 +26,34 @@ if (checkPWButton) {
       }
     });
 }
+// 비밀번호 변경하기
+const changePWButton = document.getElementById('changePW-btn');
+if (changePWButton) {
+    changePWButton.addEventListener('click', event => {
+      // JavaScript 값이나 객체를 JSON 문자열로 변환
+      body = JSON.stringify({
+        oldPassword: document.getElementById('oldPassword').value,
+        newPassword: document.getElementById('newPassword').value
+      });
+      function success(json) {
+        if(json.jsonObject[0].isSuccess=="true"){
+            alert("비밀번호 변경 성공");
+            location.replace(json.jsonObject[1].link);
+        }else{
+            alert("비밀번호 변경 실패.");
+            location.replace(json.jsonObject[1].link);
+        }
+      }
+      function fail() {
+      }
+      if(loginStyle=="Oauth2Login"){
+        oauth2HttpRequest('PATCH','/api/user/password',body,success,fail);
+      }else{
+        httpRequest('PATCH','/api/user/password',body,success,fail);
+      }
+    });
+}
+
 // 기본적인 HTTP 요청을 보내는 함수
 function httpRequest(method,url,body,success,fail){
   fetch(url,{

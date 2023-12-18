@@ -74,8 +74,9 @@ public class UserService {
                 .orElseThrow(()-> new IllegalArgumentException("not found:"+email));
         if(userDTO.getNickname() != null)
             user.setNickname(userDTO.getNickname());
-        if(userDTO.getPassword() != null)
+        if(userDTO.getPassword() != null){
             newPassword= bCryptPasswordEncoder.encode(userDTO.getPassword());
             user.setPassword(newPassword);
+        }
     }
 }
