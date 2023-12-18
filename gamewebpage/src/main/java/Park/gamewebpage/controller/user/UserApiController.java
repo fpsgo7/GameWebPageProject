@@ -75,10 +75,11 @@ public class UserApiController {
             @RequestBody UpdateUserDTO userDTO,
             Principal principal
             ){
+        String successLink = URL.FREE_BOARD_VIEW;
+        String failLink = URL.USER_VIEW+principal.getName();
+
         userService.updateUser(userDTO,principal.getName());
-        jsonObject.clear();
-        jsonObject.put("successLink",URL.FREE_BOARD_VIEW);
-        jsonObject.put("failLink",URL.USER_VIEW+principal.getName());
+        jsonPut("true",successLink,failLink);
         return ResponseEntity
                 .ok()
                 .body(jsonObject);
@@ -98,11 +99,10 @@ public class UserApiController {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         GetUserDTO user =new GetUserDTO(userService.findByEmail(principal.getName()));
 
-        jsonObject.clear();
         if(encoder.matches(userDTO.getPassword(),user.getPassword())){
-            jsonObject.put("isSuccess", "true");
+            jsonPut("true",null,null);
         }else {
-            jsonObject.put("isSuccess", "false");
+            jsonPut("false",null,null);
         }
         return ResponseEntity
                 .ok()
@@ -114,22 +114,33 @@ public class UserApiController {
             @RequestBody UpdatePWDTO updatePWDTO,
             Principal principal
             ){
+        String successLink = URL.FREE_BOARD_VIEW;
+        String failLink = URL.USER_VIEW+principal.getName();
         GetUserDTO userDTO
                 = new GetUserDTO(userService.findByEmail(principal.getName()));
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        jsonObject.clear();
+
         if(encoder.matches(updatePWDTO.getOldPassword(),userDTO.getPassword())){
             UpdateUserDTO updateUserDTO = new UpdateUserDTO();
             updateUserDTO.setPassword(updatePWDTO.getNewPassword());
             userService.updateUser(updateUserDTO,userDTO.getEmail());
-            jsonObject.put("isSuccess","true");
+            jsonPut("true",successLink,failLink);
         }else {
-            jsonObject.put("isSuccess","false");
+            jsonPut("false",successLink,failLink);
         }
-        jsonObject.put("successLink",URL.FREE_BOARD_VIEW);
-        jsonObject.put("failLink",URL.USER_VIEW+userDTO.getEmail());
         return ResponseEntity
                 .ok()
                 .body(jsonObject);
+    }
+
+    /**
+     * json 오브젝트를 초기화한 후
+     * 인자 값을 받아 Json에 값을 넣어준다.
+     */
+    private void jsonPut(String isSuccess,String successLink, String failLink){
+        jsonObject.clear();
+        jsonObject.put("isSuccess",isSuccess);
+        jsonObject.put("successLink", successLink);
+        jsonObject.put("failLink",failLink);
     }
 }
