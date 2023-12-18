@@ -19,14 +19,14 @@
       <li class="nav-item active">
         <a class="nav-link" href="/view/freeBoard">자유 게시판 <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/view/gameCharacterRank">랭킹 <span class="sr-only">(current)</span></a>
+      </li>
       <li class="nav-item active" sec:authorize="isAuthenticated()">
         <a class="nav-link" th:href="@{|/view/gameCharacter/${#authentication.name}|}">캐릭터 정보<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active" sec:authorize="isAuthenticated()">
-        <a class="nav-link" th:href="@{|/view/user/${#authentication.name}|}">회원 정보<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/view/gameCharacterRank">랭킹 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" th:href="@{|/view/user/${#authentication.name}|}">회원 정보 수정<span class="sr-only">(current)</span></a>
       </li>
     </ul>
     <button type="button" class="btn btn-secondary" onclick="location.href='/logout'" sec:authorize="isAuthenticated()">

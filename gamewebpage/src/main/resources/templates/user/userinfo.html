@@ -13,12 +13,12 @@
 <div th:include="header/header.html" th:remove="tag"></div>
 <div class="container">
     <th:block th:if="${session.LoginStyle}!='Oauth2Login'">
-        <h1>이름 수정</h1>
-        <div class="form-group">
-            <label>이름:</label>
-            <input id="newNickname" type="text" class="form-control" th:value="${user.nickname}">
-        </div>
-        <button id="changeNickname-btn" class="btn btn-primary">수정하기</button>
+    <h1>이름 수정</h1>
+    <div class="form-group">
+        <label>이름:</label>
+        <input id="newNickname" type="text" class="form-control" th:value="${user.nickname}">
+    </div>
+    <button id="changeNickname-btn" class="btn btn-primary">수정하기</button>
     </th:block>
     <h1>비밀번호 수정</h1>
     <div class="form-group">
@@ -58,9 +58,8 @@
      </table>
  </div>
  <div class="conformBtn">
- <Button class="close" id="checkPassword-btn" >확인하기</Button>
+    <Button class="close" id="checkPassword-btn" >확인하기</Button>
  </div>
- <a href="#a" class="close">닫기</a>
 </div>
 
 <div class="popupdark" id="popupdark"></div>
