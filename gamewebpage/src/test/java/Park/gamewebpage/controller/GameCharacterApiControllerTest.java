@@ -135,7 +135,7 @@ class GameCharacterApiControllerTest {
                 = new UpdateGameCharacterNicknameDTO(newNickname);
         //when
         ResultActions resultActions
-                = mockMvc.perform(put(url,gameCharacter.getEmail())
+                = mockMvc.perform(patch(url,gameCharacter.getEmail())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(updateGameCharacterNicknameDTO)));
 

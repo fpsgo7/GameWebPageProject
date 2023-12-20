@@ -75,7 +75,7 @@ class FreeBoardApiControllerTest {
     void setSecurityContext(){
         iUserRepository.deleteAll();
         user = iUserRepository.save(User.builder()
-                .email("user@gmail.com")
+                .email("user@gmail.com").nickname("name")
                 .password("test").build());
         SecurityContext context = SecurityContextHolder.getContext();
         context.setAuthentication(new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities()));
@@ -202,7 +202,7 @@ class FreeBoardApiControllerTest {
 
         // when
         ResultActions resultActions
-                = mockMvc.perform(put(url,savedFreeBoard.getId())
+                = mockMvc.perform(patch(url,savedFreeBoard.getId())
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(objectMapper.writeValueAsString(updateFreeBoardDTO)));
 

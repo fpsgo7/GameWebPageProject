@@ -21,7 +21,7 @@ public class FreeBoardApiController {
     private final FreeBoardService freeBoardService;
 
     /**
-     * 자유 게시판 글생성 컨트롤러이다.
+     * 자유 게시판 글생성
      * @param createFreeBoardDTO
      * @return HTTP 상태 코드는 생성이며
      * HTTP body에는 FreeBoard 객체로 반환한다.
@@ -102,7 +102,7 @@ public class FreeBoardApiController {
      * @param updateFreeBoardDTO
      * @return UpdateFreeBoardDTO 객체 반환
      */
-    @PutMapping(URL.FREE_BOARD_API_BY_ID)
+    @PatchMapping(URL.FREE_BOARD_API_BY_ID)
     public ResponseEntity<FreeBoard> updateFreeBoard(
             @PathVariable long id,
             @RequestBody UpdateFreeBoardDTO updateFreeBoardDTO

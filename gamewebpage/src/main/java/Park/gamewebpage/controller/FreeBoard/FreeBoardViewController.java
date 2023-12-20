@@ -61,11 +61,10 @@ public class FreeBoardViewController {
 
     /**
      * 자유게시판 글 생성 뷰 컨트롤러
-     * @param model
      * @return
      */
     @GetMapping(URL.CREATE_FREE_BOARD_VIEW)
-    public String createFreeBoardView(Model model){
+    public String createFreeBoardView(){
         return "freeBoard/createFreeBoard";
     }
 

@@ -47,7 +47,7 @@ public class FreeBoardCommentApiController {
      * @param updateFreeBoardCommentDTO : 댓글 객체
      * @return 업데이트를 해준다.
      */
-    @PutMapping(URL.FREE_BOARD_COMMENT_API_BY_ID)
+    @PatchMapping(URL.FREE_BOARD_COMMENT_API_BY_ID)
     public ResponseEntity<Long> update
             (@PathVariable Long freeBoardId,
              @PathVariable Long id,

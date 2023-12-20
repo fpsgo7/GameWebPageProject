@@ -18,6 +18,7 @@ public class GameCharacterApiController {
     private  final GameCharacterService gameCharacterService;
 
     /**
+     * 테스트용
      * 게임 캐릭터를 조회한다
      * 만약 게임캐릭터가 없다면 null을 반환시킨다.
      * @param email
@@ -62,7 +63,7 @@ public class GameCharacterApiController {
      * @param updateGameCharacterApiDTO
      * @return 게임 캐릭터 객체
      */
-    @PutMapping(URL.GAME_CHARACTER_API_BY_EMAIL)
+    @PatchMapping(URL.GAME_CHARACTER_API_BY_EMAIL)
     public ResponseEntity<GameCharacter> updateNickNameGameCharacter(
             @PathVariable String email,
             @RequestBody UpdateGameCharacterNicknameDTO updateGameCharacterApiDTO

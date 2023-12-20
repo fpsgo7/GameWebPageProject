@@ -47,6 +47,12 @@ public class UserApiController {
         return "redirect:"+URL.USER_LOGIN_API_VIEW;
     }
 
+    /**
+     * 회원 탈퇴 메서드
+     * @param getUser
+     * @param principal
+     * @return
+     */
     @PostMapping(URL.USER_DELETE_API)
     public String deleteUser(
             @ModelAttribute GetUserDTO getUser,Principal principal
@@ -108,6 +114,13 @@ public class UserApiController {
                 .ok()
                 .body(jsonObject);
     }
+
+    /**
+     * 비밀번호 수정
+     * @param updatePWDTO
+     * @param principal
+     * @return
+     */
 
     @PatchMapping(URL.USER_PASSWORD_API)
     public ResponseEntity<JSONObject> updatePW(

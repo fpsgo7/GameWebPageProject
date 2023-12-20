@@ -43,9 +43,9 @@ function updateComment(id) {
     location.replace('/view/freeBoard/'+freeBoardId);
   }
   if(loginStyle=="Oauth2Login"){
-      oauth2HttpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
+      oauth2HttpRequest( 'PATCH','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
   }else{
-      httpRequest( 'PUT','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
+      httpRequest( 'PATCH','/api/freeBoard/'+freeBoardId+'/freeBoardComment/'+id,body,success,fail);
   }
 }
 

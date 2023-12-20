@@ -137,7 +137,7 @@ public class URL {
             = "/view/gameCharacter/{email}";
 
     /**
-     * gameCharacterRank.html
+     * header.html
      */
     public static final String GAME_CHARACTER_RANK_VIEW
             = "/view/gameCharacterRank";
