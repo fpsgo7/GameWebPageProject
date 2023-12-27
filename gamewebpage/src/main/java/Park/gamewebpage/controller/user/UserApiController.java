@@ -7,7 +7,6 @@ import Park.gamewebpage.dto.user.UpdateUserDTO;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
-import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
