@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UpdateGameCharacterHighScoreDTO {
-    private int highScore;
+    private Long highScore;
 
-    public UpdateGameCharacterHighScoreDTO(int highScore){
+    public UpdateGameCharacterHighScoreDTO(Long highScore){
         this.highScore =highScore;
     }
 }

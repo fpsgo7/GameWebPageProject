@@ -33,7 +33,7 @@ public class GameCharacterViewController {
                     , new GetGameCharacterDTO(gameCharacter));
         }else {
             model.addAttribute("gameCharacter"
-                    , new GetGameCharacterDTO(null,0,null));
+                    , new GetGameCharacterDTO(null,0L,null));
         }
         return "gameCharacter/gameCharacter";
     }

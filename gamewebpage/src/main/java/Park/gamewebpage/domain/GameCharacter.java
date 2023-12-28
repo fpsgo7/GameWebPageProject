@@ -25,10 +25,10 @@ public class GameCharacter {
     
     // 향후 필요 없어 보이면 없엘것
     @Column(name = "high_score")
-    private int highScore;
+    private Long highScore;
 
     @Builder
-    public GameCharacter(String email, String nickname, int highScore){
+    public GameCharacter(String email, String nickname, Long highScore){
         this.email = email;
         this.nickname = nickname;
         this.highScore = highScore;

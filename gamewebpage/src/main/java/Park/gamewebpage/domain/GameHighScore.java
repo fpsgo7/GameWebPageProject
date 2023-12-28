@@ -25,13 +25,13 @@ public class GameHighScore {
     private String gameCharacterNickname;
 
     @Column(name = "high_score", nullable = false)
-    private int highScore;
+    private Long highScore;
 
     @Column(name = "lasted_time", nullable = false)
     private LocalDateTime lastedTime;
 
     @Builder
-    public GameHighScore(String email, String gameCharacterNickname, int highScore, LocalDateTime lastedTime) {
+    public GameHighScore(String email, String gameCharacterNickname, Long highScore, LocalDateTime lastedTime) {
         this.email = email;
         this.gameCharacterNickname = gameCharacterNickname;
         this.highScore = highScore;

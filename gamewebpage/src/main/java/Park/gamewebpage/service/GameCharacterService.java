@@ -41,6 +41,24 @@ public class GameCharacterService {
         return iGameCharacterRepository.findAll();
     }
 
+    // CREATE
+
+    /**
+     * 게임 캐릭터 생성
+     * @param email 이메일 값
+     * @param nickname 게임 케릭터 닉네임값
+     * @return 게임 게릭터 객체
+     */
+    public GameCharacter createGameCharacter(String email, String nickname, Long highScore){
+        GameCharacter character = new GameCharacter(email,nickname,highScore);
+        iGameCharacterRepository.save(character);
+        // 서버에 저장후 가져오는 방식을 사용하여 서버에 정상적으로 저장 됬는지 확인한다.
+        character = iGameCharacterRepository.findByEmail(email).orElseThrow(() ->
+                new IllegalArgumentException(
+                        "Unexpected GameCharacter"));;
+        return character;
+    }
+
     // UPDATE
 
     /**

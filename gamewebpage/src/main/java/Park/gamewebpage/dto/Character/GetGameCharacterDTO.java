@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class GetGameCharacterDTO {
     private final String email;
-    private final int highScore;
+    private final Long highScore;
     private final String nickname;
 
     public GetGameCharacterDTO(GameCharacter gameCharacter){
