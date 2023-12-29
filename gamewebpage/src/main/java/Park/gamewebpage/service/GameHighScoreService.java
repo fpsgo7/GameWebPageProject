@@ -5,7 +5,11 @@ import Park.gamewebpage.repository.IGameHighScoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 /**
  * 게임 최고점수 서비스이다.
  */
@@ -21,7 +25,11 @@ public class GameHighScoreService {
      * 그래서 해당 메서드의 클래스는 Page이다.
      * @return 게임 캐릭터 점수 정렬 조회 결과
      */
-    public Page<GameHighScore> getGameCharacterRankList(Pageable pageable){
+    public Page<GameHighScore> getGameCharacterRankPageable(Pageable pageable){
         return iGameHighScoreRepository.findAll(pageable);
+    }
+
+    public List<GameHighScore> getGameCharacterRanks(Sort sort){
+        return  iGameHighScoreRepository.findAll(sort);
     }
 }

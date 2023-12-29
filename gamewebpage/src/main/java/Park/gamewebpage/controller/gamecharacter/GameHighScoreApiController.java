@@ -32,7 +32,7 @@ public class GameHighScoreApiController {
                 PageRequest.of(0, 10, sort);
 
         List<GameHighScore> gameCharacterRankList
-                = gameHighScoreService.getGameCharacterRankList(pageable).toList();
+                = gameHighScoreService.getGameCharacterRankPageable(pageable).toList();
 
         return ResponseEntity
                 .ok()

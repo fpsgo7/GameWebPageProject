@@ -62,7 +62,7 @@ class GameHighScoreApiControllerTest {
                         GameHighScore.builder()
                                 .email("1")
                                 .gameCharacterNickname("1")
-                                .highScore(1)
+                                .highScore(1L)
                                 .lastedTime(LocalDateTime.now())
                                 .build());
         GameHighScore gameCharacter2 =
@@ -70,7 +70,7 @@ class GameHighScoreApiControllerTest {
                         GameHighScore.builder()
                                 .email("2")
                                 .gameCharacterNickname("2")
-                                .highScore(2)
+                                .highScore(2L)
                                 .lastedTime(LocalDateTime.now())
                                 .build());
         GameHighScore gameCharacter3 =
@@ -78,7 +78,7 @@ class GameHighScoreApiControllerTest {
                         GameHighScore.builder()
                                 .email("3")
                                 .gameCharacterNickname("3")
-                                .highScore(3)
+                                .highScore(3L)
                                 .lastedTime(LocalDateTime.now())
                                 .build());
 

@@ -65,7 +65,7 @@ class GameCharacterApiControllerTest {
                 GameCharacter.builder()
                         .email("1")
                         .nickname("1")
-                        .highScore(1)
+                        .highScore(1L)
                         .build());
         //when
         final ResultActions resultActions
@@ -92,14 +92,14 @@ class GameCharacterApiControllerTest {
                         GameCharacter.builder()
                                 .email("1")
                                 .nickname("1")
-                                .highScore(1)
+                                .highScore(1L)
                                 .build());
         GameCharacter gameCharacter2 =
                 iGameCharacterRepository.save(
                         GameCharacter.builder()
                                 .email("2")
                                 .nickname("2")
-                                .highScore(2)
+                                .highScore(2L)
                                 .build());
 
         //when
@@ -128,7 +128,7 @@ class GameCharacterApiControllerTest {
                         GameCharacter.builder()
                                 .email("1")
                                 .nickname(oldNickname)
-                                .highScore(1)
+                                .highScore(1L)
                                 .build());
 
         UpdateGameCharacterNicknameDTO updateGameCharacterNicknameDTO
@@ -158,7 +158,7 @@ class GameCharacterApiControllerTest {
                         GameCharacter.builder()
                                 .email("1")
                                 .nickname("1")
-                                .highScore(1)
+                                .highScore(1L)
                                 .build());
         //when
         // 삭제 작업 수행

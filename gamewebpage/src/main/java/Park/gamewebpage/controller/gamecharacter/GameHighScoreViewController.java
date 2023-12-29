@@ -39,7 +39,7 @@ public class GameHighScoreViewController {
                 PageRequest.of(page , 10, sort);
         // 게임캐릭터 순위 리스트 정보 가져오기
         Page<GameHighScore> gameCharacterRankPage
-                = gameHighScoreService.getGameCharacterRankList(pageable);
+                = gameHighScoreService.getGameCharacterRankPageable(pageable);
 
         //페이지블럭 처리
         //1을 더해주는 이유는 pageable은 0부터라 1을 처리하려면 1을 더해서 시작해주어야 한다.
