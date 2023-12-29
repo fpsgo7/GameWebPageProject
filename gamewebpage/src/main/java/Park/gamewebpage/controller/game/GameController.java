@@ -1,25 +1,31 @@
 package Park.gamewebpage.controller.game;
 
-import Park.gamewebpage.domain.GameCharacter;
+import Park.gamewebpage.domain.GameHighScore;
 import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
 import Park.gamewebpage.dto.user.GetUserDTO;
 import Park.gamewebpage.service.GameCharacterService;
+import Park.gamewebpage.service.GameHighScoreService;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
+import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
 public class GameController {
     private final UserService userService;
     private final GameCharacterService gameCharacterService;
+    private final GameHighScoreService gameHighScoreService;
     JSONObject jsonObject = new JSONObject();
+    JSONArray jsonArray = new JSONArray();
 
     /**
      * 유니티 에서의 http test를 위한
@@ -140,4 +146,21 @@ public class GameController {
                 .body(jsonObject);
     }
 
+    /**
+     * 게임 랭크 전체 정보를 가져와 반환한다.
+     * @return
+     */
+    @GetMapping("/game/gameHighScore")
+    public ResponseEntity<List<GameHighScore>> getGameCharacterRankList(){
+        Sort sort = Sort.by(
+                Sort.Order.desc("highScore"),
+                Sort.Order.asc("lastedTime")    );
+        List<GameHighScore> gameHighScores
+                = gameHighScoreService.getGameCharacterRanks(sort);
+
+        return ResponseEntity
+                .ok()
+                // 자동으로 json 방식으로 보내준다.
+                .body(gameHighScores);
+    }
 }
