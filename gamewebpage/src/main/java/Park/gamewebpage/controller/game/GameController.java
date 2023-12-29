@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -134,6 +135,16 @@ public class GameController {
                     .createGameCharacter(gameCharacterInfo.get("email").toString(),
                             gameCharacterInfo.get("nickname").toString(),
                             0L));
+            gameHighScoreService.createGameHighScore(
+                    GameHighScore.builder()
+                            .email(gameCharacterInfo.get("email").toString())
+                            .gameCharacterNickname(gameCharacterInfo.get("nickname").toString())
+                            .highScore(0L)
+                            .lastedTime(LocalDateTime.now())
+                            .build()
+
+            );
+
             jsonObject.put("isGameCharacter","true");
             jsonObject.put("userEmail",gameCharacter.getEmail());
             jsonObject.put("gameCharacterNickname",gameCharacter.getNickname());

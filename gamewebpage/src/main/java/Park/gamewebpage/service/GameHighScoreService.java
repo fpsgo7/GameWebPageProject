@@ -32,4 +32,8 @@ public class GameHighScoreService {
     public List<GameHighScore> getGameCharacterRanks(Sort sort){
         return  iGameHighScoreRepository.findAll(sort);
     }
+
+    public GameHighScore createGameHighScore(GameHighScore gameHighScore){
+        return iGameHighScoreRepository.save(gameHighScore);
+    }
 }
