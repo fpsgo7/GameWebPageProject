@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,6 +19,11 @@ import java.util.List;
 public class GameHighScoreService {
     private final IGameHighScoreRepository iGameHighScoreRepository;
     // READ PART
+    public  GameHighScore getGameCharacterRank(String email){
+        return iGameHighScoreRepository.findByEmail(email)
+                .orElseThrow(()-> new IllegalArgumentException("not found:"+email));
+    }
+
     /**
      * 게임 캐릭터 순위 대로 가져온다.
      * 저장소의 findAll(Pageable객체 ) 메서드와 인자값을할경우
@@ -35,5 +41,13 @@ public class GameHighScoreService {
 
     public GameHighScore createGameHighScore(GameHighScore gameHighScore){
         return iGameHighScoreRepository.save(gameHighScore);
+    }
+
+    @Transactional
+    public void setGameHighScore(String email, String score){
+        Long newScore = Long.parseLong(score);
+        GameHighScore gameHighScore = iGameHighScoreRepository.findByEmail(email).orElseThrow(()-> new IllegalArgumentException("not found:"+email));
+        if(newScore > gameHighScore.getHighScore())
+            gameHighScore.setHighScore(newScore);
     }
 }

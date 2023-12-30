@@ -63,23 +63,18 @@ public class GameCharacterService {
 
     /**
      * 게임 캐릭터의 점수를 수정한다 (향후 필요하면 사용한다.)
-     * @param updateGameCharacterNicknameDTO
-     * @return 게임 캐릭터 객체
      */
     @Transactional // 게임 캐릭터를 찾는게 실패하면 작업을 취소한다.
-    public GameCharacter updateGameCharacterHighScore(String email, UpdateGameCharacterHighScoreDTO updateGameCharacterNicknameDTO){
+    public void updateGameCharacterHighScore(String email, String score){
         GameCharacter gameCharacter
                 = iGameCharacterRepository
                 .findByEmail(email)
                 .orElseThrow(() ->
                         new IllegalArgumentException(
                                 "Unexpected GameCharacter"));
-
-        gameCharacter
-                .setHighScore(
-                        updateGameCharacterNicknameDTO
-                                .getHighScore());
-        return gameCharacter;
+        Long newScore = Long.parseLong(score);
+        if(newScore > gameCharacter.getHighScore())
+        gameCharacter.setHighScore(newScore);
     }
     
     /**
