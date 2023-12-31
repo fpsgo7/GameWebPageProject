@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -47,7 +48,12 @@ public class GameHighScoreService {
     public void setGameHighScore(String email, String score){
         Long newScore = Long.parseLong(score);
         GameHighScore gameHighScore = iGameHighScoreRepository.findByEmail(email).orElseThrow(()-> new IllegalArgumentException("not found:"+email));
-        if(newScore > gameHighScore.getHighScore())
+        if(newScore > gameHighScore.getHighScore()){
             gameHighScore.setHighScore(newScore);
+            // 현제 시간 업데이트
+            LocalDateTime now = LocalDateTime.now();
+            gameHighScore.setLastedTime(now);
+        }
+
     }
 }
