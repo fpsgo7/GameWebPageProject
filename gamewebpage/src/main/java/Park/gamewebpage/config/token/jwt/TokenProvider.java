@@ -30,14 +30,12 @@ import java.util.Set;
 public class TokenProvider {
     // application.properties 에 설정한 jwt의 값들을 접근하기 휘한
     // 클래스 객체 생성( @RequiredArgsConstructor 을 통해 생성한다.)
-    // jwt.issuer = Park@email.com
-    // jwt.secret_key = game-springBoot
     private final JwtProperties jwtProperties;
 
     /**
-     * 토큰 생성을 하는 메서드
+     * 토큰 생성을 메서드를 호출하여 토큰을 반환하는 메서드
      * @param user 유저 정보 객체
-     * @param expiryTime 만료 기간 
+     * @param expiryTime 토큰 생존 기간
      * @return 생성된 토큰
      */
     public String generateToken(User user, Duration expiryTime){
@@ -47,7 +45,7 @@ public class TokenProvider {
     }
 
     /**
-     * 토큰을 생성하는 메서드이다.
+     * 토큰을 만들라는 
      * 인자값으로 유저정보 user과 만료시간 expiryTime을 받는다.
      * set 계열의 메서드로 여러값을 지정하며
      * 헤더는 typ(타입)

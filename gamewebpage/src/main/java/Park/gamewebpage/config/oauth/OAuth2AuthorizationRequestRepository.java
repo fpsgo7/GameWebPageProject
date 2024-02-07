@@ -31,12 +31,11 @@ public class OAuth2AuthorizationRequestRepository implements AuthorizationReques
     private final static int COOKIE_EXPIRE_SECONDS = 18000;// 쿠키 만료 시간
 
     /**
-     * 쿠키를 객체화 해서 가져오기
+     * 쿠키를 통해 요청정보 가져오기
      *
-     * 인자값인 HttpServletRequest와
-     * 연관된 OAuth2AuthorizationRequest를 반환한다.
+     * 인자값인 HttpServletRequest request의 값을 쿠키에 담아
      * @param request the {@code HttpServletRequest}
-     * @return 쿠키를 객체화한것
+     * @return 쿠키를 객체화한 OAuth2AuthorizationRequest 타입의 객체
      */
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
@@ -46,9 +45,8 @@ public class OAuth2AuthorizationRequestRepository implements AuthorizationReques
     }
 
     /**
+     * 인증 정보를 쿠키에 저장
      * 쿠키 추가를 통하여
-     * 제공된 HttpServletRequest 및/또는 HttpServletResponse에
-     * 연결하는 OAuth2AuthorizationRequest를 유지합니다.
      * @param authorizationRequest the {@link OAuth2AuthorizationRequest}
      * @param request the {@code HttpServletRequest}
      * @param response the {@code HttpServletResponse}

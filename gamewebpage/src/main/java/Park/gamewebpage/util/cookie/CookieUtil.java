@@ -55,6 +55,7 @@ public class CookieUtil {
     }
 
     /**
+     * 쿠키에 인증 관련 정보를 직렬화하여 저장하기 위한 메소드
      * 객체 -- 직렬화 --> 쿠키
      * @param obj 쿠키 재료 객체
      * @return 쿠키를 위해 직렬화된 객체
@@ -65,6 +66,7 @@ public class CookieUtil {
     }
 
     /**
+     * 쿠키에서 정보를 역직렬화하여 읽기 위한 메소드
      * 쿠키 -- 역직렬화 --> 객체
      * @param cookie 쿠키
      * @param tClass 원하는 클래스형 인자값

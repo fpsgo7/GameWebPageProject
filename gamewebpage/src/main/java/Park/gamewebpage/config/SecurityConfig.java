@@ -71,6 +71,8 @@ public class SecurityConfig {
 
         // 만들어둔 토큰 필터 클래스 TokenAuthenticationFilter  을
         // 활용하여 헤더를 확인할 커스텀 필터를 추가한다.
+        // addFilterBefore 메서드를 사용하여 getTokenAuthenticationFilter 필터가
+        // UsernamePasswordAuthenticationFilter보다 먼저 작동하게한다.
         httpSecurity.addFilterBefore(getTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
         // 토큰 재발급 URL은 인증 없이 접근 가능하도록 설정한다.
@@ -92,14 +94,15 @@ public class SecurityConfig {
         // 인증 성공 시 실행할 핸들러도 설정한다.
         httpSecurity.oauth2Login()
                 .loginPage(URL.USER_LOGIN_API_VIEW)
-                .authorizationEndpoint()
+                .authorizationEndpoint()// .baseUri()를 생략하였다.
                 // Authorization 요청과 관련된 상태 저장
                 .authorizationRequestRepository(getOAuth2AuthorizationRequestRepository())
                 .and()
-                // 인증 성공 시 실행할 핸들러
-                .successHandler(getOAuth2SuccessHandler())
                 .userInfoEndpoint()
-                .userService(oAuth2UserService);
+                .userService(oAuth2UserService)
+                .and()
+                // 인증 성공 시 실행할 핸들러
+                .successHandler(getOAuth2SuccessHandler());
         /* 기본 로그인 설정*/
         httpSecurity.formLogin()
                 .loginPage(URL.USER_LOGIN_API_VIEW)

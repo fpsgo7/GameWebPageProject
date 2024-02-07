@@ -32,6 +32,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
 
     /**
      * 요청을 바탕트로 유저 정보를 객체로 반환한다.
+     * 그리고 유저 업데이트를 한다.
      *
      * 스프링 시큐리티를 통해 자동 호출되며
      * 기존의 OAuth2User정보를 가져옴과 동시에
