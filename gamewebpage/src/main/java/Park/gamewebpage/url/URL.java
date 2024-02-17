@@ -101,6 +101,12 @@ public class URL {
     public final static String USER_SIGNUP_VIEW
             = "/view/signup";
 
+    /**
+     * signup.html
+     */
+    public final static String USER_SIGNUP_POPUP_VIEW
+            = "/view/signupPopup";
+
     public final static String USER_VIEW_OAUTH2
             = "/view/user/oauth2";
 

@@ -32,6 +32,14 @@ public class UserViewController {
     }
 
     /**
+     * 회원 가입 동의 화면 팝업창 띄우기
+     */
+    @GetMapping(URL.USER_SIGNUP_POPUP_VIEW)
+    public String sighnupPopup(){
+        return "user/signupPopup";
+    }
+
+    /**
      * 회원정보 뷰 열기
      */
     @GetMapping(URL.USER_VIEW_BY_EMAIL)
@@ -59,4 +67,6 @@ public class UserViewController {
     ){
         return "user/oauth2usercreatepw";
     }
+
+
 }

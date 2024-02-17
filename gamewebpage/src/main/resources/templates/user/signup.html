@@ -9,7 +9,8 @@
     .gradient-custom {
      background: linear-gradient(to right, rgba(100, 57, 103, 1), rgba(37, 157, 162, 1))
     }
-  </style>
+    </style>
+
 </head>
 <body class="gradient-custom">
 <section class="d-flex vh-100">
@@ -21,8 +22,6 @@
 
                 <div class = "mb-2">
                     <form th:action="@{/api/signup}" method="POST">
-                        <!-- 토큰을 추가하여 CSRF 공격 방지 -->
-                        <input type="hidden" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}" />
                         <div class="mb-3">
                             <label class="form-label text-white">이메일</label>
                             <input type="email" class="form-control" name="email">
@@ -35,7 +34,10 @@
                             <label class="form-label text-white">닉네임</label>
                             <input type="text" class="form-control" name="nickname">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a href="#"  onclick="signupPopup()" >회원가입 동의사항 </a>
+                        <!-- 회원가입 동의 체크박스 -->
+                        <input type="checkbox" id="signupCheckbox"></input>
+                        <button id="signupButton" type="submit" class="btn btn-primary" disabled>Submit</button>
                     </form>
                 </div>
             </div>
@@ -43,4 +45,25 @@
     </div>
 </section>
 </body>
+<script>
+  // 체크박스 요소 가져오기
+  const signupCheckbox = document.getElementById('signupCheckbox');
+
+  // 버튼 요소 가져오기
+  const signupButton = document.getElementById('signupButton');
+
+  signupCheckbox.addEventListener('change', function() {
+    if (signupCheckbox.checked) {
+        signupButton.disabled = false;
+    } else {
+        signupButton.disabled = true;
+    }
+  });
+  function signupPopup(){
+      var url = "/view/signupPopup";
+      var name = "signupPopup test";
+      var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+      window.open(url, name, option);
+  }
+</script>
 </html>
