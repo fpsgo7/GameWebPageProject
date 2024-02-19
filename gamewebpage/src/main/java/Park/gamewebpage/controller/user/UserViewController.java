@@ -1,6 +1,7 @@
 package Park.gamewebpage.controller.user;
 
 import Park.gamewebpage.dto.Character.GetGameCharacterDTO;
+import Park.gamewebpage.dto.user.CreateUserFormDTO;
 import Park.gamewebpage.dto.user.GetUserDTO;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
@@ -8,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class UserViewController {
      * 회원가입 뷰 열기
      */
     @GetMapping(URL.USER_SIGNUP_VIEW)
-    public String signup(){
+    public String signup(@ModelAttribute("createUserFormDTO")  CreateUserFormDTO createUserFormDTO){
         return "user/signup";// 회원가입 뷰 띄우기
     }
 

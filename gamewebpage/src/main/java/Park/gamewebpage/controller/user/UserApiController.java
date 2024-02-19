@@ -1,24 +1,24 @@
 package Park.gamewebpage.controller.user;
 
-import Park.gamewebpage.dto.user.CreateUserDTO;
-import Park.gamewebpage.dto.user.GetUserDTO;
-import Park.gamewebpage.dto.user.UpdatePWDTO;
-import Park.gamewebpage.dto.user.UpdateUserDTO;
+import Park.gamewebpage.dto.user.*;
 import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import net.minidev.json.JSONObject;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 import java.security.Principal;
-
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class UserApiController {
@@ -29,9 +29,29 @@ public class UserApiController {
      * 회원가입을 담당하는 메서드
      */
     @PostMapping(URL.USER_SIGNUP_API)
-    public String signup(CreateUserDTO createUserDTO){
-        userService.createUser(createUserDTO); // 회원가입 서비스
-        return "redirect:"+URL.USER_LOGIN_API_VIEW; // 회원가입이 완료된 이후에 로그인 페이지로 이동
+    public String signup(CreateUserDTO createUserDTO
+            ,@Valid CreateUserFormDTO createUserFormDTO
+            , BindingResult bindingResult){
+        if (bindingResult.hasErrors()) {
+            return "user/signup";
+        }
+        if(!createUserFormDTO.getPassword().equals(createUserFormDTO.getPasswordCheck())){
+            bindingResult.rejectValue("password2", "passwordInCorrect",
+                    "2개의 비밀번호가 다릅니다. ");
+            return "user/signup";
+        }
+        log.info("회원가입이 진행됩니다.");
+
+        try{
+            userService.findByEmail(createUserFormDTO.getEmail());
+            bindingResult.rejectValue("email", "sameEmail",
+                    "이미 존재한는 이메일입니다. ");
+            return "user/signup";
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            userService.createUser(createUserDTO); // 회원가입 서비스
+            return "redirect:"+URL.USER_LOGIN_API_VIEW; // 회원가입이 완료된 이후에 로그인 페이지로 이동
+        }
     }
 
     /**
