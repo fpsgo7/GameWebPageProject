@@ -75,7 +75,8 @@ public class OAuth2AuthorizationRequestRepository implements AuthorizationReques
     }
 
     /**
-     * 제공된 HttpServletRequest와 연결된 OAuth2AuthorizationRequest를 제거하고 반환합니다.
+     * 제공된 HttpServletRequest 및 HttpServletResponse와 연관된
+     * OAuth2AuthorizationRequest를 제거하고 반환하며,
      * 사용할 수 없는 경우 null을 반환합니다.
      */
     @Override

@@ -29,7 +29,6 @@ if (createCommentButton) {
 // 버튼의 onclick 에 함수 실행을위한 함수명과 매계변수로 id 값을 넣어
 // 해당버튼이 클릭되면 id값을 받아 실행된다.
 function updateComment(id) {
-  alert(id);
   let freeBoardId = document.getElementById('freeBoard-id').value;
   body = JSON.stringify({
       comment: document.getElementById('updateFreeBoardComment-comment'+id).value
@@ -50,7 +49,6 @@ function updateComment(id) {
 }
 
 function deleteComment(id){
-    alert(id);
     let freeBoardId = document.getElementById('freeBoard-id').value;
     function success() {
       alert('삭제 완료되었습니다.');

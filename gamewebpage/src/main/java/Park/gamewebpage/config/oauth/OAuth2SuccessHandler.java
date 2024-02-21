@@ -80,9 +80,9 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         // 비밀번호가 존재할경우 바로 자유게시판으로 이동하는 URI를 제공한다.
         String redirectUrl;
         if(user.getPassword()!=null){
-            redirectUrl = getRedirectUrl(accessToken,REDIRECT_PATH+"?id=Password");
+            redirectUrl = getRedirectUrl(accessToken,REDIRECT_PATH+"?isPassword=true");
         }else{
-            redirectUrl = getRedirectUrl(accessToken,REDIRECT_PATH+"?id=nonePassword");
+            redirectUrl = getRedirectUrl(accessToken,REDIRECT_PATH+"?isPassword=false");
         }
 
         // 3. 인증 관련 설정값, 쿠키 제거

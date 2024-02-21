@@ -61,7 +61,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
             throws Exception{
-        // 기능 테스트를 위해 비활성화 시킨다.
+        // 토큰 인증 방식을 사용하기에 비활성화 한다.
         httpSecurity.csrf().disable();
         // 세션 제어를 위해사용한다.
         // OAuth2로그인 에서는 세션을 사용하지 않으며
