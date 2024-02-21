@@ -46,15 +46,14 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         // accessToken으로 서드파티에 요청해서 사용자 정보를 얻어온다.
         OAuth2User user = super.loadUser(userRequest);
-        saveOrUpdate(user);
-        return user;
+        return new CustomUserDetails( saveOrUpdate(user),user.getAttributes());
     }
 
     /**
      * 해당 유저가 존재하면 업데이트, 없으면 유저생성
      * @param oAuth2User OAuth2User형 유저 객체
      */
-    private void saveOrUpdate(OAuth2User oAuth2User) {
+    private User saveOrUpdate(OAuth2User oAuth2User) {
 
         Map<String, Object> oAuth2UserAttributes
                 = oAuth2User.getAttributes();
@@ -71,5 +70,7 @@ public class OAuth2UserService extends DefaultOAuth2UserService {
         // 기능을하며 이미 존재하는 대상이면
         // 업데이트를 하게된다.
         iUserRepository.save(user);
+
+        return user;
     }
 }

@@ -1,5 +1,7 @@
 package Park.gamewebpage.service;
 
+import Park.gamewebpage.config.oauth.CustomUserDetails;
+import Park.gamewebpage.domain.User;
 import Park.gamewebpage.repository.IUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -27,7 +29,8 @@ public class UserDetailService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username)
+        User user =userRepository.findByEmail(username)
                 .orElseThrow(() -> new IllegalArgumentException(username));
+        return new CustomUserDetails(user);
     }
 }

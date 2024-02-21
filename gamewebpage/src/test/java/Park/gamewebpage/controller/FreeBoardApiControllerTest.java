@@ -1,5 +1,6 @@
 package Park.gamewebpage.controller;
 
+import Park.gamewebpage.config.oauth.CustomUserDetails;
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.User;
 import Park.gamewebpage.dto.freeboard.CreateFreeBoardDTO;
@@ -54,8 +55,8 @@ class FreeBoardApiControllerTest {
 
     @Autowired
     IUserRepository iUserRepository;
-
     User user;
+    CustomUserDetails userDetails;
 
     /**
      * mockMvc 객체를 빌더 형식으로
@@ -78,9 +79,8 @@ class FreeBoardApiControllerTest {
                 .email("user@gmail.com").nickname("name")
                 .password("test").build());
         SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities()));
+        context.setAuthentication(new UsernamePasswordAuthenticationToken(user, user.getPassword(), userDetails.getAuthorities()));
     }
-
     @DisplayName("createFreeBoard: 자유게시판 글 추가에 성공하였다.")
     @Test
     public void createFreeBoard() throws Exception{
@@ -219,7 +219,7 @@ class FreeBoardApiControllerTest {
     private FreeBoard createDefaultFreeBoard(){
         return iFreeBoardRepository.save(FreeBoard.builder()
                 .title("title")
-                .writerId(user.getUsername())
+                .writerId(userDetails.getUsername())
                 .content("content")
                 .build());
     }

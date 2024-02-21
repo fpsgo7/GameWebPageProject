@@ -1,5 +1,6 @@
 package Park.gamewebpage.controller;
 
+import Park.gamewebpage.config.oauth.CustomUserDetails;
 import Park.gamewebpage.domain.FreeBoard;
 import Park.gamewebpage.domain.FreeBoardComment;
 import Park.gamewebpage.domain.User;
@@ -20,6 +21,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -56,6 +58,8 @@ class FreeBoardCommentApiControllerTest {
 
     User user;
 
+    CustomUserDetails userDetails;
+
     /**
      * mockMvc 객체를 빌더 형식으로
      * 생성한후 받아오며
@@ -81,7 +85,7 @@ class FreeBoardCommentApiControllerTest {
                 .email("user@gmail.com")
                 .password("test").build());
         SecurityContext context = SecurityContextHolder.getContext();
-        context.setAuthentication(new UsernamePasswordAuthenticationToken(user, user.getPassword(), user.getAuthorities()));
+        context.setAuthentication(new UsernamePasswordAuthenticationToken(user, user.getPassword(), userDetails.getAuthorities()));
     }
 
     /**
@@ -95,7 +99,7 @@ class FreeBoardCommentApiControllerTest {
 
         return iFreeBoardRepository.save(FreeBoard.builder()
                 .title("title")
-                .writerId(user.getUsername())
+                .writerId(userDetails.getUsername())
                 .content("content")
                 .build());
     }
