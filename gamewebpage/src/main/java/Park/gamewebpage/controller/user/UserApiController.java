@@ -85,7 +85,7 @@ public class UserApiController {
             userService.deleteById(user.getId());
             return "redirect:" + URL.USER_LOGIN_API_VIEW;
         }else {
-            return "redirect:" + URL.USER_VIEW+user.getEmail();
+            return "redirect:" + URL.USER_VIEW;
         }
     }
 
@@ -101,7 +101,7 @@ public class UserApiController {
             Principal principal
             ){
         String successLink = URL.FREE_BOARD_VIEW;
-        String failLink = URL.USER_VIEW+principal.getName();
+        String failLink = URL.USER_VIEW;
 
         userService.updateUser(userDTO,principal.getName());
         jsonPut("true",successLink,failLink);
@@ -147,7 +147,7 @@ public class UserApiController {
             Principal principal
             ){
         String successLink = URL.FREE_BOARD_VIEW;
-        String failLink = URL.USER_VIEW+principal.getName();
+        String failLink = URL.USER_VIEW;
         GetUserDTO userDTO
                 = new GetUserDTO(userService.findByEmail(principal.getName()));
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();

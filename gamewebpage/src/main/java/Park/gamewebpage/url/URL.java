@@ -113,10 +113,8 @@ public class URL {
     /**
      * header.html
      */
-    public final static String USER_VIEW_BY_EMAIL
-            = "/view/user/{email}";
     public final static String USER_VIEW
-            = "/view/user/";
+            = "/view/user";
     /**
      * oauth2usercreatepw.html
      */
@@ -139,8 +137,8 @@ public class URL {
     /**
      * header.html
      */
-    public static final String GAME_CHARACTER_VIEW_BY_EMAIL
-            = "/view/gameCharacter/{email}";
+    public static final String GAME_CHARACTER_VIEW
+            = "/view/gameCharacter";
 
     /**
      * header.html

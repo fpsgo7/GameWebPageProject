@@ -1,7 +1,9 @@
 package Park.gamewebpage.controller.gamecharacter;
 
+import Park.gamewebpage.util.AddAttributeForModel;
 import Park.gamewebpage.domain.GameHighScore;
 import Park.gamewebpage.service.GameHighScoreService;
+import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -13,10 +15,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
+
 @RequiredArgsConstructor
 @Controller
 public class GameHighScoreViewController {
     private  final GameHighScoreService gameHighScoreService;
+    private final UserService userService;
 
     /**
      * 게임 캐릭터 랭크를 보여주는 컨트롤러
@@ -26,7 +31,7 @@ public class GameHighScoreViewController {
      */
     @GetMapping(URL.GAME_CHARACTER_RANK_VIEW)
     public String getRankListGameCharacter(
-            Model model,
+            Principal principal, Model model,
             // PageRequest.of 를 사용하는 경우 추가해줘야하는 문장잉다.
             @RequestParam(required = false, defaultValue = "0") int page
     ){
@@ -52,6 +57,7 @@ public class GameHighScoreViewController {
         model.addAttribute("nowPage",nowPage);
         model.addAttribute("startPage", startPage);
         model.addAttribute("endPage", endPage);
+        AddAttributeForModel.getUserInfo(userService,principal,model);
 
         return "gameCharacter/gameCharacterRank";
     }

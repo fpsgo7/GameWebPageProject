@@ -1,8 +1,10 @@
 package Park.gamewebpage.controller.FreeBoard;
 
+import Park.gamewebpage.util.AddAttributeForModel;
 import Park.gamewebpage.dto.freeboard.GetFreeBoardDTO;
 import Park.gamewebpage.dto.freeboardcomment.GetFreeBoardCommentDTO;
 import Park.gamewebpage.service.FreeBoardService;
+import Park.gamewebpage.service.UserService;
 import Park.gamewebpage.url.URL;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +22,7 @@ import java.util.stream.Collectors;
 public class FreeBoardViewController {
 
     private final FreeBoardService freeBoardService;
+    private final UserService userService;
 
     /**
      * 자유 게시판 글 리스트  뷰 컨트롤러
@@ -26,7 +30,7 @@ public class FreeBoardViewController {
      * @return
      */
     @GetMapping(URL.FREE_BOARD_VIEW)
-    public String getFreeBoardListView(Model model){
+    public String getFreeBoardListView(Principal principal,Model model){
         List<GetFreeBoardDTO> freeBoardList
                 = freeBoardService.getListFreeBoard()
                 .stream()
@@ -34,6 +38,7 @@ public class FreeBoardViewController {
                 .collect(Collectors.toList());
 
         model.addAttribute("FreeBoardList",freeBoardList);
+        AddAttributeForModel.getUserInfo(userService,principal,model);
 
         return "freeBoard/freeBoardList";
 
@@ -47,6 +52,7 @@ public class FreeBoardViewController {
      */
     @GetMapping(URL.FREE_BOARD_VIEW_BY_ID)
     public String getFreeBoardView(
+            Principal principal,
             @PathVariable Long id, Model model
     ){
         GetFreeBoardDTO freeBoard = new GetFreeBoardDTO(freeBoardService.getFreeBoard(id));
@@ -56,6 +62,7 @@ public class FreeBoardViewController {
             model.addAttribute("freeBoardComments" , freeBoardComments);
         }
         model.addAttribute("freeBoard",freeBoard);
+        AddAttributeForModel.getUserInfo(userService,principal,model);
         return "freeBoard/freeBoard";
     }
 
@@ -64,7 +71,8 @@ public class FreeBoardViewController {
      * @return
      */
     @GetMapping(URL.CREATE_FREE_BOARD_VIEW)
-    public String createFreeBoardView(){
+    public String createFreeBoardView(Principal principal,Model model){
+        AddAttributeForModel.getUserInfo(userService,principal,model);
         return "freeBoard/createFreeBoard";
     }
 
@@ -75,9 +83,10 @@ public class FreeBoardViewController {
      * @return
      */
     @GetMapping(URL.UPDATE_FREE_BOARD_VIEW)
-    public String newFreeBoardView(@RequestParam Long id, Model model){
+    public String newFreeBoardView(@RequestParam Long id, Principal principal, Model model){
         GetFreeBoardDTO freeBoard = new GetFreeBoardDTO(freeBoardService.getFreeBoard(id));
         model.addAttribute("freeBoard",freeBoard);
+        AddAttributeForModel.getUserInfo(userService,principal,model);
         return "freeBoard/updateFreeBoard";
     }
 }
