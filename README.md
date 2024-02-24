@@ -40,10 +40,8 @@ DB
 
 ## 실행 화면
 
-## 설계
-### DB
+## DB 설계
 ![Untitled](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/8710f193-f367-463c-b2de-547c319fd60b)
-### API
 
 ## 개발 내용
 
