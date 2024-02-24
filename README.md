@@ -41,7 +41,7 @@ DB
 ## 실행 화면
 
 ### 사용자관련
-1. 회원가입
+#### 1. 회원가입
 > 알맞은 정보를 입력한후 회원 가입 버튼을 클릭해주면된다.
 
 
@@ -51,44 +51,82 @@ DB
 
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/51014da5-bff7-4240-9501-3ccdc0a2af12)
 
-2. 일반 로그인
+#### 2. 일반 로그인
 > 아이디와 비밀번호를 입력한후 Submit 이라 적인 버튼을 클릭하면 로그인이된다.
 
 
 ![로그인](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/d063091d-30f1-455a-88a2-013b56e67c77)
 
 
-3. OAuth2 로그인
+#### 3. OAuth2 로그인
 > 로그인 창에서 "Sign in with Google" 라고 적힌 버튼을 클릭하여 구글 로그인을 시도하면된다.
 
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/c969d7c4-9727-465b-8b22-238478282021)
    
 
 ### 자유게시판 화면
-1. 자유게시판 리스트 화면 겸 메인화면
+#### 1. 자유게시판 리스트 화면 겸 메인화면
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/6dcc0b9b-fd70-495e-a3ff-0e9dbc613762)
 
 
 헤더에서는 자유게시판 화면, 랭킹 , 캐릭터 정보 , 회원 정보 화면으로 이동할 수 있는 링크와 로그아웃 버튼이있다.
 그리고 메인 화면에는 자유게시판 글들과 글 등록 버튼이 있다.
 로그인 중이 아닐 때에는 "캐릭터 정보", "회원정보 수정" "글등록" 링크와 버튼은 사라지며, 로그아웃 버튼 대신 로그인 버튼이 있다.
-2. 글등록 화면
+
+
+#### 2. 글등록 화면
 > 간단하게 제목과 내용을 입력후 등록 버튼을 클릭하면 등록이 된다.
+
+
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/f9c32b0e-7470-4dc2-bc41-095b1fce6829)
 
 
-3. 글 화면
+#### 3. 글 화면
 > 글 제목과 언제 쓰여졌는지 누가 작성하였는지 적혀있으며 댓글을 작성하는 공간이 존재한다
 > 만약 내가 작성한 글이라면 수정 버튼과 삭제 버튼이 있으며 수정 버튼을 누르면
 > 수정화면으로 삭제 버튼을 누르면 글이 삭제된다.
+
+
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/64e713d2-81f9-40a4-a074-d398702a0541)
 
 
-4. 글 수정화면
+#### 4. 글 수정화면
 > 제목과 내욜을 입력하는 공간에 원하는 글자로 수정한후 수정 버튼을 클릭하면 글이 입력한대로 수정된다.
+
+
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/5a5a4b64-081f-40c7-8cb2-a5cbc78d4b9c)
 > 수정 버튼을 누른 후 해당 글로 이동하면 수정 되었음을 확인 할 수 있다.
+
+
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/c19dede1-75b2-4f69-8b6b-fce5d1a14144)
+
+
+#### 5. 글 삭제
+> 자신이 쓴 게시글에서 삭제 버튼을 누르면 삭제가 진행된다
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/b561ec56-786d-499c-99bb-276e800abb8d)
+
+### 댓글 
+#### 1. 댓글 작성
+> 로그인 한뒤 작성할 수 있는 뷰가 나타나며 내용 작성 후 제출을 누르면 해당 게시글에 추가된다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/e974b49f-ad57-4bca-a727-3621a4f75d24)
+
+
+#### 2. 댓글 보기에서 수정과 삭제
+> 자유 게시판 글에서 자신의 댓글에는 수정 삭제 버튼이 각각 있다.
+여기서 삭제 를 누르면 자신의 댓글은 삭제된다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/1ea7b9ca-9b69-476e-b9b6-29c678d0017b)
+> 수정 버튼을 누른다면 댓글 수정을 위한 입력란이 나타나며 글 입력후 수정 버튼을 누르면
+> 댓글이 수정된다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/62693e95-6701-4f0b-8185-7c26a476c503)
+
 
 
 
