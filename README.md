@@ -80,6 +80,20 @@ DB
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/9b3760ae-aa61-45f1-a8e9-82360ac2d28e)
 
 
+
+#### 5. 캐릭터 정보
+> 자신의 게임 캐릭터 정보를 보여주는 창으로 아직 게임을 시작하지 않아
+> 캐릭터가 없을 경우에는 게임에서 캐릭터를 생성해달라 하며
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/200fe275-5baf-4212-9c58-607a47b91d30)
+
+
+> 게임을 시작하여 게임 캐릭터가 있다면 해당 계정 캐릭터의 이름과 점수가 뜬다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/ad02b7bb-8abc-460b-8d3e-8f6040ad96fd)
+
 ### 자유게시판 화면
 #### 1. 자유게시판 리스트 화면 겸 메인화면
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/6dcc0b9b-fd70-495e-a3ff-0e9dbc613762)
@@ -144,6 +158,12 @@ DB
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/62693e95-6701-4f0b-8185-7c26a476c503)
 
 
+### 랭킹
+> 페이징을 사용하였으며 점수와 시간값을 통해 정렬되어 있다.
+> 각 유저의 게임 캐릭터의 최고 점수를 기준으로 한다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/0254a0af-7e9a-463f-8eb2-efb792814de9)
 
 
 
