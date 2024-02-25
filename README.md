@@ -64,6 +64,22 @@ DB
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/c969d7c4-9727-465b-8b22-238478282021)
    
 
+#### 4. 회원 정보 수정
+> 헤더의 (회원이름)님의 회원정보 수정 링크로 들어가면되며
+> 바로 회원정보 수정이 가능하지 않고 누군가의 잘못된 수정을 막기위해 비밀번호로
+> 사용자인지 확인후 회원 수정이 가능하다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/3fec3890-5a81-4a26-b60c-048d305a4c7f)
+
+
+>회원 수정 창에서는 이름 수정, 비밀번후 수정, 회원 탈퇴가 가능하나 단 oaUTH2 로그인 시에는
+>이름을 구글 계정의 이름을 사용하기 때문에 이름 수정이 없다.
+
+
+![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/9b3760ae-aa61-45f1-a8e9-82360ac2d28e)
+
+
 ### 자유게시판 화면
 #### 1. 자유게시판 리스트 화면 겸 메인화면
 ![image](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/6dcc0b9b-fd70-495e-a3ff-0e9dbc613762)
