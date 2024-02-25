@@ -184,8 +184,3 @@ DB
 
 ![Untitled](https://github.com/fpsgo7/GameWebPageProject/assets/101778043/8710f193-f367-463c-b2de-547c319fd60b)
 
-## 개발 내용
-### 로그인 과정
-
-### 페이징 방법
-
