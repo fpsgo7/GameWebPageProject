@@ -31,8 +31,9 @@ public class GameController {
     private final GameHighScoreService gameHighScoreService;
 
     // 암호화와 복호화를 위해 사용한다.
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    JSONObject jsonObject = new JSONObject();
+    private final BCryptPasswordEncoder encoder;
+    // 스프링 빈에 등록되지 않은 대상은 직접 객체를 생성하여 사용한다.
+    private JSONObject jsonObject = new JSONObject();
 
     /**
      * 유니티 에서의 로그인

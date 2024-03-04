@@ -29,7 +29,7 @@ import java.util.Set;
 @Service
 public class TokenProvider {
     // application.properties 에 설정한 jwt의 값들을 접근하기 휘한
-    // 클래스 객체 생성( @RequiredArgsConstructor 을 통해 생성한다.)
+    // 클래스 객체 스프링 빈에서 가져오기( @RequiredArgsConstructor 을 통해 빈을 가져온다..)
     private final JwtProperties jwtProperties;
 
     /**
